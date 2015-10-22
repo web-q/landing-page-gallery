@@ -1,1 +1,17 @@
 <p>this is the results page</p>
+<div id="results" ng-controller="templatesCtrl">
+
+	<h3>Templates</h3>
+
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Description</th>
+		</tr>
+		<tr ng-repeat="t in templates">
+			<td>{{t.title}}</td>
+			<td>{{t.description}}</td>
+		</tr>
+	</table>
+
+</div>

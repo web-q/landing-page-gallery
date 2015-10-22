@@ -2,8 +2,6 @@
 
 // Declare app level module which depends on views, and components
 var landingPageWiz = angular.module('landingPageWiz', [
-  // 'landingPageWiz.controllers',
-  // 'landingPageWiz.services',
   'ngRoute'
 ]);
 
