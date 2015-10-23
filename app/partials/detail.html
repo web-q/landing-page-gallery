@@ -1,6 +1,20 @@
-<p>this is the detail page</p>
 <div id="detail">
-<h2>{{template.title}}</h2>
-  ID: {{template.id}}<br />
-  TITLE: {{template.title}}<br />
-  DESCRIPTION: {{template.description}}
+  <!--{{template.id}}-->
+  <h2>{{template.title}}</h2>
+  <h3>This Campaign</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      
+    </div>
+    <div class="col-sm-6">
+      <p>DESCRIPTION: {{template.description}}</p>
+      <p>FEATURES:
+        <ul>
+          <li ng-repeat="f in template.features">{{f}}</li>
+        </ul>
+      </p>
+      <p>BUILD TIME: {{template.buildTime}}</p>
+      <div class="custom-{{template.custom}}">{{customFlag}}</div>
+    </div>
+  </div>
+</div>

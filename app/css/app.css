@@ -1,5 +1,5 @@
 /* app css stylesheet */
-
+/*
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -27,4 +27,13 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}*/
+
+
+.custom-true {
+  color: red;
+}
+
+.custom-false {
+  color: blue;
 }

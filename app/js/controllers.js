@@ -1,3 +1,5 @@
+'use strict';
+
 // landingPageWiz.controller('mainCtrl', ['$route', '$routeParams', '$location',
 //   function($route, $routeParams, $location) {
 //     this.$route = $route;
@@ -12,7 +14,13 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', '$filter',
 
 	// We filter the array by id, the result is an array
 	// so we select the element 0
-	$scope.template = $filter('filter')(templates, function (d){return d.id === parseInt(tid);})[0];
+	var template = $filter('filter')(templates, function (d){return d.id === parseInt(tid);})[0];
+  $scope.template = template;
+  if(template.custom) {
+    $scope.customFlag = "Custom";
+  } else {
+    $scope.customFlag = "Standard";
+  }
 }]);
 
 landingPageWiz.controller('resultsCtrl', ['$routeParams', '$scope', 'templates', function($routeParams, $scope, templates) {
