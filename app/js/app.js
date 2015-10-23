@@ -7,14 +7,18 @@ var landingPageWiz = angular.module('landingPageWiz', [
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/main', {
+    when('/', {
       templateUrl: 'partials/main.html',
     }).
     when('/results', {
       templateUrl: 'partials/results.html',
+      controller: 'resultsCtrl',
+      controllerAs: 'results'
     }).
-    when('/detail', {
+    when('/template/:templateId', {
       templateUrl: 'partials/detail.html',
+      controller: 'detailCtrl',
+      controllerAs: 'detail'
     }).
-  otherwise({redirectTo: '/main'});
+  otherwise({redirectTo: '/'});
 }]);

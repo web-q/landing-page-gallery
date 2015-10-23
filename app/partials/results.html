@@ -1,6 +1,6 @@
 <p>this is the results page</p>
-<div id="results" ng-controller="templatesCtrl">
-
+<div id="results">
+controller: {{controllerName}}
 	<h3>Templates</h3>
 
 	<table>
@@ -9,7 +9,7 @@
 			<th>Description</th>
 		</tr>
 		<tr ng-repeat="t in templates">
-			<td>{{t.title}}</td>
+			<td><a href="#/template/{{t.id}}">{{t.title}}</a></td>
 			<td>{{t.description}}</td>
 		</tr>
 	</table>
