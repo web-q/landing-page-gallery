@@ -1,20 +1,21 @@
-<div id="detail">
+<div>
   <!--{{template.id}}-->
-  <h2>{{template.title}}</h2>
-  <h3>This Campaign</h3>
-  <div class="row">
-    <div class="col-sm-6">
-      
+  <h2 class="text-center">{{template.title}}</h2>
+  <h3 class="text-center">This Campaign</h3>
+  <div id="detail" class="row">
+    <div class="col-sm-7">
+      <img class="img-responsive" src="http://placehold.it/800x1000" alt="">
     </div>
-    <div class="col-sm-6">
-      <p>DESCRIPTION: {{template.description}}</p>
-      <p>FEATURES:
+    <div class="col-sm-5">
+      <h4>DESCRIPTION</h4>
+      <p>{{template.description}}</p>
+      <h4>FEATURES</h4>
         <ul>
           <li ng-repeat="f in template.features">{{f}}</li>
         </ul>
       </p>
-      <p>BUILD TIME: {{template.buildTime}}</p>
-      <div class="custom-{{template.custom}}">{{customFlag}}</div>
+      <h4 class="build-time">BUILD TIME: {{template.buildTime}}</h4>
+      <h4 class="custom-{{template.custom}}">{{customFlag}}</h4>
     </div>
   </div>
 </div>

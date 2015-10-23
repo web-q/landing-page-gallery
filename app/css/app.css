@@ -29,11 +29,37 @@
   padding: 0;
 }*/
 
-
-.custom-true {
-  color: red;
+#detail {
+  margin-top: 80px;
 }
 
-.custom-false {
+.build-time::before {
+  content: '\e94f';
+  font-family: "fontawesomer";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  margin-right: 10px;
+}
+.custom-true {
   color: blue;
+}
+.custom-true::before {
+  content: '\e863';
+  font-family: "fontawesomer";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  margin-right: 10px;
+}
+.custom-false {
+  color: green;
+}
+.custom-false::before {
+  content: '\e8c6';
+  font-family: "fontawesomer";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  margin-right: 10px;
 }
