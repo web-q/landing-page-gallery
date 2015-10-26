@@ -9,11 +9,8 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       templateUrl: 'partials/main.html',
-    }).
-    when('/results', {
-      templateUrl: 'partials/results.html',
-      controller: 'resultsCtrl',
-      controllerAs: 'results'
+      controller: 'mainCtrl',
+      controllerAs: 'main'
     }).
     when('/template/:templateId', {
       templateUrl: 'partials/detail.html',

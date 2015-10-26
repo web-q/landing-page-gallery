@@ -63,3 +63,9 @@
   speak: none;
   margin-right: 10px;
 }
+.campaign-thumb {
+  height: 200px;
+}
+.campaign-thumb p {
+  text-align: center;
+}

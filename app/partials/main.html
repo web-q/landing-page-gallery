@@ -1,1 +1,11 @@
 <p>this is the main page</p>
+<div id="main">
+	<h2>Templates</h2>
+	<div class="row">
+		<div class="col-sm-4" ng-repeat="c in campaigns">
+			<div class="campaign-thumb"><p><a href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></p>
+			<p>{{c.templateTitle}}</p>
+		</div>
+		</div>
+	</div>
+</div>
