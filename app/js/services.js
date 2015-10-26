@@ -66,3 +66,31 @@ landingPageWiz.factory('templates', function(){
 
   return templates;
 });
+
+landingPageWiz.factory('campaigns', function(){
+  var campaigns = [
+			{ "id": 1,
+				"title": "Special Surgery Event",
+				"url": "http://google.com",
+				"topic": "Surgery"
+				"type": "Event",
+        "templateId": "4"
+			},
+      { "id": 2,
+        "title": "Surgery Testimonials",
+        "url": "http://yahoo.com",
+        "topic": "Surgery"
+        "type": "Testimonials",
+        "templateId": "4"
+      },
+      { "id": 1,
+        "title": "Pediatric Testimonials",
+        "url": "http://aol.com",
+        "topic": "Pediatric"
+        "type": "Testimonials",
+        "templateId": "5"
+      }
+	];
+
+  return templates;
+});
