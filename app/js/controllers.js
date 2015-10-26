@@ -1,6 +1,6 @@
 'use strict';
 
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', 'campaigns', '$filter', '$scope', function($routeParams, templates, campaigns, $filter, $scope) {
+landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', 'campaigns', '$filter', '$scope', '$rootScope', function($routeParams, templates, campaigns, $filter, $scope, $rootScope) {
   // Collect url paramters into  variables
 	var tid = $routeParams.templateId;
   var cid = $routeParams.campaignId;
@@ -34,9 +34,12 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', 'campaigns
   } else {
     $scope.customFlag = "Standard";
   }
+	$scope.slide = function(transition) {
+	$rootScope.slidePage = transition;
+};
 }]);
 
-landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'templates', 'campaigns', '$filter', function($routeParams, $scope, templates, campaigns, $filter) {
+landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'templates', 'campaigns', '$filter', '$rootScope', function($routeParams, $scope, templates, campaigns, $filter, $rootScope) {
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
   for (var i=0; i < campaigns.length; i++) {
@@ -48,4 +51,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'templates', 'c
 
   // Pass campaigns data to $scope for use on the front
   $scope.campaigns = campaigns;
+	$scope.slide = function(transition) {
+	$rootScope.slidePage = transition;
+};
 }]);
