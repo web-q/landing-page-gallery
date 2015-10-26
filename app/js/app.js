@@ -2,7 +2,8 @@
 
 // Declare app level module which depends on views, and components
 var landingPageWiz = angular.module('landingPageWiz', [
-  'ngRoute'
+  'ngRoute',
+  'ngAnimate'
 ]);
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {

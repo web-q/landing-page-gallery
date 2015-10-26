@@ -19,7 +19,9 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', 'campaigns
   var campaign = $filter('filter')(campaigns, {id: cid})[0];
 
   // Make an array containing other campaigns using this template
-  var otherCampaigns = $filter('filter')(campaigns, {templateId: tid});
+  var otherCampaigns = $filter('filter')(campaigns, {templateId: tid,
+  // Exclude current campaign
+  id: "!" + cid });
 
   // Pass variables needed on the front to $scope
   $scope.template = template;

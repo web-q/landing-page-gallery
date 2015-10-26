@@ -69,3 +69,15 @@
 .campaign-thumb p {
   text-align: center;
 }
+
+
+.fadepage.ng-enter, .fadepage.ng-leave {
+  -webkit-transition: .4s linear all; /* Chrome */
+  transition: .4s linear all;
+}
+.fadepage.ng-enter, .fadepage.ng-leave.ng-leave-active {
+	opacity: 0;
+}
+.fadepage.ng-enter.ng-enter-active, .fadepage.ng-leave {
+	opacity: 1;
+}

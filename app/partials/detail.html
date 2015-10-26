@@ -4,7 +4,7 @@
   <h3 class="text-center">{{campaign.title}}</h3>
   <div id="detail" class="row">
     <div class="col-sm-7">
-      <img class="img-responsive" src="http://placehold.it/800x1000" alt="">
+      <img class="img-responsive" src="http://placehold.it/700x800" alt="">
     </div>
     <div class="col-sm-5">
       <h4>DESCRIPTION</h4>
@@ -19,10 +19,13 @@
     </div>
   </div>
   <div class="row">
+  <div class="col-sm-12">
+    <h4>Other Campaigns using {{template.title}}</h4>
     <ul>
       <li ng-repeat="otherCampaign in otherCampaigns">
-        {{otherCampaign.title}}
+        <a href="#/template/{{template.id}}/c/{{otherCampaign.id}}">{{otherCampaign.title}}</a>
       </li>
     </ul>
+  </div>
   </div>
 </div>
