@@ -1,14 +1,10 @@
 <p>this is the results page</p>
 <div id="results">
 	<h2>Templates</h2>
-	<table>
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-		</tr>
-		<tr ng-repeat="t in templates">
-			<td><a href="#/template/{{t.id}}">{{t.title}}</a></td>
-			<td>{{t.description}}</td>
-		</tr>
-	</table>
+	<div class="row">
+		<div class="col-sm-4" ng-repeat="c in campaigns">
+			<div><a href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></div>
+			<div>{{c.templateTitle}}</div>
+		</div>
+	</div>
 </div>

@@ -72,25 +72,32 @@ landingPageWiz.factory('campaigns', function(){
 			{ "id": 1,
 				"title": "Special Surgery Event",
 				"url": "http://google.com",
-				"topic": "Surgery"
+				"topic": "Surgery",
 				"type": "Event",
         "templateId": "4"
 			},
       { "id": 2,
         "title": "Surgery Testimonials",
         "url": "http://yahoo.com",
-        "topic": "Surgery"
+        "topic": "Surgery",
         "type": "Testimonials",
         "templateId": "4"
       },
-      { "id": 1,
+      { "id": 3,
         "title": "Pediatric Testimonials",
         "url": "http://aol.com",
-        "topic": "Pediatric"
+        "topic": "Pediatric",
         "type": "Testimonials",
         "templateId": "5"
+      },
+      { "id": 4,
+        "title": "My Fancy Campaign",
+        "url": "http://hooli.xyz",
+        "topic": "Womens",
+        "type": "Location",
+        "templateId": "1"
       }
 	];
 
-  return templates;
+  return campaigns;
 });

@@ -20,5 +20,10 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
       controller: 'detailCtrl',
       controllerAs: 'detail'
     }).
+    when('/template/:templateId/c/:campaignId', {
+      templateUrl: 'partials/detail.html',
+      controller: 'detailCtrl',
+      controllerAs: 'detail'
+    }).
   otherwise({redirectTo: '/'});
 }]);
