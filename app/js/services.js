@@ -1,58 +1,34 @@
 'use strict';
 
-landingPageWiz.factory('appdata', function($http, $q, $timeout) {
+landingPageWiz.factory('appdata', function($http, $q) {
   var
   templatesURL =
   "http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/v1/test-data/templates.json",
   campaignsURL =
   "http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/v1/test-data/campaigns.json";
-
-
-  // var appdata = {};
-  // appdata.templates = [];
-  // appdata.campaigns = [];
-  //
-  // var HTTPtemplates = $http.get(templatesURL),
-  //     HTTPcampaigns = $http.get(campaignsURL);
-  // $q.all([HTTPtemplates,HTTPcampaigns]).then(function(responses){
-  //     for (var i=0;i<responses[0].length;i++) {
-  //       appdata.templates.push(responses[0][i]);
-  //     }
-  //     for (var j=0;j<responses[1].length;j++) {
-  //       appdata.campaigns.push(responses[1][j]);
-  //     }
-  // });
-
-
-
-  var getdata = {};
   var appdata = {};
-  appdata.campaigns = [];
   appdata.templates = [];
+  appdata.campaigns = [];
 
-  getdata.templates = {
-      fetch: function() {
-              return $http.get(templatesURL).then(function(response) {
-                  return response.data.templates;
-              });
+  var HTTPtemplates = $http.get(templatesURL),
+      HTTPcampaigns = $http.get(campaignsURL);
+  $q.all([HTTPtemplates,HTTPcampaigns]).then(function(responses){
+      var tmp = [];
+      angular.forEach(responses, function(response) {
+        tmp.push(response.data);
+      });
+      return tmp;
+    }).then(function(tmpResult){
+      var templateData = tmpResult[0].templates;
+      for (var i=0;i<templateData.length;i++) {
+        appdata.templates.push(templateData[i]);
       }
-  };
-  getdata.campaigns = {
-      fetch: function() {
-              return $http.get(campaignsURL).then(function(response) {
-                  return response.data.campaigns;
-              });
+      return tmpResult;
+    }).then(function(tmpResult){
+      var campData = tmpResult[1].campaigns;
+      for (var j=0;j<campData.length;j++) {
+        appdata.campaigns.push(campData[j]);
       }
-  };
-  getdata.campaigns.fetch().then(function(data) {
-    for (var i=0;i<data.length;i++) {
-      appdata.campaigns.push(data[i]);
-    }
-  });
-  getdata.templates.fetch().then(function(data) {
-    for (var i=0;i<data.length;i++) {
-      appdata.templates.push(data[i]);
-    }
-  });
+    });
   return appdata;
 });
