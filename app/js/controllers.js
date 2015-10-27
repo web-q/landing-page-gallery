@@ -35,8 +35,11 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'templates', 'campaigns
     $scope.customFlag = "Standard";
   }
 	$scope.slide = function(transition) {
-	$rootScope.slidePage = transition;
-};
+		$rootScope.slidePage = transition;
+	};
+	$rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
+    window.scrollTo(0, 0);
+	});
 }]);
 
 landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'templates', 'campaigns', '$filter', '$rootScope', function($routeParams, $scope, templates, campaigns, $filter, $rootScope) {
@@ -52,6 +55,9 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'templates', 'c
   // Pass campaigns data to $scope for use on the front
   $scope.campaigns = campaigns;
 	$scope.slide = function(transition) {
-	$rootScope.slidePage = transition;
-};
+		$rootScope.slidePage = transition;
+	};
+	$rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
+    window.scrollTo(0, 0);
+	});
 }]);

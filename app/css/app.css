@@ -29,6 +29,10 @@
   padding: 0;
 }*/
 
+body {
+  overflow-x: hidden;
+}
+
 #detail {
   margin-top: 80px;
 }
@@ -80,8 +84,8 @@
 }
 .slidepage-l.ng-enter, .slidepage-r.ng-enter,
 .slidepage-l.ng-leave, .slidepage-r.ng-leave {
-    -webkit-transition: all 1s ease;
-    transition: all 1s ease;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
 }
 /* Slide Left */
 .slidepage-l.ng-enter {
@@ -103,4 +107,25 @@
 }
 .slidepage-r.ng-leave-active {
     left: 100%;
+}
+
+footer {
+  height: 40px;
+  background-color: #333333;
+  color: #afafaf;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.heart-icon {
+  color: red;
+}
+.webq-text-logo {
+  font-weight: 400;
+  font-size: 17px;
+}
+.webq-text-logo span {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size:16px;
 }
