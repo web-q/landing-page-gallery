@@ -1,7 +1,28 @@
 <div class="container">
-  <h2>Templates</h2>
+  <h2>Find A Campaign</h2>
   <div class="row">
-    <div class="col-sm-4" ng-repeat="c in campaigns">
+    <div class="col-sm-3"><label>Search: <input ng-model="search.$"></label></div>
+    <div class="col-sm-2 text-center">
+      <select ng-model="search.topic">
+        <option value="">Topic</option>
+        <option ng-repeat="c in campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
+      </select>
+    </div>
+    <div class="col-sm-2 text-center">
+      <select ng-model="search.type">
+        <option value="">Type</option>
+        <option ng-repeat="c in campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
+      </select>
+    </div>
+    <div class="col-sm-2 text-center">
+      <select ng-model="search.templateId">
+        <option value="">Template</option>
+        <option ng-repeat="c in campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4" ng-repeat="c in campaigns | filter:search:strict">
       <div class="campaign-thumb"><p><a ng-click="slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></p>
       <p>{{c.templateTitle}}</p>
     </div>

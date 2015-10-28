@@ -1,8 +1,8 @@
 'use strict';
 
 landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope, $http) {
-  var campaigns = appdata.campaigns;
   var templates = appdata.templates;
+  var campaigns = appdata.campaigns;
 
   // Collect url paramters into  variables
   var tid = $routeParams.templateId;
@@ -47,8 +47,8 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
 }]); //---------END DETAILCTRL---------//
 
 landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$filter', '$rootScope', function($routeParams, $scope, appdata, $filter, $rootScope) {
-  var campaigns = appdata.campaigns;
   var templates = appdata.templates;
+  var campaigns = appdata.campaigns;
 
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
