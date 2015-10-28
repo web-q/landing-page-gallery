@@ -98,3 +98,34 @@ footer {
   font-weight: 600;
   font-size:16px;
 }
+
+/* -----FILTERING ANIMATION ------*/
+.filterpop.ng-enter,
+.filterpop.ng-leave,
+.filterpop.ng-move
+{
+	-webkit-transition: 150ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+	-moz-transition: 150ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+	-ms-transition: 150ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+	-o-transition: 150ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+	transition: 150ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	text-overflow: clip;
+	white-space:nowrap;
+}
+
+.filterpop.ng-leave.filterpop.ng-leave-active,
+.filterpop.ng-enter {
+	opacity: 0;
+	width: 0px;
+	height: 0px;
+}
+
+.filterpop.ng-enter.filterpop.ng-enter-active,
+.filterpop.ng-leave {
+	opacity: 1;
+	width: 150px;
+	height: 30px;
+}
