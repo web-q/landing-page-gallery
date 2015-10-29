@@ -1,6 +1,6 @@
 #Landing Page Wizard
 
-The Landing Page Wizard is an application written for [HCA](http://hcahealthcare.com)'s Florida Division to showcase all of the campaign pages and microsites that they/we make. It is essentially a gallery with some filtering capability. It is built in [AngularJS](http://angularjs.org/), using [angular-seed](https://github.com/angular/angular-seed) as a quick start. This is my first time using/learning AngularJS, and as such any suggestions/criticism/refactoring is welcome.
+The Landing Page Wizard is an application written for [HCA](http://hcahealthcare.com)'s Florida Division to showcase all of the campaign pages and microsites that they/we make. It is essentially a gallery with some filtering capability. It is built in [AngularJS](http://angularjs.org/), using [angular-seed](https://github.com/angular/angular-seed) as a quick start. This is my first time using/learning AngularJS, and as such any suggestions/criticism/refactoring are welcome.
 
 ##Build
 
