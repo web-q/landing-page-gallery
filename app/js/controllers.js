@@ -60,10 +60,10 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
   }
 
   // Pass campaigns data to $scope for use on the front
-  $scope.campaigns = campaigns;
+  this.campaigns = campaigns;
 
   // Config for sliding page left/right
-  $scope.slide = function(transition) {
+  this.slide = function(transition) {
     $rootScope.slidePage = transition;
   };
   // Set scroll back to top of page

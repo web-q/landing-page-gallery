@@ -5,25 +5,25 @@
     <div class="col-sm-2 text-center">
       <select ng-model="search.topic">
         <option value="">Topic</option>
-        <option ng-repeat="c in campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
+        <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
       </select>
     </div>
     <div class="col-sm-2 text-center">
       <select ng-model="search.type">
         <option value="">Type</option>
-        <option ng-repeat="c in campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
+        <option ng-repeat="c in main.campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
       </select>
     </div>
     <div class="col-sm-2 text-center">
       <select ng-model="search.templateId">
         <option value="">Template</option>
-        <option ng-repeat="c in campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
+        <option ng-repeat="c in main.campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
       </select>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4 filterpop" ng-repeat="c in campaigns | filter:search:strict as results">
-      <div class="campaign-thumb"><p><a ng-click="slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></p>
+    <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
+      <div class="campaign-thumb"><p><a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></p>
       <p>{{c.templateTitle}}</p>
     </div>
     </div>
