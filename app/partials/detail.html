@@ -1,34 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <a ng-click="slide('slidepage-r')" class="btn btn-success" href="#/">BACK</a>
+      <a ng-click="detail.slide('slidepage-r')" class="btn btn-success" href="#/">BACK</a>
     </div>
   </div>
-  <!--{{template.id}}-->
-  <h2 class="text-center">{{template.title}}</h2>
-  <h3 class="text-center">{{campaign.title}}</h3>
+  <h2 class="text-center">{{detail.template.title}}</h2>
+  <h3 class="text-center">{{detail.campaign.title}}</h3>
   <div id="detail" class="row">
     <div class="col-sm-7">
       <img class="img-responsive" src="http://placehold.it/700x800" alt="" width="700" height="800" />
     </div>
     <div class="col-sm-5">
       <h4>DESCRIPTION</h4>
-      <p>{{template.description}}</p>
+      <p>{{detail.template.description}}</p>
       <h4>FEATURES</h4>
         <ul>
-          <li ng-repeat="f in template.features">{{f}}</li>
+          <li ng-repeat="f in detail.template.features">{{f}}</li>
         </ul>
       </p>
-      <h4 class="build-time">BUILD TIME: {{template.buildTime}}</h4>
-      <h4 class="custom-{{template.custom}}">{{customFlag}}</h4>
+      <h4 class="build-time">BUILD TIME: {{detail.template.buildTime}}</h4>
+      <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
     </div>
   </div>
   <div class="row">
   <div class="col-sm-12">
-    <h4>Other Campaigns using {{template.title}}</h4>
+    <h4>Other Campaigns using {{detail.template.title}}</h4>
     <ul>
-      <li ng-repeat="otherCampaign in otherCampaigns">
-        <a href="#/template/{{template.id}}/c/{{otherCampaign.id}}">{{otherCampaign.title}}</a>
+      <li ng-repeat="other in detail.otherCampaigns">
+        <a href="#/template/{{detail.template.id}}/c/{{other.id}}">{{other.title}}</a>
       </li>
     </ul>
   </div>

@@ -25,19 +25,19 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   id: "!" + cid }); // Exclude current campaign
 
   // Pass variables needed on the front to $scope
-  $scope.template = template;
-  $scope.campaign = campaign;
-  $scope.otherCampaigns = otherCampaigns;
+  this.template = template;
+  this.campaign = campaign;
+  this.otherCampaigns = otherCampaigns;
 
   // Functionality for "Custom" style classes
   if(template.custom) {
-    $scope.customFlag = "Custom";
+    this.customFlag = "Custom";
   } else {
-    $scope.customFlag = "Standard";
+    this.customFlag = "Standard";
   }
 
   // Config for sliding page left/right
-  $scope.slide = function(transition) {
+  this.slide = function(transition) {
     $rootScope.slidePage = transition;
   };
   // Set scroll back to top of page
