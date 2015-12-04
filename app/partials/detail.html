@@ -1,36 +1,40 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <a ng-click="detail.slide('slidepage-r')" class="btn btn-success" href="#/">BACK</a>
-    </div>
+  <div class="template-detail">
+  <h1 class="text-center">{{detail.template.title}}</h1>
+  <h2 class="text-center">{{detail.campaign.title}}</h2>
   </div>
-  <h2 class="text-center">{{detail.template.title}}</h2>
-  <h3 class="text-center">{{detail.campaign.title}}</h3>
   <div id="detail" class="row">
     <div class="col-sm-7">
       <img class="img-responsive" src="http://placehold.it/700x800" alt="" width="700" height="800" />
     </div>
     <div class="col-sm-5">
-      <h4>DESCRIPTION</h4>
+      <h3>Description</h3>
       <p>{{detail.template.description}}</p>
-      <h4>FEATURES</h4>
+      <h3>Features</h3>
         <ul>
           <li ng-repeat="f in detail.template.features">{{f}}</li>
         </ul>
       </p>
-      <h4 class="build-time">BUILD TIME: {{detail.template.buildTime}}</h4>
-      <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
+      <h3 class="build-time">Build Time: {{detail.template.buildTime}}</h3>
+      <h3 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h3>
     </div>
   </div>
-  <div class="row">
-  <div class="col-sm-12">
-    <h4>Other Campaigns using {{detail.template.title}}</h4>
-    <ul>
-      <li ng-repeat="other in detail.otherCampaigns">
-        <a href="#/template/{{detail.template.id}}/c/{{other.id}}">{{other.title}}</a>
-      </li>
-    </ul>
-  </div>
-  </div>
 </div>
-<footer><div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by <span class="webq-text-logo"><span>hca</span>webQ</span></div></footer>
+
+  <div class="row grey-bg">
+    <div class="col-sm-12">
+      <h2 class="text-center">Other Campaigns using {{detail.template.title}}</h2>
+      <ul>
+        <li ng-repeat="other in detail.otherCampaigns">
+          <a href="#/template/{{detail.template.id}}/c/{{other.id}}">{{other.title}}</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+
+<footer>
+<div id="back-btn" class="horizontal fadeIn animated">
+      <a ng-click="detail.slide('slidepage-r')" class="btn btn-success" href="#/"><i class="icon-left-open"></i><br>BACK</a>
+</div>
+
+<div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo"></div></footer>
