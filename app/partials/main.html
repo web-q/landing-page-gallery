@@ -52,11 +52,10 @@
       </select>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
       <div class="campaign-thumb">
-        <img src="http://placehold.it/300x300" />
+        <img src="http://placehold.it/300x300" class="img-responsive" />
         <h3><a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></h3>
         <h4>{{c.templateTitle}}</h4>
     </div>
@@ -66,4 +65,6 @@
     </div>
   </div>
 </div>
-<footer><div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo"></div></footer>
+<footer>
+  <div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" /></div>
+</footer>
