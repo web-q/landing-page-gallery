@@ -1,7 +1,7 @@
 <div class="container">
   <div class="navbar-header">
     <a class="navbar-brand" href="#">
-      <img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/fullColorLogo">| Landing Page Wizard</a>
+      <img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/fullColorLogo" alt="HCA Web-Q" />| Landing Page Wizard</a>
   </div>
   <div class="col-sm-3 col-md-3 pull-right">
     <form class="navbar-form" role="search">
@@ -50,9 +50,11 @@
   <div class="row">
     <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
       <div class="campaign-thumb">
-        <img src="http://placehold.it/300x300" class="img-responsive center-block" />
-        <h3><a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></h3>
-        <h4>{{c.templateTitle}}</h4>
+        <a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">
+          <img src="http://placehold.it/300x300" class="img-responsive center-block" />
+          <h3>{{c.title}}</h3>
+          <h4>{{c.templateTitle}}</h4>
+        </a>
     </div>
     </div>
     <div class="col-sm-12 filterpop text-center" ng-if="results.length == 0">
