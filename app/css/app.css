@@ -34,6 +34,17 @@ footer {
     float: none;
   }
 }
+
+.campaign-thumb a {
+  text-decoration: none;
+  display: inline-block;
+}
+.campaign-thumb a:hover, .campaign-thumb a:focus {
+  text-decoration: none;
+}
+.campaign-thumb a:hover h3, .campaign-thumb a:focus h3 {
+  text-decoration: underline;
+}
 a {
   color: #508ac5;
   text-decoration: none;
