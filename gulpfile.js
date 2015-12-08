@@ -1,10 +1,13 @@
 var gulp = require('gulp'),
+    notify = require('gulp-notify'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    ngAnnotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync')
     ;
 
@@ -36,6 +39,7 @@ gulp.task('sass', function () {
   .pipe(minifyCss())
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.css))
+  .pipe(notify("CSS Compiled and Minified"))
   ;
 });
 
@@ -44,6 +48,11 @@ gulp.task('scripts', function () {
   gulp.src(SRC.devjs)
   .pipe(concat('app.js'))
   .pipe(gulp.dest(SRC.distjs))
+  .pipe(ngAnnotate())
+  .pipe(uglify())
+  .pipe(rename({suffix:'.min'}))
+  .pipe(gulp.dest(SRC.distjs))
+  .pipe(notify("JS Compiled and Minified"))
   ;
 });
 
