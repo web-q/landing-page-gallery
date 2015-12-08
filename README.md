@@ -27,7 +27,7 @@ Now simply:
 npm start
 ```
 
-This will start a server that you can now view at: `http://localhost:3000/app/`.
+This will start a server that you can now view at: `http://localhost:3000/`.
 
 
 
