@@ -8,7 +8,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
-    browserSync = require('browser-sync')
+    browserSync = require('browser-sync'),
+    ghPages = require('gulp-gh-pages')
     ;
 
 /*--- Set Sources ---*/
@@ -105,6 +106,12 @@ gulp.task('serve', ['build-lib','watch'], function() {
       .pipe(browserSync.stream());
   });
   watch("app/**/*.html").on('change', browserSync.reload);
+});
+
+/*--- Deploy to GH-Pages ---*/
+gulp.task('gh-pages', function() {
+  return gulp.src('app/**/*')
+    .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
 });
 
 /*--- Default Gulp ---*/
