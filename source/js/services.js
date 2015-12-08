@@ -1,5 +1,3 @@
-'use strict';
-
 landingPageWiz.factory('appdata', function($http, $q) {
   var
   templatesURL =
