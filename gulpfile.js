@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
-    rename = require('gulp-rename')
+    rename = require('gulp-rename'),
+    browserSync = require('browser-sync')
     ;
 
 var AUTOPREFIXER_BROWSERS = [
@@ -23,6 +24,7 @@ var SRC = {
   css: 'app/css'
 }
 
+/*--- CSS Compiler ---*/
 gulp.task('sass', function () {
   gulp.src(SRC.scss)
   .pipe(sass())
@@ -34,8 +36,28 @@ gulp.task('sass', function () {
   ;
 });
 
+/*--- Watcher: CSS, JSS, etc... ---*/
 gulp.task('watch', function() {
   watch('source/scss/**/*.scss', function() {
     gulp.start('sass');
   });
 });
+
+/*-------------------------------
+/ Serve up Browser Sync, watch
+/ for changes & inject/reload
+/-------------------------------*/
+gulp.task('serve', ['watch'], function() {
+  browserSync.init({
+        server: "./app"
+    });
+
+  watch("app/css/*.css", function() {
+    return gulp.src("app/css/*.css")
+      .pipe(browserSync.stream());
+  });
+  watch("app/**/*.html").on('change', browserSync.reload);
+});
+
+/*--- Default Gulp ---*/
+gulp.task('default', ['serve']);
