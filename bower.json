@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "landing-page-wizard",
+  "description": "A gallery application built on top of angular-seed",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/web-q/landing-page-wizard",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -10,8 +10,6 @@
     "angular-route": "~1.4.0",
     "angular-animate": "~1.4.0",
     "angular-filter": "~0.5.7",
-    "angular-loader": "~1.4.0",
-    "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0"
   }
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope, $http) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
