@@ -9,10 +9,11 @@ The Landing Page Wizard is an application written for [HCA](http://hcahealthcare
 
 ###Getting Set Up
 
-If you'd like to check out the build at any time, simply:
+If you'd like to check out the build at any time, simply fork/clone our repository.
+
 
 ```bash
-git clone https://github.com/halvves/landing-page-wizard.git
+git clone https://github.com/{USERNAME}/landing-page-wizard.git
 cd landing-page-wizard
 ```
 Then run a quick:
@@ -26,7 +27,7 @@ Now simply:
 npm start
 ```
 
-This will start a server that you can now view at: `http://localhost:8000/app/index.html`.
+This will start a server that you can now view at: `http://localhost:3000/app/`.
 
 
 
