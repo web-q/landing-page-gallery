@@ -1,4 +1,7 @@
 logs/*
+*~
+*.swp
+*.swo
 !.gitkeep
 node_modules/
 bower_components/
