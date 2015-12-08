@@ -11,6 +11,20 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync')
     ;
 
+/*--- Set Sources ---*/
+var SRC = {
+  scss: 'source/scss/**/*.scss',
+  css: 'app/css',
+  devjs: 'source/js/**/*.js',
+  distjs: 'app/js',
+  jslib: ['bower_components/angular/angular.min.js',
+          'bower_components/angular-route/angular-route.min.js',
+          'bower_components/angular-filter/dist/angular-filter.min.js',
+          'bower_components/angular-animate/angular-animate.min.js'],
+  modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
+  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css'
+};
+
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
   'ie_mob >= 10',
@@ -22,13 +36,6 @@ var AUTOPREFIXER_BROWSERS = [
   'ChromeAndroid >= 4.4',
   'bb >= 10'
 ];
-
-var SRC = {
-  scss: 'source/scss/**/*.scss',
-  css: 'app/css',
-  devjs: 'source/js/**/*.js',
-  distjs: 'app/js'
-}
 
 /*--- CSS Compiler ---*/
 gulp.task('sass', function () {
@@ -56,6 +63,24 @@ gulp.task('scripts', function () {
   ;
 });
 
+/*--- Compile Libraries ---*/
+gulp.task('build-lib', function () {
+  gulp.src(SRC.jslib,{base: 'bower_components/'})
+  .pipe(concat('lib.min.js'))
+  .pipe(gulp.dest(SRC.distjs))
+  ;
+  gulp.src(SRC.modernizr)
+  .pipe(rename('modernizr.min.js'))
+  .pipe(gulp.dest(SRC.distjs))
+  ;
+  gulp.src(SRC.boilerplate)
+  .pipe(concat('boilerplate.css'))
+  .pipe(minifyCss())
+  .pipe(rename({suffix:'.min'}))
+  .pipe(gulp.dest(SRC.css))
+  ;
+});
+
 /*--- Watcher: CSS, JSS, etc... ---*/
 gulp.task('watch', function() {
   watch('source/scss/**/*.scss', function() {
@@ -70,7 +95,7 @@ gulp.task('watch', function() {
 / Serve up Browser Sync, watch
 / for changes & inject/reload
 /-------------------------------*/
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', ['build-lib','watch'], function() {
   browserSync.init({
         server: "./app"
     });
