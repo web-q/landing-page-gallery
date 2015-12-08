@@ -1,8 +1,34 @@
 <div class="container">
-  <h2>Find A Campaign</h2>
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#/">
+      <img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/fullColorLogo" alt="HCA Web-Q" />| Landing Page Wizard</a>
+  </div>
+  <div class="col-sm-3 col-md-3 pull-right">
+    <form class="navbar-form" role="search">
+      <div class="input-group">
+        <input type="search" class="form-control" ng-model="search.$" placeholder="Search" name="srch-term" id="srch-term" aria-label="Quick Search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--<header class="image-bg-fluid-height">
+  <img class="img-responsive img-left" src="http://placehold.it/350x200" alt="">
+</header>-->
+
+<div class="header-img">
+  <img class="img-responsive" src="http://hcasites.com/rotator-live-preview/images/text%20er%20update%20on%20tyhe%20go%20man.jpg">
+</div>
+
+<div class="container">
   <div class="row">
-    <div class="col-sm-3"><input type="search" ng-model="search.$" placeholder="Quick Search" aria-label="Quick Search" /></div>
-    <div class="col-sm-2 text-center">
+  <h1 class="text-center">Find Your Campaign</h1>
+</div>
+  <div class="row row-btns">
+    <div class="col-sm-2 col-sm-offset-3 text-center">
       <select ng-model="search.topic">
         <option value="">Topic</option>
         <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
@@ -23,8 +49,12 @@
   </div>
   <div class="row">
     <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
-      <div class="campaign-thumb"><p><a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">{{c.title}}</a></p>
-      <p>{{c.templateTitle}}</p>
+      <div class="campaign-thumb">
+        <a ng-click="main.slide('slidepage-l')" href="#/template/{{c.templateId}}/c/{{c.id}}">
+          <img src="http://placehold.it/300x300" class="img-responsive center-block" />
+          <h3>{{c.title}}</h3>
+          <h4>{{c.templateTitle}}</h4>
+        </a>
     </div>
     </div>
     <div class="col-sm-12 filterpop text-center" ng-if="results.length == 0">
@@ -32,4 +62,6 @@
     </div>
   </div>
 </div>
-<footer><div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by <span class="webq-text-logo"><span>hca</span>webQ</span></div></footer>
+<footer>
+  <div class="row">made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" /></div>
+</footer>
