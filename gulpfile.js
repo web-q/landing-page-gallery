@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
+    concat = require('gulp-concat'),
     browserSync = require('browser-sync')
     ;
 
@@ -21,7 +22,9 @@ var AUTOPREFIXER_BROWSERS = [
 
 var SRC = {
   scss: 'source/scss/**/*.scss',
-  css: 'app/css'
+  css: 'app/css',
+  devjs: 'source/js/**/*.js',
+  distjs: 'app/js'
 }
 
 /*--- CSS Compiler ---*/
@@ -36,10 +39,21 @@ gulp.task('sass', function () {
   ;
 });
 
+/*--- JS Compiler ---*/
+gulp.task('scripts', function () {
+  gulp.src(SRC.devjs)
+  .pipe(concat('app.js'))
+  .pipe(gulp.dest(SRC.distjs))
+  ;
+});
+
 /*--- Watcher: CSS, JSS, etc... ---*/
 gulp.task('watch', function() {
   watch('source/scss/**/*.scss', function() {
     gulp.start('sass');
+  });
+  watch('source/js/**/*.js', function() {
+    gulp.start('scripts');
   });
 });
 
