@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
@@ -31,4 +32,10 @@ gulp.task('sass', function () {
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.css))
   ;
+});
+
+gulp.task('watch', function() {
+  watch('source/scss/**/*.scss', function() {
+    gulp.start('sass');
+  });
 });
