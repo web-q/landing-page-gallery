@@ -231,9 +231,11 @@ select {
   width: 100%;
   height: 100%; }
 
-.slidepage-l.ng-enter, .slidepage-r.ng-enter,
+.slidepage-l.ng-enter, .slidepage-r.ng-enter {
+  transition: all .4s ease 400ms; }
+
 .slidepage-l.ng-leave, .slidepage-r.ng-leave {
-  transition: all .5s ease; }
+  transition: all .4s ease; }
 
 .fadepage.ng-enter, .fadepage.ng-leave {
   transition: all 1.3s ease; }
