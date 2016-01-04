@@ -25,7 +25,7 @@
     <h2 class="text-center">Other Campaigns using {{detail.template.title}}</h2>
     <ul>
       <li ng-repeat="other in detail.otherCampaigns">
-        <a ng-click="hideBackBtn=true" href="#/template/{{detail.template.id}}/c/{{other.id}}">{{other.title}}</a>
+        <a ng-click="hideBackBtn=true" href="#/{{other.shortCode}}">{{other.title}}</a>
       </li>
     </ul>
   </div>
@@ -34,5 +34,5 @@
   <div>made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" /></div>
 </footer>
 <div id="back-btn" class="fade-onload" ng-hide="hideBackBtn">
-  <a ng-click="detail.slide('slidepage-r'); hideBackBtn=true" href="#/"><span class="sr-only">Back</span></a>
+  <a ng-click="detail.slide('slidepage-r');" href="#/"><span class="sr-only">Back</span></a>
 </div>

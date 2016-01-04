@@ -1,22 +1,19 @@
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope, $http) {
+landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
   // Collect url paramters into  variables
-  var tid = $routeParams.templateId;
-  var cid = $routeParams.campaignId;
+  var cid = $routeParams.shortCode;
+
+  // Grab the appropriate campaign object from "campaigns" data
+  var campaign = $filter('filter')(campaigns, {shortCode: cid})[0];
+
+  // TEMP FIX FOR TESTING ************
+  var tid = campaign.templateId;
 
   // Grab the appropriate template object from "templates" data
   // We filter the array by id, the result is an array so we select element 0
   var template = $filter('filter')(templates, {id: tid})[0];
-
-  // If no campaignId declared use default from templates data
-  if (!cid){
-    cid = template.defaultCampaignId;
-  }
-
-  // Grab the appropriate campaign object from "campaigns" data
-  var campaign = $filter('filter')(campaigns, {id: cid})[0];
 
   // Make an array containing other campaigns using this template
   var otherCampaigns = $filter('filter')(campaigns, {templateId: tid,
@@ -36,15 +33,11 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
 
   // Config for sliding page left/right
   this.slide = function(transition) {
-    $rootScope.slidePage = transition;
+    $rootScope.pageTransition = transition;
   };
-  // Set scroll back to top of page
-  $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
-    window.scrollTo(0, 0);
-  });
 }]); //---------END DETAILCTRL---------//
 
-landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$filter', '$rootScope', function($routeParams, $scope, appdata, $filter, $rootScope) {
+landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -62,10 +55,12 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
 
   // Config for sliding page left/right
   this.slide = function(transition) {
-    $rootScope.slidePage = transition;
+    $rootScope.pageTransition = transition;
   };
-  // Set scroll back to top of page
-  $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
-    window.scrollTo(0, 0);
-  });
 }]); //---------END MAINCTRL---------//
+
+landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
+  this.templates = appdata.templates;
+  this.campaigns = appdata.campaigns;
+  this.printdata = appdata;
+}]); //---------END DEBUGCTRL---------//
