@@ -7,6 +7,10 @@ The Landing Page Wizard is an application written for [HCA](http://hcahealthcare
 * Move templateTitle pushing into velocity
 * Fix ID sourcing (currently pulling hostID)
 * Change template-id to templateId
+* Clean up transitions
+* Build out see otherCampaigns
+* BACKLOG screenshots and snippets
+* snippet/comment gen tool
 
 
 ##Build
