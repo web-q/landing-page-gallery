@@ -38,12 +38,15 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Function for page loading spinner
-landingPageWiz.run(function($rootScope, fetchData) {
+landingPageWiz.run(function($rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeStart', function() {
     $rootScope.loadingView = true;
   });
   $rootScope.$on('$routeChangeSuccess', function() {
     $rootScope.loadingView = false;
+    $timeout(function () {
+      $window.scrollTo(0,0);
+    }, 400);
   });
 });
 
