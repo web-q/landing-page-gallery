@@ -46,6 +46,6 @@ landingPageWiz.run(function($rootScope, $timeout, $window) {
     $rootScope.loadingView = false;
     $timeout(function () {
       $window.scrollTo(0,0);
-    }, 650);
+    }, 400);
   });
 });

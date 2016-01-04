@@ -255,7 +255,7 @@ select {
   left: 0; }
 
 .slidepage-l.ng-leave-active {
-  left: -100%; }
+  left: -110%; }
 
 /* Slide Right */
 .slidepage-r.ng-enter {
@@ -265,7 +265,7 @@ select {
   left: 0; }
 
 .slidepage-r.ng-leave-active {
-  left: 100%; }
+  left: 110%; }
 
 /* -----Fade Items In On Load----- */
 @-webkit-keyframes fadeIn {
