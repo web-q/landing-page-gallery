@@ -26,15 +26,7 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
         appdata: function(fetchData){return fetchData.getCampaigns()}
       }
     }).
-    when('/:templateId', {
-      templateUrl: 'partials/detail.html',
-      controller: 'detailCtrl',
-      controllerAs: 'detail',
-      resolve: {
-        appdata: function(fetchData){return fetchData.getCampaigns()}
-      }
-    }).
-    when('/:templateId/:campaignId', {
+    when('/:shortCode', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
       controllerAs: 'detail',
