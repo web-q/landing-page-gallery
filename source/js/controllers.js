@@ -1,4 +1,4 @@
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope, $http) {
+landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -9,7 +9,7 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   var campaign = $filter('filter')(campaigns, {shortCode: cid})[0];
 
   // TEMP FIX FOR TESTING ************
-  var tid = 2;
+  var tid = campaign.templateId;
 
   // Grab the appropriate template object from "templates" data
   // We filter the array by id, the result is an array so we select element 0
@@ -35,23 +35,15 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
-  // Set scroll back to top of page
-  $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
-    window.scrollTo(0, 0);
-  });
 }]); //---------END DETAILCTRL---------//
 
-landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$filter', '$rootScope', function($routeParams, $scope, appdata, $filter, $rootScope) {
+landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
   for (var i=0; i < campaigns.length; i++) {
-    var id = campaigns[i].id;
-    // TEMP FIX FOR TESTING ************
-    campaigns[i].templateId = '1';
-    
     // Grab template
     var template = $filter('filter')(templates, {id: campaigns[i].templateId})[0];
     // Create a templateTitle property
@@ -65,10 +57,6 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
-  // Set scroll back to top of page
-  $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
-    window.scrollTo(0, 0);
-  });
 }]); //---------END MAINCTRL---------//
 
 landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
