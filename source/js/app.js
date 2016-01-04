@@ -26,6 +26,14 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
         appdata: function(fetchData){return fetchData.getCampaigns()}
       }
     }).
+    when('/tag', {
+      templateUrl: 'partials/tagtool.html',
+      controller: 'tagtoolCtrl',
+      controllerAs: 'tagtool',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
+    }).
     when('/:shortCode', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',

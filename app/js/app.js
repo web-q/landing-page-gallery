@@ -26,6 +26,14 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
         appdata: function(fetchData){return fetchData.getCampaigns()}
       }
     }).
+    when('/tag', {
+      templateUrl: 'partials/tagtool.html',
+      controller: 'tagtoolCtrl',
+      controllerAs: 'tagtool',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
+    }).
     when('/:shortCode', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
@@ -116,6 +124,12 @@ landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
   this.campaigns = appdata.campaigns;
   this.printdata = appdata;
 }]); //---------END DEBUGCTRL---------//
+
+landingPageWiz.controller('tagtoolCtrl', ['appdata', function(appdata) {
+  this.templates = appdata.templates;
+  this.campaigns = appdata.campaigns;
+  this.printdata = appdata;
+}]); //---------END TAGTOOLCTRL---------//
 
 landingPageWiz.factory('fetchData', function($q, $http, $rootScope) {
   var cache;
