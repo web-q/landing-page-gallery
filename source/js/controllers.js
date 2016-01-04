@@ -69,3 +69,9 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
     window.scrollTo(0, 0);
   });
 }]); //---------END MAINCTRL---------//
+
+landingPageWiz.controller('debugCtrl', ['$routeParams', '$scope', 'appdata', '$filter', '$rootScope', function($routeParams, $scope, appdata, $filter, $rootScope) {
+  this.templates = appdata.templates;
+  this.campaigns = appdata.campaigns;
+  this.printdata = appdata;
+}]); //---------END DEBUGCTRL---------//

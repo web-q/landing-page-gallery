@@ -1,0 +1,22 @@
+<h1>Templates</h1>
+<div ng-repeat="t in debug.templates">
+  <h2>(ID:{{t.id}}) {{t.title}}</h2>
+  <p><b class="text-uppercase">DESCRIPTION:</b> {{t.description}}</p>
+  <ul>
+    <li ng-repeat="f in t.features">{{f}}</li>
+  </ul>
+  <p>{{t.buildTime}}</p>
+  <p>{{t.custom}}</p>
+  <p>{{t.defaultCampaignId}}</p>
+</div>
+<h1>Campaigns</h1>
+<div ng-repeat="c in debug.campaigns">
+  <h2>{{c.title}}</h2>
+  <h3>{{c.id}}</h3>
+  <h4>{{c.url}}</h4>
+  <p>{{c.topic}}</p>
+  <p>{{c.type}}</p>
+  <p>{{c.template-id}}</p>
+  <p>{{c.show}}</p>
+</div>
+<p>{{debug.printdata}}</p>
