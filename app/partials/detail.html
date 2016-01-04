@@ -25,7 +25,7 @@
     <h2 class="text-center">Other Campaigns using {{detail.template.title}}</h2>
     <ul>
       <li ng-repeat="other in detail.otherCampaigns">
-        <a ng-click="hideBackBtn=true" href="#/template/{{detail.template.id}}/c/{{other.id}}">{{other.title}}</a>
+        <a ng-click="hideBackBtn=true" href="#/{{detail.template.id}}/{{other.id}}">{{other.title}}</a>
       </li>
     </ul>
   </div>
