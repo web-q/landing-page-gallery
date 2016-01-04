@@ -64,3 +64,9 @@ landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
   this.campaigns = appdata.campaigns;
   this.printdata = appdata;
 }]); //---------END DEBUGCTRL---------//
+
+landingPageWiz.controller('tagtoolCtrl', ['appdata', function(appdata) {
+  this.templates = appdata.templates;
+  this.campaigns = appdata.campaigns;
+  this.printdata = appdata;
+}]); //---------END TAGTOOLCTRL---------//
