@@ -92,7 +92,7 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
 
   // Config for sliding page left/right
   this.slide = function(transition) {
-    $rootScope.slidePage = transition;
+    $rootScope.pageTransition = transition;
   };
   // Set scroll back to top of page
   $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
@@ -107,6 +107,8 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
   for (var i=0; i < campaigns.length; i++) {
+    // FAKE Fix until JSON is fixed
+    campaigns[i].templateId = '1';
     // Grab template
     var template = $filter('filter')(templates, {id: campaigns[i].templateId})[0];
     // Create a templateTitle property
@@ -118,7 +120,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
 
   // Config for sliding page left/right
   this.slide = function(transition) {
-    $rootScope.slidePage = transition;
+    $rootScope.pageTransition = transition;
   };
   // Set scroll back to top of page
   $rootScope.$on("$routeChangeSuccess", function (event, currentRoute, previousRoute) {
