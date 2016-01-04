@@ -51,6 +51,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
   for (var i=0; i < campaigns.length; i++) {
+    var id = campaigns[i].id;
     // FAKE Fix until JSON is fixed
     campaigns[i].templateId = '1';
     // Grab template
