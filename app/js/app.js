@@ -12,20 +12,47 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
     when('/', {
       templateUrl: 'partials/main.html',
       controller: 'mainCtrl',
-      controllerAs: 'main'
+      controllerAs: 'main',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
-    when('/template/:templateId', {
+    when('/debug', {
+      templateUrl: 'partials/debug.html',
+      controller: 'debugCtrl',
+      controllerAs: 'debug',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
+    }).
+    when('/:templateId', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
-      controllerAs: 'detail'
+      controllerAs: 'detail',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
-    when('/template/:templateId/c/:campaignId', {
+    when('/:templateId/:campaignId', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
-      controllerAs: 'detail'
+      controllerAs: 'detail',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
   otherwise({redirectTo: '/'});
 }]);
+
+// Function for page loading spinner
+landingPageWiz.run(function($rootScope) {
+  $rootScope.$on('$routeChangeStart', function(ev,data) {
+    $rootScope.loadingView = true;
+  });
+  $rootScope.$on('$routeChangeSuccess', function(ev,data) {
+    $rootScope.loadingView = false;
+  });
+});
 
 landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope, $http) {
   var templates = appdata.templates;
@@ -99,35 +126,38 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', '$scope', 'appdata', '$fi
   });
 }]); //---------END MAINCTRL---------//
 
-landingPageWiz.factory('appdata', function($http, $q) {
-  var
-  templatesURL =
-  "http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/v1/test-data/templates.json",
-  campaignsURL =
-  "http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/v1/test-data/campaigns.json";
-  var appdata = {};
-  appdata.templates = [];
-  appdata.campaigns = [];
+landingPageWiz.controller('debugCtrl', ['$routeParams', '$scope', 'appdata', '$filter', '$rootScope', function($routeParams, $scope, appdata, $filter, $rootScope) {
+  this.templates = appdata.templates;
+  this.campaigns = appdata.campaigns;
+  this.printdata = appdata;
+}]); //---------END DEBUGCTRL---------//
 
-  var HTTPtemplates = $http.get(templatesURL),
-      HTTPcampaigns = $http.get(campaignsURL);
-  $q.all([HTTPtemplates,HTTPcampaigns]).then(function(responses){
-      var tmp = [];
-      angular.forEach(responses, function(response) {
-        tmp.push(response.data);
-      });
-      return tmp;
-    }).then(function(tmpResult){
-      var templateData = tmpResult[0].templates;
-      for (var i=0;i<templateData.length;i++) {
-        appdata.templates.push(templateData[i]);
-      }
-      return tmpResult;
-    }).then(function(tmpResult){
-      var campData = tmpResult[1].campaigns;
-      for (var j=0;j<campData.length;j++) {
-        appdata.campaigns.push(campData[j]);
-      }
-    });
-  return appdata;
+landingPageWiz.factory('fetchData', function($q, $http) {
+  var cache;
+  function getCampaigns() {
+    var d = $q.defer();
+    if (cache) {
+      d.resolve(cache);
+    } else {
+      $http({
+        method: 'GET',
+        url: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
+      }).then(
+        function success(response) {
+          cache = response.data;
+          d.resolve(cache);
+        },
+        function failure(reason) {
+          d.reject(reason);
+        });
+    }
+    return d.promise;
+  }
+  function clearCache() {
+    cache = null;
+  }
+  return {
+    getCampaigns: getCampaigns,
+    clearCache: clearCache
+  };
 });
