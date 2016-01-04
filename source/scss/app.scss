@@ -246,7 +246,7 @@ select {
 }
 
 /* -----Page Change----- */
-.slidepage-l, .slidepage-r {
+.slidepage-l, .slidepage-r, .fadepage {
     position: absolute;
     left: 0;
     top: 0;
@@ -258,6 +258,13 @@ select {
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
 }
+.fadepage.ng-enter, .fadepage.ng-leave {
+  -webkit-transition: all 1.3s ease;
+  transition: all 1.3s ease;
+}
+/* Fade Page */
+.fadepage.ng-enter, .fadepage.ng-leave-active { opacity: 0; }
+.fadepage.ng-enter-active, .fadepage.ng-leave { opacity: 1; }
 /* Slide Left */
 .slidepage-l.ng-enter { left: 100%; }
 .slidepage-l.ng-enter-active, .slidepage-l.ng-leave { left: 0; }

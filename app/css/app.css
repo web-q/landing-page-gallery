@@ -224,7 +224,7 @@ select {
   height: 30px; }
 
 /* -----Page Change----- */
-.slidepage-l, .slidepage-r {
+.slidepage-l, .slidepage-r, .fadepage {
   position: absolute;
   left: 0;
   top: 0;
@@ -234,6 +234,16 @@ select {
 .slidepage-l.ng-enter, .slidepage-r.ng-enter,
 .slidepage-l.ng-leave, .slidepage-r.ng-leave {
   transition: all .5s ease; }
+
+.fadepage.ng-enter, .fadepage.ng-leave {
+  transition: all 1.3s ease; }
+
+/* Fade Page */
+.fadepage.ng-enter, .fadepage.ng-leave-active {
+  opacity: 0; }
+
+.fadepage.ng-enter-active, .fadepage.ng-leave {
+  opacity: 1; }
 
 /* Slide Left */
 .slidepage-l.ng-enter {
