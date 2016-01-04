@@ -232,7 +232,7 @@ select {
   height: 100%; }
 
 .slidepage-l.ng-enter, .slidepage-r.ng-enter {
-  transition: all .4s ease 400ms; }
+  transition: all .4s ease 450ms; }
 
 .slidepage-l.ng-leave, .slidepage-r.ng-leave {
   transition: all .4s ease; }
