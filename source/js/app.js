@@ -12,17 +12,44 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
     when('/', {
       templateUrl: 'partials/main.html',
       controller: 'mainCtrl',
-      controllerAs: 'main'
+      controllerAs: 'main',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
-    when('/template/:templateId', {
+    when('/debug', {
+      templateUrl: 'partials/debug.html',
+      controller: 'debugCtrl',
+      controllerAs: 'debug',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
+    }).
+    when('/:templateId', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
-      controllerAs: 'detail'
+      controllerAs: 'detail',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
-    when('/template/:templateId/c/:campaignId', {
+    when('/:templateId/:campaignId', {
       templateUrl: 'partials/detail.html',
       controller: 'detailCtrl',
-      controllerAs: 'detail'
+      controllerAs: 'detail',
+      resolve: {
+        appdata: function(fetchData){return fetchData.getCampaigns()}
+      }
     }).
   otherwise({redirectTo: '/'});
 }]);
+
+// Function for page loading spinner
+landingPageWiz.run(function($rootScope) {
+  $rootScope.$on('$routeChangeStart', function(ev,data) {
+    $rootScope.loadingView = true;
+  });
+  $rootScope.$on('$routeChangeSuccess', function(ev,data) {
+    $rootScope.loadingView = false;
+  });
+});
