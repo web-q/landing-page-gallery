@@ -50,7 +50,7 @@
   <div class="row">
     <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
       <div class="campaign-thumb">
-        <a ng-click="main.slide('slidepage-l')" href="#/{{c.templateId}}/{{c.id}}">
+        <a ng-click="main.slide('slidepage-l')" href="#/{{c.templateId}}/{{c.shortCode}}">
           <img src="http://placehold.it/300x300" class="img-responsive center-block" />
           <h3>{{c.title}}</h3>
           <h4>{{c.templateTitle}}</h4>
