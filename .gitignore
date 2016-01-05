@@ -10,3 +10,4 @@ tmp
 .idea
 npm-debug.log
 .publish
+tmux*.log
