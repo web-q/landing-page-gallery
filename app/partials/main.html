@@ -51,7 +51,7 @@
     <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
       <div class="campaign-thumb">
         <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
-          <img src="http://placehold.it/300x300" class="img-responsive center-block" />
+          <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{c.id}}-d.png" class="img-responsive center-block" />
           <h3>{{c.title}}</h3>
           <h4>{{c.templateTitle}}</h4>
         </a>

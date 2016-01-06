@@ -28,7 +28,7 @@
   <h2>Tag Code</h2>
   <div ng-show="tagtool.isActiveCampaign">
     <p><strong>Paste on the first line of the &ldquo;Main Article&rdquo; section in the Active Campaign structure.</strong></p>
-    <pre>&lt;!-- webq-campaign-params-start (&#39;{{tagtool.topic}}&#39;,&#39;{{tagtool.type}}&#39;,&#39;{{tagtool.templateId}}&#39;,&#39;true&#39;) webq-campaign-params-end --&gt;</pre>
+    <pre>&lt;!-- webq-campaign-params-start ({{tagtool.topic}},{{tagtool.type}},{{tagtool.templateId}},true) webq-campaign-params-end --&gt;</pre>
   </div>
   <div ng-show="!tagtool.isActiveCampaign">
     <p><strong>Paste next to the other <code>&lt;meta&gt;</code> tags inside the <code>&lt;head&gt;</code> of the index page.</strong></p>

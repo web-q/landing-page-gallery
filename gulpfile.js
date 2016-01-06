@@ -9,7 +9,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync'),
-    ghPages = require('gulp-gh-pages')
+    ghPages = require('gulp-gh-pages'),
+    pageres = require('pageres'),
+    request = require('request'),
+    imageResize = require('gulp-image-resize')
     ;
 
 /*--- Set Sources ---*/
@@ -23,7 +26,10 @@ var SRC = {
           'bower_components/angular-filter/dist/angular-filter.min.js',
           'bower_components/angular-animate/angular-animate.min.js'],
   modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
-  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css'
+  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
+  URLs: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json',
+  screenshotsRaw: '_screenshots/raw',
+  screenshotsPub: '_screenshots/pub'
 };
 
 var AUTOPREFIXER_BROWSERS = [
@@ -37,6 +43,58 @@ var AUTOPREFIXER_BROWSERS = [
   'ChromeAndroid >= 4.4',
   'bb >= 10'
 ];
+
+/*--- Take Screenshots ---*/
+gulp.task('grabshots', function() {
+  var campaignURLs;
+  request(SRC.URLs, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      campaignURLs = JSON.parse(body).campaigns;
+    }
+    var screenshot = new pageres({delay: 10}).dest(SRC.screenshotsRaw);
+    campaignURLs.forEach(function(c){
+      var fnameLG = c.id + '-d',
+          fnameSM = c.id + '-m';
+      screenshot.src(c.url, ['1024x768'], {filename: fnameLG})
+                    .src(c.url, ['750x1334'], {filename: fnameSM});
+    });
+    screenshot.run();
+    process.stdout.write('Capturing screenshots...')
+  });
+});
+
+/*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
+gulp.task('resizeshots', function() {
+  gulp.src(SRC.screenshotsRaw + '/*-d.png')
+    .pipe(imageResize({
+      width:300,
+      height:300,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshotsPub));
+  gulp.src(SRC.screenshotsRaw + '/*-d.png')
+    .pipe(imageResize({
+      width:700,
+      height:800,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(rename({suffix:'-lg'}))
+    .pipe(gulp.dest(SRC.screenshotsPub));
+  gulp.src(SRC.screenshotsRaw +'/*-m.png')
+    .pipe(imageResize({
+      width:160,
+      height:230,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshotsPub))
+    .pipe(notify("Screenshots are ready!"));
+});
 
 /*--- CSS Compiler ---*/
 gulp.task('sass', function () {
