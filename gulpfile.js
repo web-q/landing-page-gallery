@@ -44,19 +44,7 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-// var campaignURLs = [
-//   {
-//     "shortCode":"1",
-//     "url":"http://hcanorthflorida.com/campaigns/ems.dot"
-//   },
-//   {
-//     "shortCode":"2",
-//     "url":"http://alaskaregional.com/campaigns/alaska-regional-nursing-careers"
-//   }
-// ];
-
-
-
+/*--- Take Screenshots ---*/
 gulp.task('grabshots', function() {
   var campaignURLs;
   request(SRC.URLs, function (error, response, body) {
@@ -65,8 +53,8 @@ gulp.task('grabshots', function() {
     }
     var screenshot = new pageres({delay: 10}).dest(SRC.screenshotsRaw);
     campaignURLs.forEach(function(c){
-      var fnameLG = c.id + '-lg',
-          fnameSM = c.id + '-sm';
+      var fnameLG = c.id + '-d',
+          fnameSM = c.id + '-m';
       screenshot.src(c.url, ['1024x768'], {filename: fnameLG})
                     .src(c.url, ['750x1334'], {filename: fnameSM});
     });
@@ -75,8 +63,9 @@ gulp.task('grabshots', function() {
   });
 });
 
+/*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
 gulp.task('resizeshots', function() {
-  gulp.src(SRC.screenshotsRaw + '/*-lg.png')
+  gulp.src(SRC.screenshotsRaw + '/*-d.png')
     .pipe(imageResize({
       width:300,
       height:300,
@@ -85,7 +74,17 @@ gulp.task('resizeshots', function() {
       imageMagick: true
     }))
     .pipe(gulp.dest(SRC.screenshotsPub));
-  gulp.src(SRC.screenshotsRaw +'/*-sm.png')
+  gulp.src(SRC.screenshotsRaw + '/*-d.png')
+    .pipe(imageResize({
+      width:700,
+      height:800,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(rename({suffix:'-lg'}))
+    .pipe(gulp.dest(SRC.screenshotsPub));
+  gulp.src(SRC.screenshotsRaw +'/*-m.png')
     .pipe(imageResize({
       width:160,
       height:230,
