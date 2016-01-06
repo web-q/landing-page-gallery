@@ -9,7 +9,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync'),
-    ghPages = require('gulp-gh-pages')
+    ghPages = require('gulp-gh-pages'),
+    pageres = require('pageres'),
+    request = require('request'),
+    imageResize = require('gulp-image-resize')
     ;
 
 /*--- Set Sources ---*/
@@ -23,7 +26,10 @@ var SRC = {
           'bower_components/angular-filter/dist/angular-filter.min.js',
           'bower_components/angular-animate/angular-animate.min.js'],
   modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
-  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css'
+  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
+  URLs: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json',
+  screenshotsRaw: '_screenshots/raw',
+  screenshotsPub: '_screenshots/pub'
 };
 
 var AUTOPREFIXER_BROWSERS = [
@@ -37,6 +43,58 @@ var AUTOPREFIXER_BROWSERS = [
   'ChromeAndroid >= 4.4',
   'bb >= 10'
 ];
+
+// var campaignURLs = [
+//   {
+//     "shortCode":"1",
+//     "url":"http://hcanorthflorida.com/campaigns/ems.dot"
+//   },
+//   {
+//     "shortCode":"2",
+//     "url":"http://alaskaregional.com/campaigns/alaska-regional-nursing-careers"
+//   }
+// ];
+
+
+
+gulp.task('grabshots', function() {
+  var campaignURLs;
+  request(SRC.URLs, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      campaignURLs = JSON.parse(body).campaigns;
+    }
+    var screenshot = new pageres({delay: 10}).dest(SRC.screenshotsRaw);
+    campaignURLs.forEach(function(c){
+      var fnameLG = c.id + '-lg',
+          fnameSM = c.id + '-sm';
+      screenshot.src(c.url, ['1024x768'], {filename: fnameLG})
+                    .src(c.url, ['750x1334'], {filename: fnameSM});
+    });
+    screenshot.run();
+    process.stdout.write('Capturing screenshots...')
+  });
+});
+
+gulp.task('resizeshots', function() {
+  gulp.src(SRC.screenshotsRaw + '/*-lg.png')
+    .pipe(imageResize({
+      width:300,
+      height:300,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshotsPub));
+  gulp.src(SRC.screenshotsRaw +'/*-sm.png')
+    .pipe(imageResize({
+      width:160,
+      height:230,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshotsPub));
+});
 
 /*--- CSS Compiler ---*/
 gulp.task('sass', function () {
