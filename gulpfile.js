@@ -92,7 +92,8 @@ gulp.task('resizeshots', function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshotsPub));
+    .pipe(gulp.dest(SRC.screenshotsPub))
+    .pipe(notify("Screenshots are ready!"));
 });
 
 /*--- CSS Compiler ---*/
