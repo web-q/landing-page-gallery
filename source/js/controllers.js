@@ -1,4 +1,4 @@
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($sce, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -20,8 +20,12 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   id: "!" + cid }); // Exclude current campaign
 
   // Pass variables needed on the front to $scope
+
+  this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
+
   this.template = template;
   this.campaign = campaign;
+
   this.otherCampaigns = otherCampaigns;
 
   // Functionality for "Custom" style classes
@@ -30,10 +34,13 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   } else {
     this.customFlag = "Standard";
   }
-
   // Config for sliding page left/right
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
+  };
+  this.frameLoaded = function(){
+    document.getElementById('campaign-frame').style.display = 'block';
+    document.getElementById('iframe-loader').style.display = 'none';
   };
 }]); //---------END DETAILCTRL---------//
 

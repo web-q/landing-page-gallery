@@ -1,67 +1,62 @@
-<div class="container">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#/">
-      <img id="logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-logo-200.png" alt="HCA Web-Q" />| Landing Page Wizard</a>
-  </div>
-  <div class="col-sm-3 col-md-3 pull-right">
-    <form class="navbar-form" role="search">
-      <div class="input-group">
-        <input type="search" class="form-control" ng-model="search.$" placeholder="Search" name="srch-term" id="srch-term" aria-label="Quick Search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+<div id="main">
+  <header>
+    <div class="navbar-header col-sm-4">
+      <a href="#/">
+        <img id="logo" src="http://hcawebservices.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />| {{appName}}</a>
+    </div>
+    <div class="col-sm-4 col-sm-push-4">
+      <form class="navbar-form" role="search">
+        <div class="input-group">
+          <input type="search" class="form-control" ng-model="search.$" placeholder="Search" name="srch-term" id="srch-term" aria-label="Quick Search">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </header>
+  <section id="filters">
+    <div>
+      <div class="col-sm-2 col-sm-offset-3 text-center">
+        <select ng-model="search.topic">
+          <option value="">Topic</option>
+          <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
+        </select>
+      </div>
+      <div class="col-sm-2 text-center">
+        <select ng-model="search.type">
+          <option value="">Type</option>
+          <option ng-repeat="c in main.campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
+        </select>
+      </div>
+      <div class="col-sm-2 text-center">
+        <select ng-model="search.templateId">
+          <option value="">Template</option>
+          <option ng-repeat="c in main.campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
+        </select>
+      </div>
+    </div>
+  </section>
+  <section id="thumbnail-gallery">
+    <div class="row thumb-section">
+      <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
+        <div class="campaign-thumb">
+          <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
+            <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{c.id}}-d.png" class="img-responsive center-block" />
+            <h3>{{c.title}}</h3>
+            <h4>{{c.templateTitle}}</h4>
+          </a>
         </div>
       </div>
-    </form>
-  </div>
+      <div class="col-sm-12 filterpop text-center" ng-if="results.length == 0">
+        <strong>No results found...</strong>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>made with <i class="icon-heart heart-icon" aria-hidden="true"></i>
+      <span class="sr-only">love</span> by
+      <img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+    </div>
+  </footer>
 </div>
-
-<!--<header class="image-bg-fluid-height">
-  <img class="img-responsive img-left" src="http://placehold.it/350x200" alt="">
-</header>-->
-
-<div class="header-img">
-  <img class="img-responsive" src="http://hcasites.com/rotator-live-preview/images/text%20er%20update%20on%20tyhe%20go%20man.jpg">
-</div>
-
-<div class="container">
-  <div class="row">
-  <h1 class="text-center">Find Your Campaign</h1>
-</div>
-  <div class="row row-btns">
-    <div class="col-sm-2 col-sm-offset-3 text-center">
-      <select ng-model="search.topic">
-        <option value="">Topic</option>
-        <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
-      </select>
-    </div>
-    <div class="col-sm-2 text-center">
-      <select ng-model="search.type">
-        <option value="">Type</option>
-        <option ng-repeat="c in main.campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
-      </select>
-    </div>
-    <div class="col-sm-2 text-center">
-      <select ng-model="search.templateId">
-        <option value="">Template</option>
-        <option ng-repeat="c in main.campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
-      </select>
-    </div>
-  </div>
-  <div class="row thumb-section">
-    <div class="col-sm-4 filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
-      <div class="campaign-thumb">
-        <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
-          <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{c.id}}-d.png" class="img-responsive center-block" />
-          <h3>{{c.title}}</h3>
-          <h4>{{c.templateTitle}}</h4>
-        </a>
-    </div>
-    </div>
-    <div class="col-sm-12 filterpop text-center" ng-if="results.length == 0">
-      <strong>No results found...</strong>
-    </div>
-  </div>
-</div>
-<footer>
-  <div>made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" /></div>
-</footer>
