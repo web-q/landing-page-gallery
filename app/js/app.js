@@ -5,7 +5,8 @@ var MD5=function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){va
 var landingPageWiz = angular.module('landingPageWiz', [
   'ngRoute',
   'ngAnimate',
-  'angular.filter'
+  'angular.filter',
+  'ngOnload'
 ]);
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {
@@ -56,9 +57,16 @@ landingPageWiz.run(function($rootScope, $timeout, $window) {
       $window.scrollTo(0,0);
     }, 400);
   });
+  $rootScope.appName = 'Landing Page Wizard'
 });
 
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageWiz.directive('ngSpinner', function() {
+  return {
+    template: '<div class=\"sk-fading-circle\">\r\n<div class=\"sk-circle1 sk-circle\"><\/div>\r\n<div class=\"sk-circle2 sk-circle\"><\/div>\r\n<div class=\"sk-circle3 sk-circle\"><\/div>\r\n<div class=\"sk-circle4 sk-circle\"><\/div>\r\n<div class=\"sk-circle5 sk-circle\"><\/div>\r\n<div class=\"sk-circle6 sk-circle\"><\/div>\r\n<div class=\"sk-circle7 sk-circle\"><\/div>\r\n<div class=\"sk-circle8 sk-circle\"><\/div>\r\n<div class=\"sk-circle9 sk-circle\"><\/div>\r\n<div class=\"sk-circle10 sk-circle\"><\/div>\r\n<div class=\"sk-circle11 sk-circle\"><\/div>\r\n<div class=\"sk-circle12 sk-circle\"><\/div>\r\n<\/div>'
+  };
+});
+
+landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($sce, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -80,8 +88,12 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   id: "!" + cid }); // Exclude current campaign
 
   // Pass variables needed on the front to $scope
+
+  this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
+
   this.template = template;
   this.campaign = campaign;
+
   this.otherCampaigns = otherCampaigns;
 
   // Functionality for "Custom" style classes
@@ -90,10 +102,13 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   } else {
     this.customFlag = "Standard";
   }
-
   // Config for sliding page left/right
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
+  };
+  this.frameLoaded = function(){
+    document.getElementById('campaign-frame').style.display = 'block';
+    document.getElementById('iframe-loader').style.display = 'none';
   };
 }]); //---------END DETAILCTRL---------//
 
