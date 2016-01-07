@@ -9,7 +9,7 @@
     <section id="template-head">
       <h2>{{detail.template.title}}</h2>
       <h3>{{detail.campaign.title}}</h3>
-      <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d.png" />
+      <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
     </section>
     <section id="template-detail">
       <p>{{detail.template.description}}</p>
@@ -21,10 +21,15 @@
       <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
     </section>
     <section id="other-campaigns">
-      <h3>Other Campaigns using {{detail.template.title}}</h3>
+      <h3>Other Campaigns Using {{detail.template.title}}</h3>
       <ul>
         <li ng-repeat="other in detail.otherCampaigns">
-          <a href="#/{{other.shortCode}}">{{other.title}}</a>
+          <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
+            <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
+            <span>
+              {{other.title}}
+            </span>
+          </a>
         </li>
       </ul>
     </section>

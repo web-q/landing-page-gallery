@@ -3,7 +3,8 @@
 /*--------------------------------*/
 $primary-color: #508ac5;
 $secondary-color: #5ec1e9;
-$dark-grey: #333333;
+$link-hover: #01254a;
+$dark-grey: #333;
 $light-grey: #f6f6f6;
 $font-stack: 'Lato', sans-serif;
 
@@ -21,8 +22,38 @@ $font-stack: 'Lato', sans-serif;
 /*--------------------------------*/
 /*    GENERAL
 /*--------------------------------*/
+* {
+  box-sizing: border-box;
+}
 body {
   overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.428;
+  color: $dark-grey;
+  font-family: $font-stack;
+}
+p {
+  margin: 0 0 10px 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+h1, h2, h3 {
+  margin: 20px 0 10px 0;
+}
+h4, h5, h6 {
+  margin: 10px 0;
+}
+a {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: none;
+    color: $link-hover;
+  }
 }
 .loading-logo {
   @include center-block();
@@ -112,14 +143,6 @@ body {
   padding-left: 10px;
 }
 
-a {
-  color: $primary-color;
-  text-decoration: none;
-  &:hover, &:focus {
-    text-decoration: underline;
-  }
-}
-
 
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
@@ -134,19 +157,16 @@ a {
   text-align: center;
   margin-bottom: 10%;
   a {
-    text-decoration: none;
     display: inline-block;
+    &:hover, &:focus {
+      h3 {
+        text-decoration: underline;
+      }
+    }
   }
-}
-.campaign-thumb a:hover, .campaign-thumb a:focus {
-  text-decoration: none;
-}
-.campaign-thumb a:hover h3, .campaign-thumb a:focus h3 {
-  text-decoration: underline;
 }
 
 h1 {
-  font-family: $font-stack;
   font-size: 32px;
   font-style: normal;
   font-variant: normal;
@@ -154,7 +174,6 @@ h1 {
   color: $primary-color;
 }
 h2 {
-  font-family: $font-stack;
   font-size: 24px;
   font-style: normal;
   font-variant: normal;
@@ -162,7 +181,6 @@ h2 {
   color: $secondary-color;
 }
 h3 {
-  font-family: $font-stack;
   font-size: 18px;
   font-style: normal;
   font-variant: normal;
@@ -170,7 +188,6 @@ h3 {
   color: $primary-color;
 }
 h4 {
-  font-family: $font-stack;
   font-size: 16px;
   font-style: normal;
   font-variant: normal;
@@ -209,15 +226,17 @@ select {
   }
 }
 
-
 /*--------------------------------*/
 /*    DETAIL PAGE
 /*--------------------------------*/
 #detail {
   height: 100%;
+  ul {
+    padding: 0 0 0 35px;
+    margin-bottom: 10px
+  }
   .sidebar {
     border: none;
-    box-sizing: border-box;
     width: 100%;
     height: auto;
     position: relative;
@@ -271,6 +290,7 @@ select {
     }
   }
   #template-head {
+    text-align: center;
     img {
       @include center-block();
       @include img-responsive();
@@ -298,6 +318,29 @@ select {
       margin: 0 0 15px 0;
       color: $dark-grey;
     }
+    ul {
+      list-style-type: none;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 0;
+        overflow: auto;
+        a {
+          text-decoration: none;
+          padding: 7px 2px;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+        }
+        img {
+          float: left;
+          width: 40px;
+          height: auto;
+          margin: 0 14px 0 0;
+        }
+      }
+    }
   }
   #campaign-viewer {
     margin-left: 0;
@@ -318,153 +361,41 @@ select {
     }
   }
 }
-
 @media (min-width: 768px) {
   #detail {
-    height: 100%;
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-      display: block;
-      z-index: 1;
-    }
-    header {
-      width: 100%;
-      height: 86px;
-      a {
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-        &::before {
-          content: '\e963';
-          font-family: "fontawesomer";
-          font-style: normal;
-          font-size: 30px;
-          color: #FFF;
-          speak: none;
-          display: inline;
-          vertical-align: middle;
-          line-height: normal;
-          padding: 0 2px 2px 5px;
-          position: absolute;
-          top: 30px;
-        }
-      }
-    }
     #template-head {
+      text-align: left;
       float: left;
       width: 35%;
-      margin-left: 15%;
+      margin-left: 7.5%;
       img {
         float: left;
-        @include img-responsive();
-      }
-      h2 {
-        font-size: 20px;
-        margin: 0 0 5px 0;
-        color: $dark-grey;
-      }
-      h3 {
-        font-size: 16px;
-        margin: 0 0 20px 0;
-        color: $dark-grey;
       }
     }
     #template-detail {
-      width: 30%;
+      width: 25%;
       float: left;
-      h4 {
-        font-size: 16px;
-        color: $dark-grey;
-      }
     }
     #other-campaigns {
+      width: 25%;
+      float: left;
       h3 {
-        font-size: 20px;
-        margin: 0 0 15px 0;
-        color: $dark-grey;
-      }
-    }
-    #campaign-viewer {
-      margin-left: 0px;
-      height: 100%;
-      #campaign-frame {
-        height: 100%;
-        width: 100%;
-        border: none;
-        display: none;
-      }
-      #iframe-loader {
-        padding-top: 100px;
-        .sk-fading-circle {
-          margin: auto;
-          width: 40px;
-          height: 40px;
-        }
+        font-size: 16px;
       }
     }
   }
 }
-
 @media (min-width: 1068px) {
   #detail {
-    height: 100%;
     .sidebar {
-      border: none;
-      box-sizing: border-box;
       width: 300px;
       height: 100%;
       position: absolute;
-      padding: 0;
-      margin: 0;
-      display: block;
       background-color: #FFF;
       -webkit-box-shadow: 0px 0px 20px black;
       -moz-box-shadow: 0px 0px 20px black;
       box-shadow: 0px 0px 20px black;
-      overflow-y: auto;
       z-index: 1000;
-    }
-    section {
-      padding: 15px;
-    }
-    header {
-      background-color: $dark-grey;
-      width: 100%;
-      height: 86px;
-      a {
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-        &::before {
-          content: '\e963';
-          font-family: "fontawesomer";
-          font-style: normal;
-          font-size: 30px;
-          color: #FFF;
-          speak: none;
-          display: inline;
-          vertical-align: middle;
-          line-height: normal;
-          padding: 0 2px 2px 5px;
-          position: absolute;
-          top: 30px;
-        }
-      }
-      img {
-        @include center-block();
-        padding-left: 8px;
-        max-width: 200px;
-      }
-      h1 {
-        font-size: 16px;
-        text-align: center;
-        color: #FFF;
-        margin: 0;
-      }
     }
     #template-head {
       background-color: $light-grey;
@@ -473,72 +404,26 @@ select {
       margin: 0;
       img {
         float:none;
-        @include center-block();
-      }
-      h2 {
-        font-size: 20px;
-        margin: 0 0 5px 0;
-        color: $dark-grey;
-      }
-      h3 {
-        font-size: 16px;
-        margin: 0 0 20px 0;
-        color: $dark-grey;
       }
     }
     #template-detail {
       float: none;
       width: 100%;
       margin: 0;
-      h4 {
-        font-size: 16px;
-        color: $dark-grey;
-      }
     }
     #other-campaigns {
+      float: none;
+      width: 100%;
       background-color: $light-grey;
       h3 {
         font-size: 20px;
-        margin: 0 0 15px 0;
-        color: $dark-grey;
       }
     }
     #campaign-viewer {
       margin-left: 300px;
-      height: 100%;
-      #campaign-frame {
-        height: 100%;
-        width: 100%;
-        border: none;
-        display: none;
-      }
-      #iframe-loader {
-        padding-top: 100px;
-        .sk-fading-circle {
-          margin: auto;
-          width: 40px;
-          height: 40px;
-        }
-      }
     }
   }
 }
-
-.crontainer {
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (min-width: 768px) {
-  .crontainer {
-    width: 750px;
-  }
-}
-@media (min-width: 980px) {
-  .crontainer {
-    width: 970px;
-  }
-}
-
 .build-time::before {
   content: '\e94f';
   font-family: "fontawesomer";
@@ -567,6 +452,24 @@ select {
     font-weight: normal;
     speak: none;
     margin-right: 10px;
+  }
+}
+
+
+
+/* ---WORK IN PROGRESS --- */
+.crontainer {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .crontainer {
+    width: 750px;
+  }
+}
+@media (min-width: 980px) {
+  .crontainer {
+    width: 970px;
   }
 }
 
