@@ -4,8 +4,37 @@
 /*--------------------------------*/
 /*    GENERAL
 /*--------------------------------*/
+* {
+  box-sizing: border-box; }
+
 body {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.428;
+  color: #333;
+  font-family: "Lato", sans-serif; }
+
+p {
+  margin: 0 0 10px 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit; }
+
+h1, h2, h3 {
+  margin: 20px 0 10px 0; }
+
+h4, h5, h6 {
+  margin: 10px 0; }
+
+a {
+  color: #508ac5;
+  text-decoration: none; }
+  a:hover, a:focus {
+    text-decoration: none;
+    color: #01254a; }
 
 .loading-logo {
   display: block;
@@ -61,7 +90,7 @@ body {
 
 #main footer {
   height: 40px;
-  background-color: #333333;
+  background-color: #333;
   color: #afafaf;
   text-align: center;
   padding-top: 12px; }
@@ -81,12 +110,6 @@ body {
   padding-right: 10px;
   padding-left: 10px; }
 
-a {
-  color: #508ac5;
-  text-decoration: none; }
-  a:hover, a:focus {
-    text-decoration: underline; }
-
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
   .navbar-brand {
     display: block;
@@ -97,17 +120,11 @@ a {
   text-align: center;
   margin-bottom: 10%; }
   .campaign-thumb a {
-    text-decoration: none;
     display: inline-block; }
-
-.campaign-thumb a:hover, .campaign-thumb a:focus {
-  text-decoration: none; }
-
-.campaign-thumb a:hover h3, .campaign-thumb a:focus h3 {
-  text-decoration: underline; }
+    .campaign-thumb a:hover h3, .campaign-thumb a:focus h3 {
+      text-decoration: underline; }
 
 h1 {
-  font-family: "Lato", sans-serif;
   font-size: 32px;
   font-style: normal;
   font-variant: normal;
@@ -115,7 +132,6 @@ h1 {
   color: #508ac5; }
 
 h2 {
-  font-family: "Lato", sans-serif;
   font-size: 24px;
   font-style: normal;
   font-variant: normal;
@@ -123,7 +139,6 @@ h2 {
   color: #5ec1e9; }
 
 h3 {
-  font-family: "Lato", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-variant: normal;
@@ -131,7 +146,6 @@ h3 {
   color: #508ac5; }
 
 h4 {
-  font-family: "Lato", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-variant: normal;
@@ -168,9 +182,11 @@ select {
 /*--------------------------------*/
 #detail {
   height: 100%; }
+  #detail ul {
+    padding: 0 0 0 35px;
+    margin-bottom: 10px; }
   #detail .sidebar {
     border: none;
-    box-sizing: border-box;
     width: 100%;
     height: auto;
     position: relative;
@@ -184,7 +200,7 @@ select {
   #detail section {
     padding: 15px; }
   #detail header {
-    background-color: #333333;
+    background-color: #333;
     width: 100%;
     height: 86px; }
     #detail header a {
@@ -216,28 +232,49 @@ select {
       text-align: center;
       color: #FFF;
       margin: 0; }
-  #detail #template-head img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    max-width: 100%;
-    height: auto; }
-  #detail #template-head h2 {
-    font-size: 20px;
-    margin: 0 0 5px 0;
-    color: #333333; }
-  #detail #template-head h3 {
-    font-size: 16px;
-    margin: 0 0 20px 0;
-    color: #333333; }
+  #detail #template-head {
+    text-align: center; }
+    #detail #template-head img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      max-width: 100%;
+      height: auto; }
+    #detail #template-head h2 {
+      font-size: 20px;
+      margin: 0 0 5px 0;
+      color: #333; }
+    #detail #template-head h3 {
+      font-size: 16px;
+      margin: 0 0 20px 0;
+      color: #333; }
   #detail #template-detail h4 {
     font-size: 16px;
-    color: #333333; }
+    color: #333; }
   #detail #other-campaigns h3 {
     font-size: 20px;
     margin: 0 0 15px 0;
-    color: #333333; }
+    color: #333; }
+  #detail #other-campaigns ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0; }
+    #detail #other-campaigns ul li {
+      padding: 0;
+      overflow: auto; }
+      #detail #other-campaigns ul li a {
+        text-decoration: none;
+        padding: 7px 2px;
+        display: inline-block;
+        width: 100%;
+        height: 100%; }
+      #detail #other-campaigns ul li img {
+        float: left;
+        width: 40px;
+        height: auto;
+        margin: 0 14px 0 0; }
   #detail #campaign-viewer {
     margin-left: 0;
     height: 100%; }
@@ -254,185 +291,49 @@ select {
         height: 40px; }
 
 @media (min-width: 768px) {
-  #detail {
-    height: 100%; }
-    #detail .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-      display: block;
-      z-index: 1; }
-    #detail header {
-      width: 100%;
-      height: 86px; }
-      #detail header a {
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        display: inline-block; }
-        #detail header a::before {
-          content: '\e963';
-          font-family: "fontawesomer";
-          font-style: normal;
-          font-size: 30px;
-          color: #FFF;
-          speak: none;
-          display: inline;
-          vertical-align: middle;
-          line-height: normal;
-          padding: 0 2px 2px 5px;
-          position: absolute;
-          top: 30px; }
-    #detail #template-head {
-      float: left;
-      width: 35%;
-      margin-left: 15%; }
-      #detail #template-head img {
-        float: left;
-        display: block;
-        max-width: 100%;
-        height: auto; }
-      #detail #template-head h2 {
-        font-size: 20px;
-        margin: 0 0 5px 0;
-        color: #333333; }
-      #detail #template-head h3 {
-        font-size: 16px;
-        margin: 0 0 20px 0;
-        color: #333333; }
-    #detail #template-detail {
-      width: 30%;
+  #detail #template-head {
+    text-align: left;
+    float: left;
+    width: 35%;
+    margin-left: 7.5%; }
+    #detail #template-head img {
       float: left; }
-      #detail #template-detail h4 {
-        font-size: 16px;
-        color: #333333; }
+  #detail #template-detail {
+    width: 25%;
+    float: left; }
+  #detail #other-campaigns {
+    width: 25%;
+    float: left; }
     #detail #other-campaigns h3 {
-      font-size: 20px;
-      margin: 0 0 15px 0;
-      color: #333333; }
-    #detail #campaign-viewer {
-      margin-left: 0px;
-      height: 100%; }
-      #detail #campaign-viewer #campaign-frame {
-        height: 100%;
-        width: 100%;
-        border: none;
-        display: none; }
-      #detail #campaign-viewer #iframe-loader {
-        padding-top: 100px; }
-        #detail #campaign-viewer #iframe-loader .sk-fading-circle {
-          margin: auto;
-          width: 40px;
-          height: 40px; } }
+      font-size: 16px; } }
 
 @media (min-width: 1068px) {
-  #detail {
-    height: 100%; }
-    #detail .sidebar {
-      border: none;
-      box-sizing: border-box;
-      width: 300px;
-      height: 100%;
-      position: absolute;
-      padding: 0;
-      margin: 0;
-      display: block;
-      background-color: #FFF;
-      box-shadow: 0px 0px 20px black;
-      overflow-y: auto;
-      z-index: 1000; }
-    #detail section {
-      padding: 15px; }
-    #detail header {
-      background-color: #333333;
-      width: 100%;
-      height: 86px; }
-      #detail header a {
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        display: inline-block; }
-        #detail header a::before {
-          content: '\e963';
-          font-family: "fontawesomer";
-          font-style: normal;
-          font-size: 30px;
-          color: #FFF;
-          speak: none;
-          display: inline;
-          vertical-align: middle;
-          line-height: normal;
-          padding: 0 2px 2px 5px;
-          position: absolute;
-          top: 30px; }
-      #detail header img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 8px;
-        max-width: 200px; }
-      #detail header h1 {
-        font-size: 16px;
-        text-align: center;
-        color: #FFF;
-        margin: 0; }
-    #detail #template-head {
-      background-color: #f6f6f6;
-      float: none;
-      width: 100%;
-      margin: 0; }
-      #detail #template-head img {
-        float: none;
-        display: block;
-        margin-left: auto;
-        margin-right: auto; }
-      #detail #template-head h2 {
-        font-size: 20px;
-        margin: 0 0 5px 0;
-        color: #333333; }
-      #detail #template-head h3 {
-        font-size: 16px;
-        margin: 0 0 20px 0;
-        color: #333333; }
-    #detail #template-detail {
-      float: none;
-      width: 100%;
-      margin: 0; }
-      #detail #template-detail h4 {
-        font-size: 16px;
-        color: #333333; }
-    #detail #other-campaigns {
-      background-color: #f6f6f6; }
-      #detail #other-campaigns h3 {
-        font-size: 20px;
-        margin: 0 0 15px 0;
-        color: #333333; }
-    #detail #campaign-viewer {
-      margin-left: 300px;
-      height: 100%; }
-      #detail #campaign-viewer #campaign-frame {
-        height: 100%;
-        width: 100%;
-        border: none;
-        display: none; }
-      #detail #campaign-viewer #iframe-loader {
-        padding-top: 100px; }
-        #detail #campaign-viewer #iframe-loader .sk-fading-circle {
-          margin: auto;
-          width: 40px;
-          height: 40px; } }
-
-.crontainer {
-  margin-left: auto;
-  margin-right: auto; }
-
-@media (min-width: 768px) {
-  .crontainer {
-    width: 750px; } }
-
-@media (min-width: 980px) {
-  .crontainer {
-    width: 970px; } }
+  #detail .sidebar {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    background-color: #FFF;
+    box-shadow: 0px 0px 20px black;
+    z-index: 1000; }
+  #detail #template-head {
+    background-color: #f6f6f6;
+    float: none;
+    width: 100%;
+    margin: 0; }
+    #detail #template-head img {
+      float: none; }
+  #detail #template-detail {
+    float: none;
+    width: 100%;
+    margin: 0; }
+  #detail #other-campaigns {
+    float: none;
+    width: 100%;
+    background-color: #f6f6f6; }
+    #detail #other-campaigns h3 {
+      font-size: 20px; }
+  #detail #campaign-viewer {
+    margin-left: 300px; } }
 
 .build-time::before {
   content: '\e94f';
@@ -461,6 +362,19 @@ select {
     font-weight: normal;
     speak: none;
     margin-right: 10px; }
+
+/* ---WORK IN PROGRESS --- */
+.crontainer {
+  margin-left: auto;
+  margin-right: auto; }
+
+@media (min-width: 768px) {
+  .crontainer {
+    width: 750px; } }
+
+@media (min-width: 980px) {
+  .crontainer {
+    width: 970px; } }
 
 /*--------------------------------*/
 /*    ANIMATIONS
