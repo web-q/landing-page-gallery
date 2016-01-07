@@ -19,9 +19,11 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
-  font-weight: 500;
   line-height: 1.1;
-  color: inherit; }
+  color: inherit;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400; }
 
 h1, h2, h3 {
   margin: 20px 0 10px 0; }
@@ -29,12 +31,30 @@ h1, h2, h3 {
 h4, h5, h6 {
   margin: 10px 0; }
 
+h1, h3 {
+  color: #508ac5; }
+
+h2, h4 {
+  color: #5ec1e9; }
+
+h1 {
+  font-size: 32px; }
+
+h2 {
+  font-size: 24px; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
 a {
   color: #508ac5;
   text-decoration: none; }
   a:hover, a:focus {
     text-decoration: none;
-    color: #01254a; }
+    color: #0b3765; }
 
 .loading-logo {
   display: block;
@@ -75,7 +95,7 @@ a {
   background-color: #508ac5;
   width: 100%;
   float: left; }
-  #main header #logo {
+  #main header .webq-logo {
     max-width: 200px;
     margin-top: -7px;
     display: inline-block; }
@@ -87,28 +107,34 @@ a {
 #main #thumbnail-gallery {
   padding: 40px;
   min-height: 415px; }
+  #main #thumbnail-gallery #no-results {
+    font-weight: 700;
+    text-align: center; }
 
 #main footer {
+  position: absolute;
+  bottom: 0;
   height: 40px;
+  width: 100%;
   background-color: #333;
   color: #afafaf;
   text-align: center;
   padding-top: 12px; }
-  #main footer #logo {
+  #main footer .webq-logo {
     max-width: 100px;
     margin-top: -7px;
     display: inline-block; }
-
-@media (min-width: 768px) {
-  .campaign-thumbnail {
-    width: 33.3333%;
-    float: left; } }
 
 .campaign-thumbnail {
   position: relative;
   min-height: 1px;
   padding-right: 10px;
   padding-left: 10px; }
+
+@media (min-width: 768px) {
+  .campaign-thumbnail {
+    width: 33.3333%;
+    float: left; } }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
   .navbar-brand {
@@ -123,34 +149,6 @@ a {
     display: inline-block; }
     .campaign-thumb a:hover h3, .campaign-thumb a:focus h3 {
       text-decoration: underline; }
-
-h1 {
-  font-size: 32px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: #508ac5; }
-
-h2 {
-  font-size: 24px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: #5ec1e9; }
-
-h3 {
-  font-size: 18px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: #508ac5; }
-
-h4 {
-  font-size: 16px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: #5ec1e9; }
 
 select::-ms-expand {
   /* for IE 11 */

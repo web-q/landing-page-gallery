@@ -3,8 +3,9 @@
 /*--------------------------------*/
 $primary-color: #508ac5;
 $secondary-color: #5ec1e9;
-$link-hover: #01254a;
+$link-hover: #0b3765;
 $dark-grey: #333;
+$mid-grey: #afafaf;
 $light-grey: #f6f6f6;
 $font-stack: 'Lato', sans-serif;
 
@@ -37,9 +38,11 @@ p {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
-  font-weight: 500;
   line-height: 1.1;
   color: inherit;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
 }
 h1, h2, h3 {
   margin: 20px 0 10px 0;
@@ -47,6 +50,12 @@ h1, h2, h3 {
 h4, h5, h6 {
   margin: 10px 0;
 }
+h1, h3 { color: $primary-color; }
+h2, h4 { color: $secondary-color; }
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+h4 { font-size: 16px; }
 a {
   color: $primary-color;
   text-decoration: none;
@@ -101,7 +110,7 @@ a {
     background-color: $primary-color;
     width: 100%;
     float: left;
-    #logo {
+    .webq-logo {
       max-width: 200px;
       margin-top: -7px;
       display: inline-block;
@@ -114,14 +123,21 @@ a {
   #thumbnail-gallery {
     padding: 40px;
     min-height: 415px;
+    #no-results {
+      font-weight: 700;
+      text-align: center;
+    }
   }
   footer {
+    position: absolute;
+    bottom: 0;
     height: 40px;
+    width: 100%;
     background-color: $dark-grey;
-    color: #afafaf;
+    color: $mid-grey;
     text-align: center;
     padding-top: 12px;
-    #logo {
+    .webq-logo {
       max-width: 100px;
       margin-top: -7px;
       display: inline-block;
@@ -129,6 +145,13 @@ a {
   }
 }
 
+
+.campaign-thumbnail {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
 @media (min-width: 768px) {
   .campaign-thumbnail
   {
@@ -136,13 +159,6 @@ a {
     float: left;
   }
 }
-.campaign-thumbnail {
-  position: relative;
-  min-height: 1px;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
 
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
@@ -164,35 +180,6 @@ a {
       }
     }
   }
-}
-
-h1 {
-  font-size: 32px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: $primary-color;
-}
-h2 {
-  font-size: 24px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: $secondary-color;
-}
-h3 {
-  font-size: 18px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: $primary-color;
-}
-h4 {
-  font-size: 16px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  color: $secondary-color;
 }
 
 select::-ms-expand {

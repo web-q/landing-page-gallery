@@ -2,7 +2,7 @@
   <div id="topbar">
     <header>
       <div class="navbar-header col-sm-4">
-          <img id="logo" src="http://hcawebservices.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+          <img class="webq-logo" src="http://hcawebservices.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
       </div>
       <div class="col-sm-4 col-sm-push-4">
         <form class="navbar-form" role="search">
@@ -49,15 +49,15 @@
           </a>
         </div>
       </div>
-      <div class="col-sm-12 filterpop text-center" ng-if="results.length == 0">
-        <strong>No results found...</strong>
+      <div id="no-results" class="col-sm-12 filterpop" ng-if="results.length == 0">
+        <span>No results found&hellip;</span>
       </div>
     </div>
   </section>
   <footer>
     <div>made with <span class="heart-icon" aria-hidden="true"></span>
       <span class="sr-only">love</span> by
-      <img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+      <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
     </div>
   </footer>
 </div>
