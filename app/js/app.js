@@ -5,7 +5,8 @@ var MD5=function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){va
 var landingPageWiz = angular.module('landingPageWiz', [
   'ngRoute',
   'ngAnimate',
-  'angular.filter'
+  'angular.filter',
+  'ngOnload'
 ]);
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {
@@ -56,9 +57,16 @@ landingPageWiz.run(function($rootScope, $timeout, $window) {
       $window.scrollTo(0,0);
     }, 400);
   });
+  $rootScope.appName = 'Landing Page Wizard'
 });
 
-landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageWiz.directive('ngSpinner', function() {
+  return {
+    template: '<div class=\"sk-fading-circle\">\r\n<div class=\"sk-circle1 sk-circle\"><\/div>\r\n<div class=\"sk-circle2 sk-circle\"><\/div>\r\n<div class=\"sk-circle3 sk-circle\"><\/div>\r\n<div class=\"sk-circle4 sk-circle\"><\/div>\r\n<div class=\"sk-circle5 sk-circle\"><\/div>\r\n<div class=\"sk-circle6 sk-circle\"><\/div>\r\n<div class=\"sk-circle7 sk-circle\"><\/div>\r\n<div class=\"sk-circle8 sk-circle\"><\/div>\r\n<div class=\"sk-circle9 sk-circle\"><\/div>\r\n<div class=\"sk-circle10 sk-circle\"><\/div>\r\n<div class=\"sk-circle11 sk-circle\"><\/div>\r\n<div class=\"sk-circle12 sk-circle\"><\/div>\r\n<\/div>'
+  };
+});
+
+landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($sce, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -67,8 +75,6 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
 
   // Grab the appropriate campaign object from "campaigns" data
   var campaign = $filter('filter')(campaigns, {shortCode: cid})[0];
-
-  // TEMP FIX FOR TESTING ************
   var tid = campaign.templateId;
 
   // Grab the appropriate template object from "templates" data
@@ -77,9 +83,10 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
 
   // Make an array containing other campaigns using this template
   var otherCampaigns = $filter('filter')(campaigns, {templateId: tid,
-  id: "!" + cid }); // Exclude current campaign
+  shortCode: "!" + cid }); // Exclude current campaign
 
-  // Pass variables needed on the front to $scope
+  // Pass variables needed on the front to controllerAs
+  this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
   this.template = template;
   this.campaign = campaign;
   this.otherCampaigns = otherCampaigns;
@@ -90,10 +97,13 @@ landingPageWiz.controller('detailCtrl', ['$routeParams', 'appdata', '$filter', '
   } else {
     this.customFlag = "Standard";
   }
-
   // Config for sliding page left/right
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
+  };
+  this.frameLoaded = function(){
+    document.getElementById('campaign-frame').style.display = 'block';
+    document.getElementById('iframe-loader').style.display = 'none';
   };
 }]); //---------END DETAILCTRL---------//
 
@@ -110,7 +120,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
     campaigns[i].templateTitle = template.title;
   }
 
-  // Pass campaigns data to $scope for use on the front
+  // Pass campaigns data to controllerAs for use on the front
   this.campaigns = campaigns;
 
   // Config for sliding page left/right
@@ -128,7 +138,6 @@ landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
 landingPageWiz.controller('tagtoolCtrl', ['appdata', function(appdata) {
   this.templates = appdata.templates;
   this.campaigns = appdata.campaigns;
-  this.printdata = appdata;
 }]); //---------END TAGTOOLCTRL---------//
 
 landingPageWiz.factory('fetchData', function($q, $http, $rootScope) {

@@ -1,38 +1,46 @@
-<div class="container">
-  <div class="template-detail">
-    <h1 class="text-center">{{detail.template.title}}</h1>
-    <h2 class="text-center">{{detail.campaign.title}}</h2>
-  </div>
-  <div id="detail" class="row">
-    <div class="col-sm-7">
-      <img class="img-responsive fade-onload" src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" alt="" width="700" height="800" />
-    </div>
-    <div class="col-sm-5">
-      <h3>Description</h3>
+<div id="detail">
+  <div class="sidebar">
+    <header>
+      <a ng-click="detail.slide('slidepage-r');" href="#/">
+        <img class="webq-logo" src="http://hcawebservices.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+        <h1>{{appName}}</h1>
+      </a>
+    </header>
+    <section id="template-head">
+      <h2>{{detail.template.title}}</h2>
+      <h3>{{detail.campaign.title}}</h3>
+      <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
+    </section>
+    <section id="template-detail">
       <p>{{detail.template.description}}</p>
-      <h3>Features</h3>
+      <h4>Features</h4>
       <ul>
         <li ng-repeat="f in detail.template.features">{{f}}</li>
       </ul>
-      </p>
-      <h3 class="build-time">Build Time: {{detail.template.buildTime}}</h3>
-      <h3 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h3>
+      <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
+      <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
+    </section>
+    <section id="other-campaigns">
+      <h3>Other Campaigns Using {{detail.template.title}}</h3>
+      <ul>
+        <li ng-repeat="other in detail.otherCampaigns">
+          <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
+            <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
+            <span>
+              {{other.title}}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section id="scroll-down">
+      <span>Scroll Down To Preview</span>
+    </section>
+  </div>
+  <div id="campaign-viewer">
+    <div id="iframe-loader">
+      <div ng-spinner></div>
     </div>
+    <iframe id="campaign-frame" class="fade-onload" ng-onload="detail.frameLoaded();" ng-src="{{detail.iframeURL}}"></iframe>
   </div>
-</div>
-<section class="container grey-bg">
-  <div class="col-sm-12">
-    <h2 class="text-center">Other Campaigns using {{detail.template.title}}</h2>
-    <ul>
-      <li ng-repeat="other in detail.otherCampaigns">
-        <a ng-click="hideBackBtn=true" href="#/{{other.shortCode}}">{{other.title}}</a>
-      </li>
-    </ul>
-  </div>
-</section>
-<footer>
-  <div>made with <i class="icon-heart heart-icon" aria-hidden="true"></i><span class="sr-only">love</span> by<img id="logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" /></div>
-</footer>
-<div id="back-btn" class="fade-onload" ng-hide="hideBackBtn">
-  <a ng-click="detail.slide('slidepage-r');" href="#/"><span class="sr-only">Back</span></a>
 </div>
