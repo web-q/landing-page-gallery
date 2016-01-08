@@ -7,8 +7,6 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
 
   // Grab the appropriate campaign object from "campaigns" data
   var campaign = $filter('filter')(campaigns, {shortCode: cid})[0];
-
-  // TEMP FIX FOR TESTING ************
   var tid = campaign.templateId;
 
   // Grab the appropriate template object from "templates" data
@@ -19,13 +17,10 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
   var otherCampaigns = $filter('filter')(campaigns, {templateId: tid,
   shortCode: "!" + cid }); // Exclude current campaign
 
-  // Pass variables needed on the front to $scope
-
+  // Pass variables needed on the front to controllerAs
   this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
-
   this.template = template;
   this.campaign = campaign;
-
   this.otherCampaigns = otherCampaigns;
 
   // Functionality for "Custom" style classes
@@ -57,7 +52,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
     campaigns[i].templateTitle = template.title;
   }
 
-  // Pass campaigns data to $scope for use on the front
+  // Pass campaigns data to controllerAs for use on the front
   this.campaigns = campaigns;
 
   // Config for sliding page left/right
@@ -75,5 +70,4 @@ landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
 landingPageWiz.controller('tagtoolCtrl', ['appdata', function(appdata) {
   this.templates = appdata.templates;
   this.campaigns = appdata.campaigns;
-  this.printdata = appdata;
 }]); //---------END TAGTOOLCTRL---------//
