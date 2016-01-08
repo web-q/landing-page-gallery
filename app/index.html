@@ -10,8 +10,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <link rel="stylesheet" href="css/boilerplate.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://core.ehc.com/design/font/fontawesomer/css/fontawesomer.css" media="screen" />
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/app.min.css">
   <script src="js/modernizr.min.js"></script>
 </head>
@@ -20,23 +20,10 @@
   <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
-<div class="" ng-show="loadingView">
-  <div class="sk-fading-circle">
-    <div class="sk-circle1 sk-circle"></div>
-    <div class="sk-circle2 sk-circle"></div>
-    <div class="sk-circle3 sk-circle"></div>
-    <div class="sk-circle4 sk-circle"></div>
-    <div class="sk-circle5 sk-circle"></div>
-    <div class="sk-circle6 sk-circle"></div>
-    <div class="sk-circle7 sk-circle"></div>
-    <div class="sk-circle8 sk-circle"></div>
-    <div class="sk-circle9 sk-circle"></div>
-    <div class="sk-circle10 sk-circle"></div>
-    <div class="sk-circle11 sk-circle"></div>
-    <div class="sk-circle12 sk-circle"></div>
-  </div>
+<div ng-show="loadingView">
+  <div ng-spinner></div>
   <div>
-    <img class="center-block" width="200px" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-logo-200.png" alt="HCA Web-Q" />
+    <img class="loading-logo" width="200px" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-logo-200.png" alt="HCA Web-Q" />
   </div>
 </div>
   <script src="js/lib.min.js"></script>
