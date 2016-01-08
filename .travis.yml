@@ -1,8 +1,23 @@
+sudo: false
+branches:
+  only:
+  - master
 language: node_js
 node_js:
 - '0.10'
+install:
+  - npm install
+before_script:
+  - git config --global user.email "halvves@users.noreply.github.com"
+  - git config --global user.name "Travis-CI"
 script: npm run gh-pages
 env:
  global:
  - GH_REF: github.com/web-q/landing-page-wizard.git
  - secure: OzNtDQRdXODmrlKRrFgYTP1+eDqUZ5PKiNhNbPo5minq2KIw4A/rPUw+hT+0ZWZb+lmjoDHLwXSxi1lvv+zBNZNXh1+bsTiqvcAJ345DTf2Dim/AJ3EhNXfu0KqrKwTqT0A/HZw4keUtoKN3ZwhrJDsRtxthjwiiJlmJJPUmTeSWMxCJerM7XaUhiL6DDVIFzIUPqeKfgeDwL741ohc4qzvdLzDh3q2JX2DgcvKDcQuK7umTXiQTs0yqDaK3oSVVxLL6CyDRcJqeyCazdxLNFlHGePMdtudt9xSxktpuqVrfW1A/xaWMTtpZOoEgpFx1fSfhRFwWc0TMc08i0ZxXW6gvOt0qXBL9CAocrxZMpwZ1WLIlVgNkTa2o1PBF3jywuJKPZgwWW6n3c8qMxtUgaje6gI2HfV871UnLDu4ykn+13Us18PY3FCroCJYtZ9Acb79YdNsshg1b+pLJYQcwN6VmhY7mY4sk0ei2LLs0QK6QjhC+4zTRbbwh5F7n0Wr2Sxhf4AH6SaM64sSylsOAMARSE/Ak/ifTKCSKs0bV1KQ7IMTFThuWrKEUxVayMjK5nSOUgtomCfgPlnILusziHySTGzxQD8uy3FZae2dxNF2lQEnlmJOzw81rzfvhovN2XimSP+UT3bpV9k2LoCVYcuWJXckbj2n1nwj00eLuWw4=
+ notifications:
+   email:
+     recipients:
+       - codyhca@gmail.com
+     on_success: always
+     on_failure: always
