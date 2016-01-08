@@ -6,7 +6,7 @@ branches:
   - master
 language: node_js
 node_js:
-- 'stable'
+- '4.2.1'
 install:
   - npm install
 before_script:
