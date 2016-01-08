@@ -12,7 +12,8 @@ var gulp = require('gulp'),
     ghPages = require('gulp-gh-pages'),
     pageres = require('pageres'),
     request = require('request'),
-    imageResize = require('gulp-image-resize')
+    imageResize = require('gulp-image-resize'),
+    gutil = require('gulp-util')
     ;
 
 /*--- Set Sources ---*/
@@ -106,7 +107,7 @@ gulp.task('sass', function () {
   .pipe(minifyCss())
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.css))
-  .pipe(notify("CSS Compiled and Minified"))
+  .pipe(gutil.env.type !== 'ci' ? notify("CSS Compiled and Minified") : gutil.noop())
   ;
 });
 
@@ -119,7 +120,7 @@ gulp.task('scripts', function () {
   .pipe(uglify())
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.distjs))
-  .pipe(notify("JS Compiled and Minified"))
+  .pipe(gutil.env.type !== 'ci' ? notify("JS Compiled and Minified") : gutil.noop())
   ;
 });
 
