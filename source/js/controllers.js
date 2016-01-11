@@ -42,6 +42,9 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
 landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
+  var topics = [];
+  var types = [];
+
 
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
@@ -50,10 +53,14 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
     var template = $filter('filter')(templates, {id: campaigns[i].templateId})[0];
     // Create a templateTitle property
     campaigns[i].templateTitle = template.title;
+    topics = topics.concat(campaigns[i].topic);
+    types = types.concat(campaigns[i].type);
   }
 
   // Pass campaigns data to controllerAs for use on the front
   this.campaigns = campaigns;
+  this.topics = topics;
+  this.types = types;
 
   // Config for sliding page left/right
   this.slide = function(transition) {
