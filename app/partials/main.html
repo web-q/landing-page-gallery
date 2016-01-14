@@ -16,13 +16,13 @@
           <div class="filter-dropdown">
             <select ng-model="search.topic">
               <option value="">Topic</option>
-              <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
+              <option ng-repeat="t in main.topics | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
             <select ng-model="search.type">
               <option value="">Type</option>
-              <option ng-repeat="c in main.campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
+              <option ng-repeat="t in main.types | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
