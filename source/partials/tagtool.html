@@ -1,21 +1,21 @@
-<div class="container">
-  <img class="center-block" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-logo-200.png" alt="HCA Web-Q" />
-  <h1>Tag Generator</h1>
-  <div class="form-group">
-    <label for="campaign-topic" class="control-label">Topic</label>
+<div id="tagtool">
+  <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-logo-200.png" alt="HCA Web-Q" />
+  <h2>Tag Generator</h2>
+  <div class="fgroup">
+    <label for="campaign-topic" class="control-label">Topic (seperate multiple w/ comma and no space)</label>
     <input ng-model="tagtool.topic" class="form-control" id="campaign-topic" type="text" />
   </div>
-  <div class="form-group">
-    <label for="campaign-type" class="control-label">Type</label>
+  <div class="fgroup">
+    <label for="campaign-type" class="control-label">Type (seperate multiple w/ comma and no space)</label>
     <input ng-model="tagtool.type" class="form-control" id="campaign-type" type="text" />
   </div>
-  <div class="form-group" ng-init="tagtool.templateId='1'">
+  <div class="fgroup" ng-init="tagtool.templateId='1'">
     <label for="template-id" class="control-label">Template</label>
     <select id="template-id" class="form-control" ng-model="tagtool.templateId">
       <option ng-repeat="t in tagtool.templates" value="{{t.id}}">{{t.title}}</option>
     </select>
   </div>
-  <div class="form-group" ng-init="tagtool.isActiveCampaign=true">
+  <div class="fgroup" ng-init="tagtool.isActiveCampaign=true">
     <label>
        <input type="radio" ng-model="tagtool.isActiveCampaign" ng-value="true" />
        Active Campaign
@@ -28,12 +28,10 @@
   <h2>Tag Code</h2>
   <div ng-show="tagtool.isActiveCampaign">
     <p><strong>Paste on the first line of the &ldquo;Main Article&rdquo; section in the Active Campaign structure.</strong></p>
-    <pre>&lt;!-- webq-campaign-params-start ({{tagtool.topic}},{{tagtool.type}},{{tagtool.templateId}},true) webq-campaign-params-end --&gt;</pre>
+    <pre>&lt;!-- webq-campaign-params-start ({{tagtool.topic}}|{{tagtool.type}}|{{tagtool.templateId}}|true) webq-campaign-params-end --&gt;</pre>
   </div>
   <div ng-show="!tagtool.isActiveCampaign">
     <p><strong>Paste next to the other <code>&lt;meta&gt;</code> tags inside the <code>&lt;head&gt;</code> of the index page.</strong></p>
-    <pre>&lt;meta name="webq-campaign-params" content="{{tagtool.topic}},{{tagtool.type}},{{tagtool.templateId}},true"&gt;</pre>
+    <pre>&lt;meta name="webq-campaign-params" content="{{tagtool.topic}}|{{tagtool.type}}|{{tagtool.templateId}}|true"&gt;</pre>
   </div>
-  <hr />
-  <h1>To Come&hellip; Image Name Gen</h1>
 </div>
