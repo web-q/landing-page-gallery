@@ -12,3 +12,4 @@ npm-debug.log
 .publish
 tmux*.log
 _screenshots
+app
