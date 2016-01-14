@@ -18,6 +18,10 @@ var gulp = require('gulp'),
 
 /*--- Set Sources ---*/
 var SRC = {
+  partials: 'source/partials/*.html',
+  index: 'source/index.html',
+  partialspub: 'app/partials',
+  indexpub: 'app/',
   scss: 'source/scss/**/*.scss',
   css: 'app/css',
   devjs: 'source/js/**/*.js',
@@ -94,8 +98,7 @@ gulp.task('resizeshots', function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshotsPub))
-    .pipe(notify("Screenshots are ready!"));
+    .pipe(gulp.dest(SRC.screenshotsPub));
 });
 
 /*--- CSS Compiler ---*/
@@ -124,6 +127,16 @@ gulp.task('scripts', function () {
   ;
 });
 
+/*--- HTML Compiler ---*/
+gulp.task('html', function () {
+  gulp.src(SRC.partials)
+  .pipe(gulp.dest(SRC.partialspub))
+  ;
+  gulp.src(SRC.index)
+  .pipe(gulp.dest(SRC.indexpub))
+  ;
+});
+
 /*--- Compile Libraries ---*/
 gulp.task('build-lib', function () {
   gulp.src(SRC.jslib,{base: 'bower_components/'})
@@ -149,6 +162,9 @@ gulp.task('watch', function() {
   });
   watch('source/js/**/*.js', function() {
     gulp.start('scripts');
+  });
+  watch("source/**/*.html", function() {
+    gulp.start('html');
   });
 });
 
