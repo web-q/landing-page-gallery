@@ -3,7 +3,7 @@
     <div id="topbar">
       <header>
         <div id="navbar-header">
-            <img class="webq-logo" src="http://hcawebservices.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+            <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-ko-logo-200.png" alt="HCA Web-Q" />
         </div>
         <div id="navbar-search">
           <div class="search-wrapper">
@@ -16,13 +16,13 @@
           <div class="filter-dropdown">
             <select ng-model="search.topic">
               <option value="">Topic</option>
-              <option ng-repeat="c in main.campaigns | unique:'topic'" value="{{c.topic}}">{{c.topic}}</option>
+              <option ng-repeat="t in main.topics | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
             <select ng-model="search.type">
               <option value="">Type</option>
-              <option ng-repeat="c in main.campaigns | unique:'type'" value="{{c.type}}">{{c.type}}</option>
+              <option ng-repeat="t in main.types | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
@@ -50,7 +50,7 @@
   <footer>
     <div>made with <span class="heart-icon" aria-hidden="true"></span>
       <span class="sr-only">love</span> by
-      <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web-Q" />
+      <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-ko-logo-200.png" alt="HCA Web-Q" />
     </div>
   </footer>
 </div>
