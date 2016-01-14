@@ -18,6 +18,10 @@ var gulp = require('gulp'),
 
 /*--- Set Sources ---*/
 var SRC = {
+  partials: 'source/partials/*.html',
+  index: 'source/index.html',
+  partialspub: 'app/partials',
+  indexpub: 'app/',
   scss: 'source/scss/**/*.scss',
   css: 'app/css',
   devjs: 'source/js/**/*.js',
@@ -94,8 +98,7 @@ gulp.task('resizeshots', function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshotsPub))
-    .pipe(notify("Screenshots are ready!"));
+    .pipe(gulp.dest(SRC.screenshotsPub));
 });
 
 /*--- CSS Compiler ---*/
@@ -121,6 +124,16 @@ gulp.task('scripts', function () {
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.distjs))
   .pipe(gutil.env.type !== 'ci' ? notify("JS Compiled and Minified") : gutil.noop())
+  ;
+});
+
+/*--- HTML Compiler ---*/
+gulp.task('html', function () {
+  gulp.src(SRC.partials)
+  .pipe(gulp.dest(SRC.partialspub))
+  ;
+  gulp.src(SRC.index)
+  .pipe(gulp.dest(SRC.indexpub))
   ;
 });
 
@@ -150,13 +163,16 @@ gulp.task('watch', function() {
   watch('source/js/**/*.js', function() {
     gulp.start('scripts');
   });
+  watch("source/**/*.html", function() {
+    gulp.start('html');
+  });
 });
 
 /*-------------------------------
 / Serve up Browser Sync, watch
 / for changes & inject/reload
 /-------------------------------*/
-gulp.task('serve', ['build-lib','watch'], function() {
+gulp.task('serve', ['html','build-lib','scripts','sass','watch'], function() {
   browserSync.init({
         server: "./app"
     });
@@ -169,7 +185,7 @@ gulp.task('serve', ['build-lib','watch'], function() {
 });
 
 /*--- Deploy to GH-Pages ---*/
-gulp.task('gh-pages', ['build-lib', 'sass', 'scripts'], function() {
+gulp.task('gh-pages', ['html','build-lib', 'sass', 'scripts'], function() {
   return gulp.src('app/**/*')
     .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
 });
