@@ -172,7 +172,7 @@ gulp.task('watch', function() {
 / Serve up Browser Sync, watch
 / for changes & inject/reload
 /-------------------------------*/
-gulp.task('serve', ['build-lib','watch'], function() {
+gulp.task('serve', ['html','build-lib','scripts','sass','watch'], function() {
   browserSync.init({
         server: "./app"
     });
