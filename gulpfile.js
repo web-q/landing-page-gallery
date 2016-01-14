@@ -185,7 +185,7 @@ gulp.task('serve', ['html','build-lib','scripts','sass','watch'], function() {
 });
 
 /*--- Deploy to GH-Pages ---*/
-gulp.task('gh-pages', ['build-lib', 'sass', 'scripts'], function() {
+gulp.task('gh-pages', ['html','build-lib', 'sass', 'scripts'], function() {
   return gulp.src('app/**/*')
     .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
 });
