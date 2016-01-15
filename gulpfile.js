@@ -70,7 +70,7 @@ gulp.task('grabshots', function() {
 });
 
 /*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
-gulp.task('resizeshots', function() {
+gulp.task('resizeshots', ['grabshots'], function() {
   gulp.src(SRC.screenshotsRaw + '/*-d.png')
     .pipe(imageResize({
       width:300,
@@ -137,8 +137,8 @@ gulp.task('html', function () {
   ;
 });
 
-/*--- Compile Libraries ---*/
-gulp.task('build-lib', function () {
+/*--- Build Dependencies ---*/
+gulp.task('build-dep', function () {
   gulp.src(SRC.jslib,{base: 'bower_components/'})
   .pipe(concat('lib.min.js'))
   .pipe(gulp.dest(SRC.distjs))
@@ -172,7 +172,7 @@ gulp.task('watch', function() {
 / Serve up Browser Sync, watch
 / for changes & inject/reload
 /-------------------------------*/
-gulp.task('serve', ['html','build-lib','scripts','sass','watch'], function() {
+gulp.task('serve', ['html','build-dep','scripts','sass','watch'], function() {
   browserSync.init({
         server: "./app"
     });
@@ -185,7 +185,7 @@ gulp.task('serve', ['html','build-lib','scripts','sass','watch'], function() {
 });
 
 /*--- Deploy to GH-Pages ---*/
-gulp.task('gh-pages', ['html','build-lib', 'sass', 'scripts'], function() {
+gulp.task('gh-pages', ['html','build-dep', 'sass', 'scripts'], function() {
   return gulp.src('app/**/*')
     .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
 });
