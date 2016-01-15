@@ -12,7 +12,7 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] fix ID sourcing (currently pulling hostID)
 - [x] change template-id to templateId
 - [x] clean up transitions
-- [ ] build out see otherCampaigns
+- [x] build out see otherCampaigns
 - [x] screenshots
 - [x] snippet/comment gen tool
 - [ ] pagination/endless scroll
