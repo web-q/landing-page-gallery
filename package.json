@@ -8,6 +8,7 @@
   "devDependencies": {
     "bower": "^1.3.1",
     "browser-sync": "^2.10.0",
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
@@ -30,14 +31,19 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "gulp",
+    "start": "gulp clean",
+    "poststart": "gulp",
     "test": "echo sorry no can has test",
-    "sass": "gulp sass",
+    "clean": "gulp clean",
+    "styles": "gulp styles",
     "scripts": "gulp scripts",
     "html": "gulp html",
+    "build": "gulp build",
     "build-dep": "gulp build-dep",
     "watch": "gulp watch",
+    "pregh-pages": "gulp clean",
     "gh-pages": "gulp gh-pages",
-    "screenshots": "gulp resizeshots"
+    "screenshots": "gulp screenshots-save",
+    "clear-screenshots": "gulp clear-screenshots"
   }
 }

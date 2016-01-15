@@ -13,29 +13,43 @@ var gulp = require('gulp'),
     pageres = require('pageres'),
     request = require('request'),
     imageResize = require('gulp-image-resize'),
-    gutil = require('gulp-util')
+    gutil = require('gulp-util'),
+    del = require('del'),
+    q = require('q')
     ;
 
 /*--- Set Sources ---*/
 var SRC = {
-  partials: 'source/partials/*.html',
-  index: 'source/index.html',
-  partialspub: 'app/partials',
-  indexpub: 'app/',
-  scss: 'source/scss/**/*.scss',
-  css: 'app/css',
-  devjs: 'source/js/**/*.js',
-  distjs: 'app/js',
-  jslib: ['bower_components/angular/angular.min.js',
-          'bower_components/angular-route/angular-route.min.js',
-          'bower_components/angular-filter/dist/angular-filter.min.js',
-          'bower_components/angular-animate/angular-animate.min.js',
-          'bower_components/ng-onload/release/ng-onload.min.js'],
-  modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
-  boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
-  URLs: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json',
-  screenshotsRaw: '_screenshots/raw',
-  screenshotsPub: '_screenshots/pub'
+  source: {
+    index: 'source/index.html',
+    partials: 'source/partials/*.html',
+    styles: 'source/scss/**/*.scss',
+    scripts: 'source/js/**/*.js'
+  },
+  pub: {
+    root: 'app',
+    index: 'app/',
+    partials: 'app/partials',
+    styles: 'app/css',
+    scripts: 'app/js'
+  },
+  dep: {
+    jslib: [
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular-route/angular-route.min.js',
+      'bower_components/angular-filter/dist/angular-filter.min.js',
+      'bower_components/angular-animate/angular-animate.min.js',
+      'bower_components/ng-onload/release/ng-onload.min.js'
+    ],
+    modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
+    boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
+  },
+  screenshots: {
+    root: '_screenshots',
+    raw: '_screenshots/raw',
+    pub: '_screenshots/pub'
+  },
+  appdata: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
 };
 
 var AUTOPREFIXER_BROWSERS = [
@@ -51,27 +65,28 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 /*--- Take Screenshots ---*/
-gulp.task('grabshots', function() {
+gulp.task('screenshots-scrape', function(cb) {
+  process.stdout.write('\nCapturing screenshots... \n\n');
   var campaignURLs;
-  request(SRC.URLs, function (error, response, body) {
+  request(SRC.appdata, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       campaignURLs = JSON.parse(body).campaigns;
     }
-    var screenshot = new pageres({delay: 10}).dest(SRC.screenshotsRaw);
+    var screenshot = new pageres({delay: 10}).dest(SRC.screenshots.raw);
     campaignURLs.forEach(function(c){
       var fnameLG = c.id + '-d',
           fnameSM = c.id + '-m';
       screenshot.src(c.url, ['1024x768'], {filename: fnameLG})
                     .src(c.url, ['750x1334'], {filename: fnameSM});
     });
-    screenshot.run();
-    process.stdout.write('Capturing screenshots...')
+    screenshot.run()
+    .then(() => {return cb()});
   });
 });
 
 /*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
-gulp.task('resizeshots', ['grabshots'], function() {
-  gulp.src(SRC.screenshotsRaw + '/*-d.png')
+gulp.task('screenshots-save',['screenshots-scrape'], function() {
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:300,
       height:300,
@@ -79,8 +94,9 @@ gulp.task('resizeshots', ['grabshots'], function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshotsPub));
-  gulp.src(SRC.screenshotsRaw + '/*-d.png')
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:700,
       height:800,
@@ -89,8 +105,9 @@ gulp.task('resizeshots', ['grabshots'], function() {
       imageMagick: true
     }))
     .pipe(rename({suffix:'-lg'}))
-    .pipe(gulp.dest(SRC.screenshotsPub));
-  gulp.src(SRC.screenshotsRaw +'/*-m.png')
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw +'/*-m.png')
     .pipe(imageResize({
       width:160,
       height:230,
@@ -98,69 +115,84 @@ gulp.task('resizeshots', ['grabshots'], function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshotsPub));
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
+    ;
+});
+
+/*--- Delete Screenshots Folder ---*/
+gulp.task('clear-screenshots', function() {
+    return del([SRC.screenshots.root]);
 });
 
 /*--- CSS Compiler ---*/
-gulp.task('sass', function () {
-  gulp.src(SRC.scss)
+gulp.task('styles', function () {
+  return gulp.src(SRC.source.styles)
   .pipe(sass())
   .pipe(autoprefixer({ browsers: AUTOPREFIXER_BROWSERS }))
-  .pipe(gulp.dest(SRC.css))
+  .pipe(gulp.dest(SRC.pub.styles))
   .pipe(minifyCss())
   .pipe(rename({suffix:'.min'}))
-  .pipe(gulp.dest(SRC.css))
+  .pipe(gulp.dest(SRC.pub.styles))
   .pipe(gutil.env.type !== 'ci' ? notify("CSS Compiled and Minified") : gutil.noop())
   ;
 });
 
 /*--- JS Compiler ---*/
 gulp.task('scripts', function () {
-  gulp.src(SRC.devjs)
+  return gulp.src(SRC.source.scripts)
   .pipe(concat('app.js'))
-  .pipe(gulp.dest(SRC.distjs))
+  .pipe(gulp.dest(SRC.pub.scripts))
   .pipe(ngAnnotate())
   .pipe(uglify())
   .pipe(rename({suffix:'.min'}))
-  .pipe(gulp.dest(SRC.distjs))
+  .pipe(gulp.dest(SRC.pub.scripts))
   .pipe(gutil.env.type !== 'ci' ? notify("JS Compiled and Minified") : gutil.noop())
   ;
 });
 
 /*--- HTML Compiler ---*/
 gulp.task('html', function () {
-  gulp.src(SRC.partials)
-  .pipe(gulp.dest(SRC.partialspub))
-  ;
-  gulp.src(SRC.index)
-  .pipe(gulp.dest(SRC.indexpub))
-  ;
+  return Promise.all([
+    gulp.src(SRC.source.partials)
+      .pipe(gulp.dest(SRC.pub.partials)),
+    gulp.src(SRC.source.index)
+      .pipe(gulp.dest(SRC.pub.index))
+      .pipe(notify({ message: "HTML Saved", onLast: true }))
+  ]);
 });
 
 /*--- Build Dependencies ---*/
 gulp.task('build-dep', function () {
-  gulp.src(SRC.jslib,{base: 'bower_components/'})
-  .pipe(concat('lib.min.js'))
-  .pipe(gulp.dest(SRC.distjs))
-  ;
-  gulp.src(SRC.modernizr)
-  .pipe(rename('modernizr.min.js'))
-  .pipe(gulp.dest(SRC.distjs))
-  ;
-  gulp.src(SRC.boilerplate)
-  .pipe(concat('boilerplate.css'))
-  .pipe(minifyCss())
-  .pipe(rename({suffix:'.min'}))
-  .pipe(gulp.dest(SRC.css))
-  ;
+  return Promise.all([
+    gulp.src(SRC.dep.jslib,{base: 'bower_components/'})
+      .pipe(concat('lib.min.js'))
+      .pipe(gulp.dest(SRC.pub.scripts)),
+    gulp.src(SRC.dep.modernizr)
+      .pipe(rename('modernizr.min.js'))
+      .pipe(gulp.dest(SRC.pub.scripts)),
+    gulp.src(SRC.dep.boilerplate)
+      .pipe(concat('boilerplate.css'))
+      .pipe(minifyCss())
+      .pipe(rename({suffix:'.min'}))
+      .pipe(gulp.dest(SRC.pub.styles))
+  ]);
 });
 
-/*--- Watcher: CSS, JSS, etc... ---*/
-gulp.task('watch', function() {
-  watch('source/scss/**/*.scss', function() {
-    gulp.start('sass');
+/*--- Delete App Folder ---*/
+gulp.task('clean', function(cb) {
+  return del([SRC.pub.root]);
+});
+
+/*--- Build All ---*/
+gulp.task('build', ['html','build-dep','scripts','styles']);
+
+/*--- Watcher: CSS, JSS, HTML, etc... ---*/
+gulp.task('watch', ['build'], function() {
+  watch(SRC.source.styles, function() {
+    gulp.start('styles');
   });
-  watch('source/js/**/*.js', function() {
+  watch(SRC.source.scripts, function() {
     gulp.start('scripts');
   });
   watch("source/**/*.html", function() {
@@ -172,22 +204,24 @@ gulp.task('watch', function() {
 / Serve up Browser Sync, watch
 / for changes & inject/reload
 /-------------------------------*/
-gulp.task('serve', ['html','build-dep','scripts','sass','watch'], function() {
+gulp.task('serve',['watch'], function() {
   browserSync.init({
         server: "./app"
     });
-
   watch("app/css/*.css", function() {
     return gulp.src("app/css/*.css")
       .pipe(browserSync.stream());
   });
   watch("app/**/*.html").on('change', browserSync.reload);
+  watch("app/js/*.js").on('change', browserSync.reload);
 });
 
 /*--- Deploy to GH-Pages ---*/
-gulp.task('gh-pages', ['html','build-dep', 'sass', 'scripts'], function() {
-  return gulp.src('app/**/*')
-    .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
+gulp.task('gh-pages',['build'], function() {
+  setTimeout(function() {
+    return gulp.src('app/**/*')
+      .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
+  }, 3000);
 });
 
 /*--- Default Gulp ---*/
