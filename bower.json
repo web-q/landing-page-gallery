@@ -1,9 +1,9 @@
 {
   "name": "landing-page-wizard",
-  "description": "A gallery application built on top of angular-seed",
+  "description": "A gallery application built with angular.js",
   "version": "0.0.0",
   "homepage": "https://github.com/web-q/landing-page-wizard",
-  "license": "MIT",
+  "license": "GPL",
   "private": true,
   "dependencies": {
     "angular": "~1.4.0",
