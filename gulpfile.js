@@ -14,8 +14,7 @@ var gulp = require('gulp'),
     request = require('request'),
     imageResize = require('gulp-image-resize'),
     gutil = require('gulp-util'),
-    del = require('del'),
-    q = require('q')
+    del = require('del')
     ;
 
 /*--- Set Sources ---*/

@@ -23,7 +23,7 @@
     <section id="other-campaigns">
       <h3>Other Campaigns Using {{detail.template.title}}</h3>
       <ul>
-        <li ng-repeat="other in detail.otherCampaigns">
+        <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
           <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
             <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
             <span>
