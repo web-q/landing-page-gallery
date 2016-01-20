@@ -20,7 +20,7 @@
       <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
       <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
     </section>
-    <section id="other-campaigns">
+    <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
       <h3>Other Campaigns Using {{detail.template.title}}</h3>
       <ul>
         <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
