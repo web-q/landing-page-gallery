@@ -20,10 +20,10 @@
       <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
       <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
     </section>
-    <section id="other-campaigns">
+    <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
       <h3>Other Campaigns Using {{detail.template.title}}</h3>
       <ul>
-        <li ng-repeat="other in detail.otherCampaigns">
+        <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
           <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
             <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
             <span>
