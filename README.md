@@ -17,6 +17,8 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] snippet/comment gen tool
 - [ ] pagination/endless scroll
 - [ ] clean image loading (lazy loading?)
+- [ ] change template details to full-height on tablet
+- [ ] vertical align (Other Campaigns) thumbnails and text
 
 ###Requirements
 * Node/npm
