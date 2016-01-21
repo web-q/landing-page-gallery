@@ -3,30 +3,30 @@
     <div id="topbar">
       <header>
         <div id="navbar-header">
-            <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-ko-logo-200.png" alt="HCA Web-Q" />
+            <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
         </div>
         <div id="navbar-search">
           <div class="search-wrapper">
-            <input type="search" ng-model="search.$" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
+            <input type="search" ng-model="quicksearch.$" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
           </div>
         </div>
       </header>
       <section id="filters">
         <div>
           <div class="filter-dropdown">
-            <select ng-model="search.topic">
+            <select ng-model="filters.topic">
               <option value="">Topic</option>
               <option ng-repeat="t in main.topics | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
-            <select ng-model="search.type">
+            <select ng-model="filters.type">
               <option value="">Type</option>
               <option ng-repeat="t in main.types | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
-            <select ng-model="search.templateId">
+            <select ng-model="filters.templateId">
               <option value="">Template</option>
               <option ng-repeat="c in main.campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
             </select>
@@ -35,7 +35,7 @@
       </section>
     </div>
     <section id="thumbnail-gallery">
-        <div class="campaign-thumbnail filterpop" ng-repeat="c in main.campaigns | filter:search:strict as results">
+        <div class="campaign-thumbnail filterpop" ng-repeat="c in main.campaigns | filter:{topic: filters.topic || undefined}:true | filter:{type: filters.type || undefined}:true | filter:{templateId: filters.templateId || undefined}:true | filter:quicksearch as results">
           <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
             <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{c.id}}-d.png" />
             <h3>{{c.title}}</h3>
