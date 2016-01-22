@@ -171,15 +171,41 @@ input {
       a {
         display: inline-block;
         width: 100%;
-        &:hover, &:focus {
-          h3 {
-            text-decoration: underline;
+        max-width: 300px;
+        .thumbnail-wrapper {
+          box-shadow: -2px 5px 10px -2px rgba(0,0,0,0.4);
+          border: 2.5px solid $light-grey;
+          border-radius: 5px 5px 0 0;
+          transition: all .1s ease;
+          .faux-browser {
+            height: 17px;
+            width: 100%;
+            background-color: $light-grey;
+            img {
+              width: 30px;
+              height: 10px;
+              margin-top: 3px;
+              float: left;
+              margin-left: 7px;
+            }
+          }
+          img {
+            @include center-block();
+            @include img-responsive();
           }
         }
-        img {
-          @include center-block();
-          @include img-responsive();
-          border: 1px solid $border-color;
+        h3 {
+          transition: all .1s ease;
+        }
+        &:hover, &:focus {
+          .thumbnail-wrapper {
+            box-shadow: -10px 13px 10px -2px rgba(0,0,0,0.4);
+            margin-top: -8px;
+          }
+          h3 {
+            margin-top: 28px;
+            text-decoration: underline;
+          }
         }
       }
     }
