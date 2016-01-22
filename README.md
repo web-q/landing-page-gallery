@@ -17,6 +17,11 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] snippet/comment gen tool
 - [ ] pagination/endless scroll
 - [ ] clean image loading (lazy loading?)
+- [x] change template details to full-height on tablet (redesigned tablet view)
+- [x] vertical align (Other Campaigns) thumbnails and text
+- [ ] write a new screenshot scraper that can handle YT embeds
+- [x] change loading splash to light blue bg and KO logo
+- [ ] make quick search act like a fuzzy finder?
 
 ###Requirements
 * Node/npm

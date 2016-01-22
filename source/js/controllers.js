@@ -2,7 +2,7 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
-  // Collect url paramters into  variables
+  // Collect url paramters into variables
   var cid = $routeParams.shortCode;
 
   // Grab the appropriate campaign object from "campaigns" data
@@ -11,11 +11,13 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
 
   // Grab the appropriate template object from "templates" data
   // We filter the array by id, the result is an array so we select element 0
-  var template = $filter('filter')(templates, {id: tid})[0];
+  var template = $filter('filter')(templates, {id: parseInt(tid)}, true)[0];
 
   // Make an array containing other campaigns using this template
   var otherCampaigns = $filter('filter')(campaigns, {templateId: tid,
-  shortCode: "!" + cid }); // Exclude current campaign
+  shortCode: "!" + cid }, true); // Exclude current campaign
+  // Randomize results
+  otherCampaigns = shuffleArray(otherCampaigns);
 
   // Pass variables needed on the front to controllerAs
   this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
@@ -33,6 +35,8 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
+
+  // Show loading spinner until iframe is fully loaded
   this.frameLoaded = function(){
     document.getElementById('campaign-frame').style.display = 'block';
     document.getElementById('iframe-loader').style.display = 'none';
@@ -44,7 +48,6 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
   var campaigns = appdata.campaigns;
   var topics = [];
   var types = [];
-
 
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
