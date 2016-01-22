@@ -371,7 +371,7 @@ select {
     h3 {
       font-size: 20px;
       margin: 0 0 15px 0;
-      color: $dark-grey;
+      color: $primary-color;
     }
     ul {
       list-style-type: none;
@@ -398,6 +398,9 @@ select {
           height: auto;
           margin: 0 14px 0 0;
           border: 1px solid $border-color;
+        }
+        span {
+          line-height: 40px;
         }
       }
     }
@@ -445,14 +448,44 @@ select {
       }
     }
     #template-detail {
-      width: 25%;
+      margin-top: 60px;
+      width: 50%;
       float: left;
+      clear: right;
     }
     #other-campaigns {
-      width: 25%;
+      margin-top: 0;
+      border: none;
+      width: 85%;
       float: left;
+      clear: left;
+      margin-left: 7.5%;
+      background-color: #FFF;
       h3 {
-        font-size: 16px;
+        font-size: 18px;
+        color: $secondary-color;
+      }
+      ul {
+        background-color: $light-grey;
+        padding: 5px 20px 0 20px;
+        li {
+          display: inline-block;
+          width: 33%;
+          a {
+            padding: 20px 20px 0 20px;
+            display: block;
+          }
+          img {
+            float: none;
+            width: 100%;
+            margin: 0 0 10px 0;
+          }
+          span {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+          }
+        }
       }
     }
   }
@@ -484,6 +517,10 @@ select {
       background-color: #FFF;
     }
     #other-campaigns {
+      margin-left: 0;
+      clear: none;
+      margin-top: 10px;
+      border-top: 1px solid $border-color;
       float: none;
       width: 100%;
       background-color: $light-grey;
@@ -491,6 +528,28 @@ select {
       h3 {
         font-size: 20px;
         color: $primary-color;
+      }
+      ul {
+        background-color: none;
+        padding: 0;
+        li {
+          display: block;
+          width: auto;
+          a {
+            padding: 7px 2px;
+            display: inline-block;
+          }
+          img {
+            float: left;
+            width: 40px;
+            margin: 0 14px 0 0;
+          }
+          span {
+            display: inline;
+            font-size: 14px;
+            text-align: left;
+          }
+        }
       }
     }
     #scroll-down {
