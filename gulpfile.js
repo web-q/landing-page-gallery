@@ -23,14 +23,16 @@ var SRC = {
     index: 'source/index.html',
     partials: 'source/partials/*.html',
     styles: 'source/scss/**/*.scss',
-    scripts: 'source/js/**/*.js'
+    scripts: 'source/js/**/*.js',
+    img: 'source/img/**/*'
   },
   pub: {
     root: 'app',
     index: 'app/',
     partials: 'app/partials',
     styles: 'app/css',
-    scripts: 'app/js'
+    scripts: 'app/js',
+    img: 'app/img'
   },
   dep: {
     jslib: [
@@ -161,6 +163,12 @@ gulp.task('html', function () {
   ]);
 });
 
+/*--- IMG Setup ---*/
+gulp.task('img', function () {
+  return gulp.src(SRC.source.img)
+      .pipe(gulp.dest(SRC.pub.img));
+});
+
 /*--- Build Dependencies ---*/
 gulp.task('build-dep', function () {
   return Promise.all([
@@ -184,7 +192,7 @@ gulp.task('clean', function(cb) {
 });
 
 /*--- Build All ---*/
-gulp.task('build', ['html','build-dep','scripts','styles']);
+gulp.task('build', ['html','build-dep','img','scripts','styles']);
 
 /*--- Watcher: CSS, JSS, HTML, etc... ---*/
 gulp.task('watch', ['build'], function() {

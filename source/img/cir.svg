@@ -1,0 +1,8 @@
+<svg id="browser-circles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 10">
+<style>.le-circle{fill:#d3d3d3;}</style>
+<g>
+  <circle class="le-circle" cx="5" cy="5" r="3.6" />
+  <circle class="le-circle" cx="15" cy="5" r="3.6" />
+  <circle class="le-circle" cx="25" cy="5" r="3.6" />
+</g>
+</svg>
