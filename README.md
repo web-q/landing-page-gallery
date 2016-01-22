@@ -7,6 +7,7 @@ SASS and JS are compiled and minified on save using Gulp. A live version can be 
 This application requires A LOT of screenshots, so we have also written a Gulp task to handle grabbing all of those as well: `npm run screenshots`. Be sure to have ImageMagick installed before running this.
 
 ##Todo
+- [ ] content gathering
 - [ ] move shortCode hashing into velocity/backend
 - [ ] move templateTitle pushing into velocity/backend
 - [x] fix ID sourcing (currently pulling hostID)
