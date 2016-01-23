@@ -20,6 +20,11 @@ $font-stack: 'Lato', sans-serif;
   max-width: 100%;
   height: auto;
 }
+@mixin anim-grad-bg() {
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  background-size: 400% 400%;
+  animation: gradientbganim 15s ease infinite;
+}
 
 /*--------------------------------*/
 /*    GENERAL
@@ -103,7 +108,7 @@ input {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: $secondary-color;
+    @include anim-grad-bg();
 }
 
 /*--------------------------------*/
@@ -139,7 +144,7 @@ input {
         }
       }
     }
-    background-color: $secondary-color;
+    @include anim-grad-bg();
     width: 100%;
   }
   #filters {
@@ -330,7 +335,7 @@ select {
     padding: 15px;
   }
   header {
-    background-color: $secondary-color;
+    @include anim-grad-bg();
     width: 100%;
     height: 100px;
     a {
@@ -656,6 +661,11 @@ select {
 /*--------------------------------*/
 /*    ANIMATIONS
 /*--------------------------------*/
+@keyframes gradientbganim {
+   0%{background-position:0% 50%}
+   50%{background-position:100% 50%}
+   100%{background-position:0% 50%}
+}
 /* -----Filtering----- */
 .filterpop.ng-enter,
 .filterpop.ng-leave,
