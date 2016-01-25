@@ -170,6 +170,14 @@ input {
       width: 100%;
       position: relative;
     }
+    #campaign-listing {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
     .campaign-thumbnail {
       text-align: center;
       margin-bottom: 5%;

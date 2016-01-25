@@ -35,7 +35,8 @@
       </section>
     </div>
     <section id="thumbnail-gallery">
-        <div class="campaign-thumbnail filterpop" ng-repeat="c in main.campaigns | filter:{topic: filters.topic || undefined}:true | filter:{type: filters.type || undefined}:true | filter:{templateId: filters.templateId || undefined}:true | filter:quicksearch as results">
+      <ul id="campaign-listing">
+        <li class="campaign-thumbnail filterpop" ng-repeat="c in main.campaigns | filter:{topic: filters.topic || undefined}:true | filter:{type: filters.type || undefined}:true | filter:{templateId: filters.templateId || undefined}:true | filter:quicksearch as results">
           <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
             <div class="thumbnail-wrapper">
               <div class="faux-browser">
@@ -46,10 +47,11 @@
             <h3>{{c.title}}</h3>
             <h4>{{c.templateTitle}}</h4>
           </a>
-        </div>
-        <div id="no-results" class="filterpop" ng-if="results.length == 0">
+        </li>
+        <li id="no-results" class="filterpop" ng-if="results.length == 0">
           <span>No results found&hellip;</span>
-        </div>
+        </li>
+      </ul>
     </section>
   </div>
   <footer>
