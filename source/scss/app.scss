@@ -180,11 +180,11 @@ input {
     }
     .campaign-thumbnail {
       text-align: center;
-      margin-bottom: 5%;
       position: relative;
       min-height: 1px;
       padding-right: 10px;
       padding-left: 10px;
+      padding-bottom: 5%;
       a {
         display: inline-block;
         width: 100%;
@@ -837,4 +837,24 @@ select {
 @keyframes sk-circleFadeDelay {
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; }
+}
+.grid {
+  transition: all 200ms ease;
+}
+.grid.ng-leave {
+  transition: all ease 200ms;
+}
+.grid.ng-leave.ng-leave-active {
+  transform: scale(0.5);
+  opacity: 0;
+}
+.grid.ng-enter {
+  transition: all ease 200ms;
+  transition-delay: 200ms;
+  transform: scale(0.5);
+  opacity: 0;
+}
+.grid.ng-enter.ng-enter-active {
+  transform: scale(1);
+  opacity: 1;
 }

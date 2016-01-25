@@ -40,7 +40,8 @@ var SRC = {
       'bower_components/angular-route/angular-route.min.js',
       'bower_components/angular-filter/dist/angular-filter.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/ng-onload/release/ng-onload.min.js'
+      'bower_components/ng-onload/release/ng-onload.min.js',
+      'bower_components/angulargrid/angulargrid.min.js'
     ],
     modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
     boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',

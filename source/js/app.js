@@ -24,7 +24,8 @@ var landingPageWiz = angular.module('landingPageWiz', [
   'ngRoute',
   'ngAnimate',
   'angular.filter',
-  'ngOnload'
+  'ngOnload',
+  'angularGrid'
 ]);
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {
