@@ -68,8 +68,8 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
 
   // Filter campaigns array
   this.filterResults = function() {
-    this.campaigns =  $filter('filter')(campaigns, {$: this.quicksearch});
-    this.campaigns =  $filter('filter')(campaigns, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
+    var temp =  $filter('filter')(campaigns, {$: this.quicksearch});
+    this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
   };
 
   // Config for sliding page left/right
