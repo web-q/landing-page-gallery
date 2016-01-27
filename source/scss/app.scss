@@ -109,10 +109,18 @@ input {
     border: 0;
 }
 #pageLoad {
+    padding-top: 40px;
     position: absolute;
     width: 100%;
     height: 100%;
     @include anim-bg();
+    transition: opacity 0.3s ease;
+    #svgSplash {
+      display: block;
+      width: 50%;
+      max-width: 400px;
+      margin: 10px auto;
+    }
 }
 
 /*--------------------------------*/

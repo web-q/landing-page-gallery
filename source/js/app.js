@@ -66,11 +66,20 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Function for page loading spinner
-landingPageWiz.run(function($rootScope, $timeout, $window) {
+landingPageWiz.run(function(fetchData, $rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeStart', function() {
-    $rootScope.loadingView = true;
+    if (typeof $rootScope.dCache === 'undefined'){
+      $rootScope.loadingView = true;
+    }
   });
   $rootScope.$on('$routeChangeSuccess', function() {
+    if ($rootScope.loadingView === true){
+      var pageLoad = document.getElementById('pageLoad');
+      pageLoad.style.opacity = '0';
+      $timeout(function () {
+        pageLoad.style.display = 'none';
+      }, 300);
+    }
     $rootScope.loadingView = false;
     $timeout(function () {
       $window.scrollTo(0,0);

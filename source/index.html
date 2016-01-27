@@ -16,17 +16,20 @@
   <script src="js/modernizr.min.js"></script>
 </head>
 <body>
-  <div ng-view class="{{pageTransition}}" autoscroll="false"></div>
+  <div id="app-viewer" ng-view class="{{pageTransition}}" autoscroll="false"></div>
   <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
-<div id="pageLoad" ng-show="loadingView">
-  <div ng-spinner></div>
+<div id="pageLoad" ng-if="loadingView">
   <div>
     <img class="loading-logo" width="200px" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
+    <object id="svgSplash" data="img/splash.svg" type="image/svg+xml">
+      Your browser doesn&rsquo;t support SVG
+    </object>
   </div>
 </div>
   <script src="js/lib.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
   <script src="js/app.min.js"></script>
 </body>
 </html>
