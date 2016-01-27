@@ -1,4 +1,4 @@
-window.onload = function() {
+function splashAnimate() {
   var svgdoc = document.getElementById("svgSplash").contentDocument;
   var cir = svgdoc.getElementsByClassName("cir"),
       icon = svgdoc.getElementsByClassName("icon-wrap"),
