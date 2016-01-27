@@ -8,7 +8,7 @@ function splashAnimate() {
     tIconOffset = "-=" + (tAnim * 7 / 10),
     tAltOffset = "-=" + (tAnim * 1 / 2),
     tl = new TimelineMax({
-      repeat: -1,
+      repeat: 0,
       yoyo: false,
       repeatDelay: tAnim
     });
