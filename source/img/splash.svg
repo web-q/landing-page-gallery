@@ -22,18 +22,47 @@
 .icon-wrap {
   opacity: 0;
 }
+.title {
+  text-anchor: middle;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  fill: #FFF;
+  opacity: 0;
+}
+.sub {
+  text-anchor: middle;
+  font-family: 'Lato', sans-serif;
+  fill: #FFF;
+  opacity: 0;
+}
 </style>
 </defs>
   <circle id="cir-1" class="cir" cx="25" cy="25" r="24"></circle>
   <g class="icon-wrap">
     <text id="icon-1" class="icon" x="17.5" y="37.5" font-size="30">&#xf245;</text>
   </g>
+  <text id="title-1" class="title" x="25" y="58" font-size="9">Explore</text>
+  <text id="sub-1" class="sub" x="25" y="64" font-size="4.3">
+    <tspan x="25">Choose a filter,</tspan>
+    <tspan x="25" dy="1em">explore your options.</tspan>
+  </text>
   <circle id="cir-2" class="cir" cx="25" cy="25" r="24"></circle>
   <g class="icon-wrap">
     <text id="icon-2" class="icon" x="9.6" y="40" font-size="30">&#xf004;</text>
   </g>
+  <text id="title-2" class="title" x="25" y="58" font-size="9">Love</text>
+  <text id="sub-2" class="sub" x="25" y="64" font-size="4.3">
+    <tspan x="25">Select the template</tspan>
+    <tspan x="25" dy="1em">that&#x2019;s right for you.</tspan>
+  </text>
   <circle id="cir-3" class="cir" cx="25" cy="25" r="24"></circle>
   <g class="icon-wrap">
     <text id="icon-3" class="icon" x="9.6" y="39" font-size="30">&#xf135;</text>
   </g>
+  <text id="title-3" class="title" x="25" y="58" font-size="9">Launch</text>
+  <text id="sub-3" class="sub" x="25" y="64" font-size="4.3">
+    <tspan x="25">We&#x2019;ll take it from</tspan>
+    <tspan x="25" dy="1em">here.</tspan>
+  </text>
 </svg>

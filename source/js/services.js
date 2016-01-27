@@ -19,7 +19,7 @@ landingPageWiz.factory('fetchData', function($q, $http, $rootScope, $timeout) {
           }
           $timeout(function() {
             return d.resolve(cache)
-          }, 6000);
+          }, 10000);
         },
         function failure(reason) {
           d.reject(reason);
