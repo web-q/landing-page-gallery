@@ -22,7 +22,7 @@ var SRC = {
   source: {
     index: 'source/index.html',
     partials: 'source/partials/*.html',
-    styles: 'source/scss/**/*.scss',
+    styles: 'source/scss/app.scss',
     scripts: 'source/js/**/*.js',
     img: 'source/img/**/*'
   },
