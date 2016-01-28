@@ -10,18 +10,14 @@
   animation: dash 1.4s ease-in-out infinite, colors 2.8s ease-in-out infinite;
 }
 @-webkit-keyframes colors {
-  0% {stroke: #013C80;}
-  25% {stroke: #009edb;}
-  50% {stroke: #afafaf;}
-  75% {stroke: #009edb;}
-  100% {stroke: #013C80;}
+  0% {stroke: #00d2ff;}
+  50% {stroke: #3a7bd5;}
+  100% {stroke: #00d2ff;}
 }
 @keyframes colors {
-  0% {stroke: #013C80;}
-  25% {stroke: #009edb;}
-  50% {stroke: #afafaf;}
-  75% {stroke: #009edb;}
-  100% {stroke: #013C80;}
+  0% {stroke: #00d2ff;}
+  50% {stroke: #3a7bd5;}
+  100% {stroke: #00d2ff;}
 }
 @-webkit-keyframes dash {
   0% {stroke-dashoffset: 210;}
