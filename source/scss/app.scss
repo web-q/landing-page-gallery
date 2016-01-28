@@ -467,6 +467,7 @@ select {
   }
   #campaign-viewer {
     margin-left: 0;
+    padding-left: 0;
     height: 100%;
     width: 100%;
     #campaign-frame {
@@ -605,7 +606,8 @@ select {
       display: none;
     }
     #campaign-viewer {
-      margin-left: 300px;
+      margin: 0;
+      padding-left: 300px;
     }
   }
 }
