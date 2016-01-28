@@ -35,7 +35,7 @@
       </section>
     </div>
     <section id="thumbnail-gallery">
-      <ul class="dynamic-grid" angular-grid="main.campaigns" css-grid="true" id="campaign-listing">
+      <ul class="dynamic-grid" angular-grid="main.campaigns" css-grid="false" id="campaign-listing">
         <li class="campaign-thumbnail grid" ng-repeat="c in main.campaigns as results">
           <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
             <div class="thumbnail-wrapper">

@@ -74,18 +74,18 @@
   animation-delay: 0.1s;
 }
 .grid {
-  transition: all 200ms ease;
+  transition: all 300ms ease;
 }
 .grid.ng-leave {
-  transition: all ease 200ms;
+  transition: all ease 300ms;
 }
 .grid.ng-leave.ng-leave-active {
   transform: scale(0.5);
   opacity: 0;
 }
 .grid.ng-enter {
-  transition: all ease 200ms;
-  transition-delay: 200ms;
+  transition: all ease 300ms;
+  transition-delay: 400ms;
   transform: scale(0.5);
   opacity: 0;
 }
