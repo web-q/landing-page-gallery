@@ -1,4 +1,4 @@
-landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($sce, $routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageWiz.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -31,6 +31,16 @@ landingPageWiz.controller('detailCtrl', ['$sce', '$routeParams', 'appdata', '$fi
   } else {
     this.customFlag = "Standard";
   }
+
+  // Detect window width for displaying the iframe preview
+  $scope.windowWidth = $window.innerWidth;
+  angular.element($window).bind('resize', function(){
+    $scope.windowWidth = $window.innerWidth;
+    // manuall $digest required as resize event
+    // is outside of angular
+    $scope.$digest();
+  });
+
   // Config for sliding page left/right
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
