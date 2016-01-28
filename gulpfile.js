@@ -198,7 +198,7 @@ gulp.task('build', ['html','build-dep','img','scripts','styles']);
 
 /*--- Watcher: CSS, JSS, HTML, etc... ---*/
 gulp.task('watch', ['build'], function() {
-  watch(SRC.source.styles, function() {
+  watch("source/**/*.scss", function() {
     gulp.start('styles');
   });
   watch(SRC.source.scripts, function() {
