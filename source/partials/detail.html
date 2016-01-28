@@ -1,46 +1,53 @@
 <div id="detail">
-  <div class="sidebar">
-    <header>
-      <a ng-click="detail.slide('slidepage-r');" href="#/">
-        <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
-        <h1>{{appName}}</h1>
-      </a>
-    </header>
-    <section id="template-head">
-      <h2>{{detail.template.title}}</h2>
-      <h3>{{detail.campaign.title}}</h3>
-      <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
-    </section>
-    <section id="template-detail">
-      <p>{{detail.template.description}}</p>
-      <h4>Features</h4>
-      <ul>
-        <li ng-repeat="f in detail.template.features">{{f}}</li>
-      </ul>
-      <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
-      <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
-    </section>
-    <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
-      <h3>Other Campaigns Using {{detail.template.title}}</h3>
-      <ul>
-        <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
-          <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
-            <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
-            <span>
-              {{other.title}}
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <section id="scroll-down">
-      <span>Scroll Down To Preview</span>
-    </section>
-  </div>
-  <div id="campaign-viewer">
-    <div id="iframe-loader">
-      <div ng-spinner></div>
+    <div class="sidebar">
+      <div class="wrapme">
+      <header>
+        <a ng-click="detail.slide('slidepage-r');" href="#/">
+          <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
+          <h1>{{appName}}</h1>
+        </a>
+      </header>
+      <section id="template-head">
+        <h2>{{detail.template.title}}</h2>
+        <h3>{{detail.campaign.title}}</h3>
+        <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
+      </section>
+      <section id="template-detail">
+        <p>{{detail.renderHTML(detail.template.description)}}</p>
+        <h4>Features</h4>
+        <ul>
+          <li ng-repeat="f in detail.template.features">{{f}}</li>
+        </ul>
+        <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
+        <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
+      </section>
+      <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
+        <h3>Other Campaigns Using {{detail.template.title}}</h3>
+        <ul>
+          <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
+            <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
+              <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
+              <span>
+                {{other.title}}
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      </div>
+      <footer>
+        <div>made with <span class="heart-icon" aria-hidden="true"></span>
+          <span class="sr-only">love</span> by
+          <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/web-q-ko-logo-200.png" alt="HCA Web-Q" />
+        </div>
+      </footer>
     </div>
-    <iframe id="campaign-frame" class="fade-onload" ng-onload="detail.frameLoaded();" ng-src="{{detail.iframeURL}}"></iframe>
-  </div>
+    <div id="campaign-viewer" ng-if="windowWidth > 1068">
+      <div id="iframe-loader">
+        <object id="iframe-svg-loader" data="img/iframe-loader.svg" type="image/svg+xml">
+          Your browser doesn&rsquo;t support SVG
+        </object>
+      </div>
+      <iframe id="campaign-frame" class="fade-onload" ng-onload="detail.frameLoaded();" ng-src="{{detail.iframeURL}}"></iframe>
+    </div>
 </div>

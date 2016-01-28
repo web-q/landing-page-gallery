@@ -22,7 +22,7 @@ var SRC = {
   source: {
     index: 'source/index.html',
     partials: 'source/partials/*.html',
-    styles: 'source/scss/**/*.scss',
+    styles: 'source/scss/app.scss',
     scripts: 'source/js/**/*.js',
     img: 'source/img/**/*'
   },
@@ -40,7 +40,9 @@ var SRC = {
       'bower_components/angular-route/angular-route.min.js',
       'bower_components/angular-filter/dist/angular-filter.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/ng-onload/release/ng-onload.min.js'
+      'bower_components/ng-onload/release/ng-onload.min.js',
+      'bower_components/angulargrid/angulargrid.min.js',
+      'bower_components/gsap/src/minified/TweenMax.min.js'
     ],
     modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
     boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
@@ -196,7 +198,7 @@ gulp.task('build', ['html','build-dep','img','scripts','styles']);
 
 /*--- Watcher: CSS, JSS, HTML, etc... ---*/
 gulp.task('watch', ['build'], function() {
-  watch(SRC.source.styles, function() {
+  watch("source/**/*.scss", function() {
     gulp.start('styles');
   });
   watch(SRC.source.scripts, function() {

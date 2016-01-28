@@ -24,7 +24,8 @@ var landingPageWiz = angular.module('landingPageWiz', [
   'ngRoute',
   'ngAnimate',
   'angular.filter',
-  'ngOnload'
+  'ngOnload',
+  'angularGrid'
 ]);
 
 landingPageWiz.config(['$routeProvider', function($routeProvider) {
@@ -65,21 +66,24 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Function for page loading spinner
-landingPageWiz.run(function($rootScope, $timeout, $window) {
+landingPageWiz.run(function(fetchData, $rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeStart', function() {
-    $rootScope.loadingView = true;
+    if (typeof $rootScope.dCache === 'undefined'){
+      $rootScope.loadingView = true;
+    }
   });
   $rootScope.$on('$routeChangeSuccess', function() {
+    if ($rootScope.loadingView === true){
+      var pageLoad = document.getElementById('pageLoad');
+      pageLoad.style.opacity = '0';
+      $timeout(function () {
+        pageLoad.style.display = 'none';
+      }, 300);
+    }
     $rootScope.loadingView = false;
     $timeout(function () {
       $window.scrollTo(0,0);
     }, 400);
   });
   $rootScope.appName = 'Landing Page Wizard'
-});
-
-landingPageWiz.directive('ngSpinner', function() {
-  return {
-    template: '<div class=\"sk-fading-circle\">\r\n<div class=\"sk-circle1 sk-circle\"><\/div>\r\n<div class=\"sk-circle2 sk-circle\"><\/div>\r\n<div class=\"sk-circle3 sk-circle\"><\/div>\r\n<div class=\"sk-circle4 sk-circle\"><\/div>\r\n<div class=\"sk-circle5 sk-circle\"><\/div>\r\n<div class=\"sk-circle6 sk-circle\"><\/div>\r\n<div class=\"sk-circle7 sk-circle\"><\/div>\r\n<div class=\"sk-circle8 sk-circle\"><\/div>\r\n<div class=\"sk-circle9 sk-circle\"><\/div>\r\n<div class=\"sk-circle10 sk-circle\"><\/div>\r\n<div class=\"sk-circle11 sk-circle\"><\/div>\r\n<div class=\"sk-circle12 sk-circle\"><\/div>\r\n<\/div>'
-  };
 });

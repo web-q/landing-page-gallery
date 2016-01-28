@@ -7,49 +7,51 @@
         </div>
         <div id="navbar-search">
           <div class="search-wrapper">
-            <input type="search" ng-model="quicksearch.$" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
+            <input type="search" ng-model="main.quicksearch" ng-change="main.filterResults()" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
           </div>
         </div>
       </header>
       <section id="filters">
         <div>
           <div class="filter-dropdown">
-            <select ng-model="filters.topic">
+            <select ng-model="main.filters.topic" ng-change="main.filterResults()">
               <option value="">Topic</option>
               <option ng-repeat="t in main.topics | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
-            <select ng-model="filters.type">
+            <select ng-model="main.filters.type" ng-change="main.filterResults()">
               <option value="">Type</option>
               <option ng-repeat="t in main.types | unique track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
-            <select ng-model="filters.templateId">
+            <select ng-model="main.filters.templateId" ng-change="main.filterResults()">
               <option value="">Template</option>
-              <option ng-repeat="c in main.campaigns | unique:'templateId'" value="{{c.templateId}}">{{c.templateTitle}}</option>
+              <option ng-repeat="t in main.templates | unique:'id'" value="{{t.id}}">{{t.title}}</option>
             </select>
           </div>
         </div>
       </section>
     </div>
     <section id="thumbnail-gallery">
-        <div class="campaign-thumbnail filterpop" ng-repeat="c in main.campaigns | filter:{topic: filters.topic || undefined}:true | filter:{type: filters.type || undefined}:true | filter:{templateId: filters.templateId || undefined}:true | filter:quicksearch as results">
+      <ul class="dynamic-grid" angular-grid="main.campaigns" css-grid="false" id="campaign-listing">
+        <li class="campaign-thumbnail grid" ng-repeat="c in main.campaigns as results">
           <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
             <div class="thumbnail-wrapper">
               <div class="faux-browser">
-                <img src="../img/cir.svg" />
+                <img src="img/cir.svg" />
               </div>
               <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{c.id}}-d.png" />
             </div>
             <h3>{{c.title}}</h3>
             <h4>{{c.templateTitle}}</h4>
           </a>
-        </div>
-        <div id="no-results" class="filterpop" ng-if="results.length == 0">
+        </li>
+        <li id="no-results" class="grid" ng-if="results.length == 0">
           <span>No results found&hellip;</span>
-        </div>
+        </li>
+      </ul>
     </section>
   </div>
   <footer>
