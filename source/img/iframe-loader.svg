@@ -1,0 +1,55 @@
+<svg id="loader" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+.path {
+  stroke-dasharray: 210;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 2.8s ease-in-out infinite;
+  animation: dash 1.4s ease-in-out infinite, colors 2.8s ease-in-out infinite;
+}
+@-webkit-keyframes colors {
+  0% {stroke: #013C80;}
+  25% {stroke: #009edb;}
+  50% {stroke: #afafaf;}
+  75% {stroke: #009edb;}
+  100% {stroke: #013C80;}
+}
+@keyframes colors {
+  0% {stroke: #013C80;}
+  25% {stroke: #009edb;}
+  50% {stroke: #afafaf;}
+  75% {stroke: #009edb;}
+  100% {stroke: #013C80;}
+}
+@-webkit-keyframes dash {
+  0% {stroke-dashoffset: 210;}
+  50% {
+    stroke-dashoffset: 52.5;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 210;
+    -webkit-transform: rotate(700deg);
+    transform: rotate(700deg);
+  }
+}
+@keyframes dash {
+  0% {stroke-dashoffset: 210;}
+  50% {
+    stroke-dashoffset: 52.5;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 210;
+    -webkit-transform: rotate(700deg);
+    transform: rotate(700deg);
+  }
+}
+</style>
+</defs>
+   <circle class="path" fill="none" stroke-width="2" stroke-linecap="round" cx="25" cy="25" r="24"></circle>
+</svg>

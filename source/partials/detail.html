@@ -39,7 +39,9 @@
   </div>
   <div id="campaign-viewer">
     <div id="iframe-loader">
-      <div ng-spinner></div>
+      <object id="iframe-svg-loader" data="img/iframe-loader.svg" type="image/svg+xml">
+        Your browser doesn&rsquo;t support SVG
+      </object>
     </div>
     <iframe id="campaign-frame" class="fade-onload" ng-onload="detail.frameLoaded();" ng-src="{{detail.iframeURL}}"></iframe>
   </div>
