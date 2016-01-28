@@ -13,7 +13,7 @@
         <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
       </section>
       <section id="template-detail">
-        <p>{{detail.template.description}}</p>
+        <p>{{detail.renderHTML(detail.template.description)}}</p>
         <h4>Features</h4>
         <ul>
           <li ng-repeat="f in detail.template.features">{{f}}</li>

@@ -25,6 +25,11 @@ landingPageWiz.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'app
   this.campaign = campaign;
   this.otherCampaigns = otherCampaigns;
 
+  this.renderHTML = function(html) {
+    var decoded = angular.element('<textarea />').html(html).text();
+    return $sce.trustAsHtml(decoded);
+  };
+
   // Functionality for "Custom" style classes
   if(template.custom) {
     this.customFlag = "Custom";
