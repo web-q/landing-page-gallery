@@ -1,0 +1,318 @@
+/*--------------------------------*/
+/*    DETAIL PAGE
+/*--------------------------------*/
+#detail {
+  .wrapme {
+    min-height: 100%;
+    width: 100%;
+    margin: 0 auto -40px;
+    padding-bottom: 40px;
+  }
+  height: 100%;
+  ul {
+    padding: 0 0 0 35px;
+    margin-bottom: 10px
+  }
+  .sidebar {
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+    background-color: #FFF;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+  section {
+    padding: 15px;
+  }
+  header {
+    background-color: $secondary-color;
+    width: 100%;
+    height: 100px;
+    a {
+      text-decoration: none;
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      &::before {
+        content: '\e963';
+        font-family: "fontawesomer";
+        font-style: normal;
+        font-size: 30px;
+        color: #FFF;
+        speak: none;
+        display: inline;
+        vertical-align: middle;
+        line-height: normal;
+        padding: 0 2px 2px 5px;
+        position: absolute;
+        top: 30px;
+      }
+    }
+    img {
+      @include center-block();
+      padding-left: 8px;
+      max-width: 215px;
+      margin: 5px auto 0;
+    }
+    h1 {
+      font-size: 16px;
+      text-align: center;
+      color: #FFF;
+      margin: 0;
+    }
+  }
+  #template-head {
+    text-align: center;
+    img {
+      @include center-block();
+      @include img-responsive();
+      border: 1px solid $border-color;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0 0 5px 0;
+      color: $secondary-color;
+    }
+    h3 {
+      font-size: 16px;
+      margin: 0 0 20px 0;
+      color: $primary-color;
+    }
+  }
+  #template-detail {
+    h4 {
+      font-size: 16px;
+      color: $secondary-color;
+    }
+  }
+  #other-campaigns {
+    border-top: 1px solid $border-color;
+    background-color: $light-grey;
+    margin-top: 10px;
+    h3 {
+      font-size: 20px;
+      margin: 0 0 15px 0;
+      color: $primary-color;
+    }
+    ul {
+      list-style-type: none;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 0;
+        overflow: auto;
+        a {
+          text-decoration: none;
+          padding: 7px 2px;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+            &:hover, &:focus {
+              color: $link-hover;
+              text-decoration: underline;
+            }
+        }
+        img {
+          float: left;
+          width: 40px;
+          height: auto;
+          margin: 0 14px 0 0;
+          border: 1px solid $border-color;
+        }
+        span {
+          line-height: 40px;
+        }
+      }
+    }
+  }
+  #campaign-viewer {
+    display: none;
+  }
+  footer {
+    clear: both;
+    height: 40px;
+    width: 100%;
+    background-color: $dark-grey;
+    color: $mid-grey;
+    text-align: center;
+    padding-top: 12px;
+    .webq-logo {
+      max-width: 100px;
+      margin-top: -6.5px;
+      padding-left: 3px;
+      display: inline-block;
+    }
+  }
+}
+@media (min-width: 768px) {
+  #detail {
+    #template-head {
+      text-align: left;
+      float: left;
+      width: 35%;
+      margin-left: 7.5%;
+      img {
+        float: left;
+      }
+    }
+    #template-detail {
+      margin-top: 60px;
+      width: 50%;
+      float: left;
+      clear: right;
+    }
+    #other-campaigns {
+      margin-top: 0;
+      border: none;
+      width: 85%;
+      float: left;
+      clear: left;
+      margin-left: 7.5%;
+      background-color: #FFF;
+      h3 {
+        font-size: 18px;
+        color: $secondary-color;
+      }
+      ul {
+        background-color: $light-grey;
+        padding: 5px 20px 0 20px;
+        li {
+          display: inline-block;
+          width: 33%;
+          a {
+            padding: 20px 20px 0 20px;
+            display: block;
+          }
+          img {
+            float: none;
+            width: 100%;
+            margin: 0 0 10px 0;
+          }
+          span {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1068px) {
+  #detail {
+    .sidebar {
+      width: 300px;
+      position: absolute;
+      box-shadow: 0px 0px 20px black;
+      z-index: 1000;
+    }
+    #template-head {
+      background-color: #FFF;
+      float: none;
+      width: 100%;
+      margin: 0;
+      img {
+        float:none;
+      }
+    }
+    #template-detail {
+      float: none;
+      width: 100%;
+      margin: 0;
+      background-color: #FFF;
+    }
+    #other-campaigns {
+      margin-left: 0;
+      clear: none;
+      margin-top: 10px;
+      border-top: 1px solid $border-color;
+      float: none;
+      width: 100%;
+      background-color: $light-grey;
+      border-top: 1px solid $border-color;
+      h3 {
+        font-size: 20px;
+        color: $primary-color;
+      }
+      ul {
+        background-color: none;
+        padding: 0;
+        li {
+          display: block;
+          width: auto;
+          a {
+            padding: 7px 2px;
+            display: inline-block;
+          }
+          img {
+            float: left;
+            width: 40px;
+            margin: 0 14px 0 0;
+          }
+          span {
+            display: inline;
+            font-size: 14px;
+            text-align: left;
+          }
+        }
+      }
+    }
+    #campaign-viewer {
+      display: block;
+      margin: 0;
+      padding-left: 300px;
+      height: 100%;
+      width: 100%;
+      #campaign-frame {
+        height: 100%;
+        width: 100%;
+        border: none;
+        display: none;
+      }
+      #iframe-loader {
+        padding-top: 200px;
+        #iframe-svg-loader {
+          display: block;
+          margin: auto;
+          width: 50%;
+          max-width: 100px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+.build-time::before {
+  content: '\e94f';
+  font-family: "fontawesomer";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  margin-right: 10px;
+}
+.custom-true {
+  color: blue;
+  &::before{
+    content: '\e863';
+    font-family: "fontawesomer";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    margin-right: 10px;
+  }
+}
+.custom-false {
+  color: green;
+  &::before{
+    content: '\e8c6';
+    font-family: "fontawesomer";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    margin-right: 10px;
+  }
+}
