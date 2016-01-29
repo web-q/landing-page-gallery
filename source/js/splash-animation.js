@@ -1,8 +1,17 @@
-landingPageWiz.directive('splashAnimate',  function () {
+landingPageWiz.directive('splashAnimate',  ['$rootScope', function($rootScope) {
    return {
      restrict: 'A',
      link: function (scope, elem, attrs) {
        elem.on('load', function () {
+         $rootScope.splashFinished = false;
+         function animationComplete() {
+           $rootScope.$apply(function(){
+             $rootScope.splashFinished = true;
+           });
+           if(!$rootScope.dataFetched){
+             tl.restart();
+           }
+         }
          var svgdoc = this.contentDocument;
          var cir = svgdoc.getElementsByClassName("cir"),
            icon = svgdoc.getElementsByClassName("icon-wrap"),
@@ -14,7 +23,8 @@ landingPageWiz.directive('splashAnimate',  function () {
            tl = new TimelineMax({
              repeat: 0,
              yoyo: false,
-             repeatDelay: tAnim
+             repeatDelay: tAnim,
+             onComplete: animationComplete
            });
          tl.to(cir[0], tAnim, {
            rotation: "360",
@@ -124,4 +134,4 @@ landingPageWiz.directive('splashAnimate',  function () {
        });
      }
    };
- });
+ }]);
