@@ -1,0 +1,35 @@
+/*--------------------------------*/
+/*    TAG TOOL
+/*--------------------------------*/
+#tagtool {
+  margin: 10px auto;
+  max-width: 600px;
+  .webq-logo {
+    display: block;
+    margin: 5px auto;
+  }
+  .fgroup {
+    margin: 10px 5px;
+    label {
+      display: block;
+      color: $dark-grey;
+      font-size: 15px;
+      margin: 5px 0;
+    }
+    input[type="text"], select {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+    }
+    input[type="radio"] {
+
+    }
+  }
+  pre {
+    background-color: $dark-grey;
+    color: #FFF;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+  }
+}

@@ -38,6 +38,7 @@
     "styles": "gulp styles",
     "scripts": "gulp scripts",
     "html": "gulp html",
+    "img": "gulp img",
     "build": "gulp build",
     "build-dep": "gulp build-dep",
     "watch": "gulp watch",

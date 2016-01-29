@@ -1,0 +1,31 @@
+/*--------------------------------*/
+/*    VARIABLES & MIXINS
+/*--------------------------------*/
+$primary-color: #013C80;
+$secondary-color: #009edb;
+$link-hover: #0b3765;
+$dark-grey: #333;
+$mid-grey: #afafaf;
+$light-grey: #f5f5f5;
+$border-color: #d3d3d3;
+$font-stack: 'Lato', sans-serif;
+
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@mixin img-responsive() {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+@mixin anim-grad-bg() {
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  background-size: 400% 400%;
+  animation: gradientbganim 15s ease infinite;
+}
+@mixin anim-bg() {
+  background-color: $primary-color;
+  animation: bganim 8s linear infinite;
+}

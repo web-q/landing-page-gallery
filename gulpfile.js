@@ -22,15 +22,17 @@ var SRC = {
   source: {
     index: 'source/index.html',
     partials: 'source/partials/*.html',
-    styles: 'source/scss/**/*.scss',
-    scripts: 'source/js/**/*.js'
+    styles: 'source/scss/app.scss',
+    scripts: 'source/js/**/*.js',
+    img: 'source/img/**/*'
   },
   pub: {
     root: 'app',
     index: 'app/',
     partials: 'app/partials',
     styles: 'app/css',
-    scripts: 'app/js'
+    scripts: 'app/js',
+    img: 'app/img'
   },
   dep: {
     jslib: [
@@ -38,7 +40,9 @@ var SRC = {
       'bower_components/angular-route/angular-route.min.js',
       'bower_components/angular-filter/dist/angular-filter.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/ng-onload/release/ng-onload.min.js'
+      'bower_components/ng-onload/release/ng-onload.min.js',
+      'bower_components/angulargrid/angulargrid.min.js',
+      'bower_components/gsap/src/minified/TweenMax.min.js'
     ],
     modernizr: 'bower_components/html5-boilerplate/dist/js/vendor/modernizr-*.min.js',
     boilerplate: 'bower_components/html5-boilerplate/dist/css/*.css',
@@ -161,6 +165,12 @@ gulp.task('html', function () {
   ]);
 });
 
+/*--- IMG Setup ---*/
+gulp.task('img', function () {
+  return gulp.src(SRC.source.img)
+      .pipe(gulp.dest(SRC.pub.img));
+});
+
 /*--- Build Dependencies ---*/
 gulp.task('build-dep', function () {
   return Promise.all([
@@ -184,11 +194,11 @@ gulp.task('clean', function(cb) {
 });
 
 /*--- Build All ---*/
-gulp.task('build', ['html','build-dep','scripts','styles']);
+gulp.task('build', ['html','build-dep','img','scripts','styles']);
 
 /*--- Watcher: CSS, JSS, HTML, etc... ---*/
 gulp.task('watch', ['build'], function() {
-  watch(SRC.source.styles, function() {
+  watch("source/**/*.scss", function() {
     gulp.start('styles');
   });
   watch(SRC.source.scripts, function() {
@@ -217,10 +227,8 @@ gulp.task('serve',['watch'], function() {
 
 /*--- Deploy to GH-Pages ---*/
 gulp.task('gh-pages',['build'], function() {
-  setTimeout(function() {
     return gulp.src('app/**/*')
       .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
-  }, 3000);
 });
 
 /*--- Default Gulp ---*/

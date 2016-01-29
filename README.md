@@ -7,6 +7,7 @@ SASS and JS are compiled and minified on save using Gulp. A live version can be 
 This application requires A LOT of screenshots, so we have also written a Gulp task to handle grabbing all of those as well: `npm run screenshots`. Be sure to have ImageMagick installed before running this.
 
 ##Todo
+###V1 Launch
 - [ ] move shortCode hashing into velocity/backend
 - [ ] move templateTitle pushing into velocity/backend
 - [x] fix ID sourcing (currently pulling hostID)
@@ -15,12 +16,18 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] build out see otherCampaigns
 - [x] screenshots
 - [x] snippet/comment gen tool
-- [ ] pagination/endless scroll
-- [ ] clean image loading (lazy loading?)
 - [x] change template details to full-height on tablet (redesigned tablet view)
 - [x] vertical align (Other Campaigns) thumbnails and text
-- [ ] write a new screenshot scraper that can handle YT embeds
 - [x] change loading splash to light blue bg and KO logo
+- [ ] pagination/endless scroll
+- [ ] clean image loading (lazy loading?)
+- [ ] squash bugs in angular grid
+- [ ] refine ui/interaction on detail page
+- [ ] add option to skip introduction
+
+
+###V2
+- [ ] write a new screenshot scraper that can handle YT embeds
 - [ ] make quick search act like a fuzzy finder?
 
 ###Requirements
