@@ -22,10 +22,15 @@
       <![endif]-->
 <div id="pageLoad" ng-if="loadingView">
   <div>
-    <img class="loading-logo" width="200px" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
+    <img class="loading-logo" width="200" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
     <object splash-animate id="svgSplash" data="img/splash.svg" type="image/svg+xml">
       Your browser doesn&rsquo;t support SVG
     </object>
+    <div ng-cloak ng-if="showLoadText">
+      <span ng-if="!dataFetched">LOADING...</span>
+      <span ng-if="dataFetched && !splashFinished">CLICK ANYWHERE TO SKIP</span>
+    </div>
+    <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
   </div>
 </div>
   <script src="js/lib.min.js"></script>

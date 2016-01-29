@@ -14,7 +14,6 @@ landingPageWiz.factory('fetchData', function($q, $http, $rootScope, $timeout) {
         function success(response) {
           $rootScope.dataFetched = true; console.log('Data Fetched');
           cache = response.data;
-          $rootScope.dCache = cache;
           var c = cache.campaigns;
           for (var i=0; i < c.length; i++) {
             c[i].shortCode = MD5(c[i].id).substring(0, 6)
@@ -22,6 +21,12 @@ landingPageWiz.factory('fetchData', function($q, $http, $rootScope, $timeout) {
           $rootScope.$watch('splashFinished', function(){
             if($rootScope.splashFinished){
               console.log('Animation Complete');
+              return d.resolve(cache);
+            }
+          });
+          $rootScope.$watch('skipIntro', function(){
+            if($rootScope.skipIntro){
+              console.log('Skipping Introduction');
               return d.resolve(cache);
             }
           });
