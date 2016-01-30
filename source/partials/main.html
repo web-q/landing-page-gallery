@@ -35,8 +35,8 @@
       </section>
     </div>
     <section id="thumbnail-gallery">
-      <ul class="dynamic-grid" angular-grid="main.campaigns" css-grid="false" id="campaign-listing">
-        <li class="campaign-thumbnail grid" ng-repeat="c in main.campaigns as results">
+      <ul id="campaign-listing">
+        <li class="campaign-thumbnail" ng-repeat="c in main.campaigns as results">
           <a ng-click="main.slide('slidepage-l')" href="#/{{c.shortCode}}">
             <div class="thumbnail-wrapper">
               <div class="faux-browser">
@@ -48,7 +48,7 @@
             <h4>{{c.templateTitle}}</h4>
           </a>
         </li>
-        <li id="no-results" class="grid" ng-if="results.length == 0">
+        <li id="no-results" ng-if="results.length == 0">
           <span>No results found&hellip;</span>
         </li>
       </ul>
