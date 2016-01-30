@@ -1,4 +1,4 @@
-landingPageWiz.directive('splashAnimate', ['$rootScope', function($rootScope) {
+landingPageGallery.directive('splashAnimate', ['$rootScope', function($rootScope) {
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {

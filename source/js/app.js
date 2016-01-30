@@ -20,14 +20,14 @@ var shuffleArray = function(array) {
 }
 
 // Declare app level module which depends on views, and components
-var landingPageWiz = angular.module('landingPageWiz', [
+var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
   'ngAnimate',
   'angular.filter',
   'ngOnload'
 ]);
 
-landingPageWiz.config(['$routeProvider', function($routeProvider) {
+landingPageGallery.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       templateUrl: 'partials/main.html',
@@ -65,7 +65,7 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Function for page loading spinner
-landingPageWiz.run(function($rootScope, $timeout, $window) {
+landingPageGallery.run(function($rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeSuccess', function() {
 
     // If showing loading screen, close it
@@ -83,5 +83,5 @@ landingPageWiz.run(function($rootScope, $timeout, $window) {
       $window.scrollTo(0,0);
     }, 400);
   });
-  $rootScope.appName = 'Landing Page Wizard'
+  $rootScope.appName = 'Landing Page Gallery'
 });

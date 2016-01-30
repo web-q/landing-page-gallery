@@ -1,9 +1,9 @@
 {
-  "name": "landing-page-wizard",
+  "name": "landing-page-gallery",
   "private": true,
   "version": "0.0.0",
   "description": "A gallery application built with angular.js",
-  "repository": "https://github.com/web-q/landing-page-wizard",
+  "repository": "https://github.com/web-q/landing-page-gallery",
   "license": "GPL",
   "devDependencies": {
     "bower": "^1.3.1",
