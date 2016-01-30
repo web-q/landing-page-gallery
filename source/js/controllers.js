@@ -1,4 +1,4 @@
-landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -33,7 +33,7 @@ landingPageWiz.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$s
   };
 }]); //---------END MAINCTRL---------//
 
-landingPageWiz.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
@@ -93,13 +93,13 @@ landingPageWiz.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'app
   };
 }]); //---------END DETAILCTRL---------//
 
-landingPageWiz.controller('debugCtrl', ['appdata', function(appdata) {
+landingPageGallery.controller('debugCtrl', ['appdata', function(appdata) {
   this.templates = appdata.templates;
   this.campaigns = appdata.campaigns;
   this.printdata = appdata;
 }]); //---------END DEBUGCTRL---------//
 
-landingPageWiz.controller('tagtoolCtrl', ['appdata', function(appdata) {
+landingPageGallery.controller('tagtoolCtrl', ['appdata', function(appdata) {
   this.templates = appdata.templates;
   this.campaigns = appdata.campaigns;
 }]); //---------END TAGTOOLCTRL---------//

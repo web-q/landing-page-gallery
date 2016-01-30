@@ -228,7 +228,7 @@ gulp.task('serve',['watch'], function() {
 /*--- Deploy to GH-Pages ---*/
 gulp.task('gh-pages',['build'], function() {
     return gulp.src('app/**/*')
-      .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-wizard.git'}));
+      .pipe(ghPages({remoteUrl:'https://github.com/web-q/landing-page-gallery.git'}));
 });
 
 /*--- Default Gulp ---*/

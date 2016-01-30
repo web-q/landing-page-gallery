@@ -10,7 +10,7 @@
       <section id="template-head">
         <h2>{{detail.template.title}}</h2>
         <h3>{{detail.campaign.title}}</h3>
-        <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{detail.campaign.id}}-d-lg.png" />
+        <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{detail.campaign.id}}-d-lg.png" />
       </section>
       <section id="template-detail">
         <p>{{detail.renderHTML(detail.template.description)}}</p>
@@ -26,7 +26,7 @@
         <ul>
           <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
             <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
-              <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-wizard/screenshots/{{other.id}}-d.png" />
+              <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{other.id}}-d.png" />
               <span>
                 {{other.title}}
               </span>
