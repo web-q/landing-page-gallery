@@ -92,4 +92,25 @@ input {
       margin: auto;
       margin-top: 15px;
     }
+  span {
+    display: block;
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    font-family: $font-stack;
+  }
+}
+#skip-it {
+  background: none;
+  position: fixed;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }

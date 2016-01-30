@@ -66,13 +66,10 @@ landingPageWiz.config(['$routeProvider', function($routeProvider) {
 }]);
 
 // Function for page loading spinner
-landingPageWiz.run(function(fetchData, $rootScope, $timeout, $window) {
-  $rootScope.$on('$routeChangeStart', function() {
-    if (typeof $rootScope.dCache === 'undefined'){
-      $rootScope.loadingView = true;
-    }
-  });
+landingPageWiz.run(function($rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeSuccess', function() {
+
+    // If showing loading screen, close it
     if ($rootScope.loadingView === true){
       var pageLoad = document.getElementById('pageLoad');
       pageLoad.style.opacity = '0';
@@ -81,6 +78,8 @@ landingPageWiz.run(function(fetchData, $rootScope, $timeout, $window) {
       }, 300);
     }
     $rootScope.loadingView = false;
+
+    // Scroll to top when going to different page
     $timeout(function () {
       $window.scrollTo(0,0);
     }, 400);
