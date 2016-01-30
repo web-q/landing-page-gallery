@@ -8,8 +8,6 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 
 ##Todo
 ###V1 Launch
-- [ ] move shortCode hashing into velocity/backend
-- [ ] move templateTitle pushing into velocity/backend
 - [x] fix ID sourcing (currently pulling hostID)
 - [x] change template-id to templateId
 - [x] clean up transitions
@@ -19,22 +17,28 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] change template details to full-height on tablet (redesigned tablet view)
 - [x] vertical align (Other Campaigns) thumbnails and text
 - [x] change loading splash to light blue bg and KO logo
-- [ ] pagination/endless scroll
-- [ ] clean image loading (lazy loading?)
-- [ ] squash bugs in angular grid
-- [ ] refine ui/interaction on detail page
-- [ ] add option to skip introduction
+- [x] refine ui/interaction on detail page
+- [x] add option to skip introduction
+- [ ] content gathering? (may move to post-launch)
+- [ ] bug: white space on mobile
 
+###V1.5 Post-Launch
+- [ ] clean image loading (lazy loading)
+- [ ] pagination/endless scroll
+####Tentative
+- [ ] move shortCode hashing into velocity/backend
+- [ ] move templateTitle pushing into velocity/backend
 
 ###V2
+- [ ] grid filtering --masonry/isotope style animation
 - [ ] write a new screenshot scraper that can handle YT embeds
 - [ ] make quick search act like a fuzzy finder?
 
-###Requirements
+##Requirements
 * Node/npm
 * ImageMagick is required for `npm run screenshots`, but not necessary to run the site/application.
 
-###Getting Set Up
+##Getting Set Up
 
 If you'd like to check out the build at any time, simply fork/clone our repository.
 
