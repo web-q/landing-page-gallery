@@ -1,4 +1,4 @@
-landingPageWiz.factory('fetchData', function($q, $http, $rootScope, $timeout) {
+landingPageWiz.factory('fetchData', function($q, $http, $rootScope) {
   var cache;
   function getCampaigns() {
     var d = $q.defer();
