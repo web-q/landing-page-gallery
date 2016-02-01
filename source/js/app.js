@@ -24,7 +24,8 @@ var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
   'ngAnimate',
   'angular.filter',
-  'ngOnload'
+  'ngOnload',
+  'afkl.lazyImage'
 ]);
 
 landingPageGallery.config(['$routeProvider', function($routeProvider) {
@@ -84,4 +85,23 @@ landingPageGallery.run(function($rootScope, $timeout, $window) {
     }, 400);
   });
   $rootScope.appName = 'Landing Page Gallery'
+});
+
+landingPageGallery.directive('imgLoadSpin', function() {
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function(scope, element, attrs) {
+      return attrs.$observe("afklLazyImageLoaded", function(value) {
+        if (value === 'done') {
+          element[0].getElementsByClassName('img-svg-loader')[0].style.display = 'none';
+          element[0].getElementsByClassName('afkl-lazy-image')[0].style.display = 'block';
+        } else {
+          element[0].getElementsByClassName('img-svg-loader')[0].style.display = 'inline';
+          element[0].getElementsByClassName('afkl-lazy-image')[0].style.display = 'none';
+        }
+      });
+    },
+    template: '<object class=\"img-svg-loader\" data=\"img\/iframe-loader.svg\" type=\"image\/svg+xml\">\r\n Loading&hellip;\r\n <\/object>'
+  };
 });
