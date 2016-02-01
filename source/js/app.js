@@ -68,7 +68,6 @@ landingPageGallery.config(['$routeProvider', function($routeProvider) {
 // Function for page loading spinner
 landingPageGallery.run(function($rootScope, $timeout, $window) {
   $rootScope.$on('$routeChangeSuccess', function() {
-
     // If showing loading screen, close it
     if ($rootScope.loadingView === true){
       var pageLoad = document.getElementById('pageLoad');
@@ -78,11 +77,13 @@ landingPageGallery.run(function($rootScope, $timeout, $window) {
       }, 300);
     }
     $rootScope.loadingView = false;
-
     // Scroll to top when going to different page
     $timeout(function () {
       $window.scrollTo(0,0);
     }, 400);
+    $timeout(function () {
+      $rootScope.$emit('lazyImg:refresh');
+    }, 900);
   });
   $rootScope.appName = 'Landing Page Gallery'
 });

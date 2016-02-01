@@ -1,4 +1,4 @@
-landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageGallery.controller('mainCtrl', ['$timeout', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($timeout, $routeParams, appdata, $filter, $scope, $rootScope) {
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -25,6 +25,9 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
   this.filterResults = function() {
     var temp =  $filter('filter')(campaigns, {$: this.quicksearch});
     this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
+    $timeout(function () {
+      $rootScope.$emit('lazyImg:refresh');
+    }, 200);
   };
 
   // Config for sliding page left/right

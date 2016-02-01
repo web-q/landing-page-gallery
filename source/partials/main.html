@@ -42,7 +42,9 @@
               <div class="faux-browser">
                 <img src="img/cir.svg" />
               </div>
-              <img lazy-img="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{c.id}}-d.png" />
+              <div class="lazy-wrapper lazy-img-ratio-1-1">
+                <img src="img/iframe-loader.svg" class="lazy-image" lazy-img="//web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{c.id}}-d.png" />
+              </div>
             </div>
             <h3>{{c.title}}</h3>
             <h4>{{c.templateTitle}}</h4>
