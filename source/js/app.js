@@ -24,7 +24,8 @@ var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
   'ngAnimate',
   'angular.filter',
-  'ngOnload'
+  'ngOnload',
+  'angularLazyImg'
 ]);
 
 landingPageGallery.config(['$routeProvider', function($routeProvider) {

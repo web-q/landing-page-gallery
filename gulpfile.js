@@ -41,6 +41,7 @@ var SRC = {
       'bower_components/angular-filter/dist/angular-filter.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
       'bower_components/ng-onload/release/ng-onload.min.js',
+      'bower_components/angular-lazy-img/release/angular-lazy-img.min.js',
       // 'bower_components/angulargrid/angulargrid.min.js',
       'bower_components/gsap/src/minified/TweenMax.min.js'
     ],
