@@ -11,10 +11,8 @@
         <h2>{{detail.template.title}}</h2>
         <h3>{{detail.campaign.title}}</h3>
         <div class="lazy-wrapper lazy-img-ratio-7-8">
-          <img class="lazy-image" lazy-img="//web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{detail.campaign.id}}-d-lg.png" />
-          <!-- <object id="iframe-svg-loader" data="img/iframe-loader.svg" type="image/svg+xml">
-            Your browser doesn&rsquo;t support SVG
-          </object> -->
+          <img class="lazy-image" lazy-img="//web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{detail.campaign.id}}-d-lg.png" img-load-spin />
+          <object class="img-svg-loader" data="img/iframe-loader.svg" type="image/svg+xml">Loading&hellip;</object>
         </div>
       </section>
       <section id="template-detail">
@@ -31,7 +29,7 @@
         <ul>
           <li ng-repeat="other in detail.otherCampaigns | limitTo:3">
             <a ng-click="detail.slide('slidepage-l');" href="#/{{other.shortCode}}">
-              <img src="http://web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{other.id}}-d.png" />
+              <img src="//web-q-hospital.prod.ehc.com/global/webq/landing-page-gallery/screenshots/{{other.id}}-d.png" />
               <span>
                 {{other.title}}
               </span>

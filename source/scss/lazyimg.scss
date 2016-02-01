@@ -5,6 +5,11 @@
   overflow: hidden;
   display: block;
   text-align: center;
+  .img-svg-loader {
+    width: 30%;
+    height: auto;
+    margin-top: 20%;
+  }
 }
 .lazy-wrapper .lazy-image {
   width: 100%;

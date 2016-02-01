@@ -87,3 +87,21 @@ landingPageGallery.run(function($rootScope, $timeout, $window) {
   });
   $rootScope.appName = 'Landing Page Gallery'
 });
+
+landingPageGallery.directive('imgLoadSpin', function() {
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function(scope, element, attrs) {
+      return attrs.$observe("src", function(value) {
+        if (value === 'null') {
+          element[0].parentNode.getElementsByClassName('img-svg-loader')[0].style.display = 'inline';
+          element[0].style.display = 'none';
+        } else {
+          element[0].parentNode.getElementsByClassName('img-svg-loader')[0].style.display = 'none';
+          element[0].style.display = 'block';
+        }
+      });
+    }
+  };
+});
