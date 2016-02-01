@@ -2,13 +2,13 @@
 /*    DETAIL PAGE
 /*--------------------------------*/
 #detail {
+  min-height: 100%;
   .wrapme {
     min-height: 100%;
     width: 100%;
     margin: 0 auto -40px;
     padding-bottom: 40px;
   }
-  height: 100%;
   ul {
     padding: 0 0 0 35px;
     margin-bottom: 10px
@@ -205,6 +205,7 @@
 }
 @media (min-width: 1068px) {
   #detail {
+    height: 100%;
     .sidebar {
       width: 300px;
       position: absolute;
