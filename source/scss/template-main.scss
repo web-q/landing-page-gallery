@@ -34,6 +34,11 @@
       }
     }
   }
+  #banner > div > img {
+      width: 100%;
+      padding: 5%;
+      background-color: #fff;
+  }
   #filters {
     .filter-dropdown {
       padding: 2px 0;
@@ -151,6 +156,11 @@
         margin-top: -7px;
         display: inline-block;
       }
+    }
+    #banner > div > img {
+        width: 100%;
+        padding:5% 20%;
+        background-color: #fff;
     }
     #filters {
       float: left;

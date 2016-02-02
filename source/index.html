@@ -21,9 +21,9 @@
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
 <div id="pageLoad" ng-if="loadingView">
-  <div>
+  <div class="load-wrap">
     <img class="loading-logo" width="200" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
-    <object splash-animate id="svgSplash" data="img/splash.svg" type="image/svg+xml">
+    <object splash-animate id="svg-splash" data="img/splash.svg" type="image/svg+xml">
       Your browser doesn&rsquo;t support SVG
     </object>
     <div ng-cloak ng-if="showLoadText">
