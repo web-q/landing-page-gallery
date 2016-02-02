@@ -103,9 +103,9 @@ input {
 }
 .load-wrap {
   width: 100vw;
-  height: 170vw; /* height:width ratio = 2/1 = 2.00  */
+  height: ($splash-aspect-h/$splash-aspect-w)*100vw; /* height:width ratio */
   max-height: 100vh;
-  max-width: 1/1.7*100vh; /* 1/2 = 0.500 */
+  max-width: ($splash-aspect-w/$splash-aspect-h)*100vh; /* height:width ratio */
   margin: auto;
   position: absolute;
   top:0;bottom:0; /* vertical center */
