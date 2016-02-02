@@ -20,9 +20,9 @@ This application requires A LOT of screenshots, so we have also written a Gulp t
 - [x] refine ui/interaction on detail page
 - [x] add option to skip introduction
 - [x] bug: white space on mobile
-
-###V1.5 Post-Launch
 - [ ] content gathering
+
+###V1.1 Post-Launch
 - [ ] clean image loading (lazy loading)
 - [ ] pagination/endless scroll
 ####Tentative

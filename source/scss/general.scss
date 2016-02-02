@@ -45,9 +45,6 @@ a {
 input {
  outline:none;
 }
-.loading-logo {
-  @include center-block();
-}
 .heart-icon {
   color: red;
   &::before {
@@ -82,25 +79,40 @@ input {
     height: 100%;
     @include anim-bg();
     transition: opacity 0.3s ease;
+    overflow: hidden;
     .loading-logo {
-      margin-top: 30px;
-    }
-    #svgSplash {
       display: block;
       width: 50%;
-      max-width: 300px;
-      margin: auto;
-      margin-top: 15px;
+      @include center-block();
+    }
+    #svg-splash {
+      display: block;
+      width: 95%;
+      @include center-block();
     }
   span {
     display: block;
     margin: auto;
-    padding-top: 10px;
+    padding-top: 3px;
     text-align: center;
     color: #FFF;
-    font-size: 14px;
+    font-size: 11px;
     font-family: $font-stack;
+    display: block;
+    width: 100%;
   }
+}
+.load-wrap {
+  width: 100vw;
+  height: ($splash-aspect-h/$splash-aspect-w)*100vw; /* height:width ratio */
+  max-height: 100vh;
+  max-width: ($splash-aspect-w/$splash-aspect-h)*100vh; /* height:width ratio */
+  margin: 0 auto;
+  position: absolute;
+  top:0;bottom:0; /* vertical center */
+  left:0;right:0; /* horizontal center */
+  overflow: hidden;
+  padding: 15px;
 }
 #skip-it {
   background: none;
