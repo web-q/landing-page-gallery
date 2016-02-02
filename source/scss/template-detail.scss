@@ -2,7 +2,7 @@
 /*    DETAIL PAGE
 /*--------------------------------*/
 #detail {
-  min-height: 100%;
+  height: 100%;
   .wrapme {
     min-height: 100%;
     width: 100%;
@@ -24,6 +24,8 @@
     box-shadow: none;
     overflow-y: auto;
     position: absolute;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
   }
   section {
     padding: 15px;
