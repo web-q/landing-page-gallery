@@ -20,8 +20,10 @@
         </ul>
         <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
         <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
-        <button type="button" class="btn btn-select"><a href="#">Select This Template</a></button>
-        <button type="button" class="btn btn-view"><a href="#">View Live Campaign</a></button>
+        <div class="action-section">
+          <a class="btn btn-view" target="_blank" href="{{detail.campaign.url}}">View Live Campaign</a>
+          <a class="btn btn-select" target="_blank" href="#">Select This Template</a>
+        </div>
       </section>
       <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
         <h3>Other Campaigns Using {{detail.template.title}}</h3>

@@ -67,66 +67,6 @@
       margin: 0;
     }
   }
-  .btn {
-      background-color: #009edb;
-      border-color: #009edb;
-      color: #ffffff;
-      padding: 6px 12px;
-      margin-top: 10px;
-      margin-bottom: 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.42857143;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      display: block;
-      width: 100%;
-  }
-
-  .btn a {
-      color: #fff;
-  }
-
-  .btn:hover {
-      background-color: #013C80;
-      border-color: #013C80;
-  }
-
-  .btn-select {
-    margin-top: 20px;
-  }
-
-  .btn-select::before {
-      content: '\e8e7';
-      font-family: fontawesomer;
-      font-style: normal;
-      font-weight: 400;
-      speak: none;
-      margin-right: 10px;
-  }
-
-  .btn-view {
-    display: block;
-  }
-
-  .btn-view::before {
-      content: '\e905';
-      font-family: fontawesomer;
-      font-style: normal;
-      font-weight: 400;
-      speak: none;
-      margin-right: 10px;
-  }
-
   #template-head {
     text-align: center;
     img {
@@ -149,6 +89,10 @@
     h4 {
       font-size: 16px;
       color: $secondary-color;
+    }
+    .btn {
+      display: block;
+      width: 100%;
     }
   }
   #other-campaigns {
@@ -227,6 +171,15 @@
       width: 50%;
       float: left;
       clear: right;
+      .btn{
+        display: inline-block;
+        width: 48%;
+        float: left;
+        position: relative;
+      }
+      .btn-select {
+        left: 4%;
+      }
     }
     #other-campaigns {
       margin-top: 0;
@@ -264,9 +217,6 @@
         }
       }
     }
-    .btn{
-      width: auto;
-    }
   }
 }
 @media (min-width: 1068px) {
@@ -291,6 +241,18 @@
       width: 100%;
       margin: 0;
       background-color: #FFF;
+      .btn{
+        display: block;
+        width: 100%;
+        float: none;
+      }
+      .btn-select {
+        left: 0;
+        position: static;
+      }
+      .btn-view {
+        display: none;
+      }
     }
     #other-campaigns {
       margin-left: 0;
@@ -350,41 +312,54 @@
         }
       }
     }
-    .btn-view {
-      display: none;
-    }
-    .btn{
-      width: 100%;
-    }
   }
 }
 .build-time::before {
   content: '\e94f';
-  font-family: "fontawesomer";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  margin-right: 10px;
+  @include icon-set();
 }
 .custom-true {
   color: blue;
   &::before{
     content: '\e863';
-    font-family: "fontawesomer";
-    font-style: normal;
-    font-weight: normal;
-    speak: none;
-    margin-right: 10px;
+    @include icon-set();
   }
 }
 .custom-false {
   color: green;
   &::before{
     content: '\e8c6';
-    font-family: "fontawesomer";
-    font-style: normal;
-    font-weight: normal;
-    speak: none;
-    margin-right: 10px;
+    @include icon-set();
   }
+}
+.btn, .btn:link, .btn:visited, .btn:active {
+  background-color: transparent;
+  color: $secondary-color;
+  padding: 6px 12px;
+  margin: 15px 2px 0 -2px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  background-image: none;
+  border: 1px solid $secondary-color;
+  border-radius: 0;
+  box-shadow:4px 4px 0px 0px $secondary-color;
+  &:hover {
+    box-shadow:4px 4px 0px 0px $primary-color;
+    cursor: pointer;
+    color: #fff;
+    background-color: $secondary-color;
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-select::before {
+  content: '\e8e7';
+  @include icon-set();
+}
+.btn-view::before {
+    content: '\e905';
+    @include icon-set();
 }
