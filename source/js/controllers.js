@@ -27,6 +27,14 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
     this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
   };
 
+  this.clearSearch = function() {
+    this.campaigns = campaigns;
+    this.filters.topic = '';
+    this.filters.type = '';
+    this.filters.templateId = '';
+    this.quicksearch = '';
+  }
+
   // Config for sliding page left/right
   this.slide = function(transition) {
     $rootScope.pageTransition = transition;
