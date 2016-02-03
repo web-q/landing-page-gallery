@@ -90,6 +90,10 @@
       font-size: 16px;
       color: $secondary-color;
     }
+    .btn {
+      display: block;
+      width: 100%;
+    }
   }
   #other-campaigns {
     border-top: 1px solid $border-color;
@@ -167,6 +171,15 @@
       width: 50%;
       float: left;
       clear: right;
+      .btn{
+        display: inline-block;
+        width: 48%;
+        float: left;
+        position: relative;
+      }
+      .btn-select {
+        left: 4%;
+      }
     }
     #other-campaigns {
       margin-top: 0;
@@ -228,6 +241,13 @@
       width: 100%;
       margin: 0;
       background-color: #FFF;
+      .btn{
+        display: block;
+        width: 100%;
+        float: none;
+        left: 0;
+        position: relative;
+      }
     }
     #other-campaigns {
       margin-left: 0;
@@ -291,31 +311,19 @@
 }
 .build-time::before {
   content: '\e94f';
-  font-family: "fontawesomer";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  margin-right: 10px;
+  @include icon-set();
 }
 .custom-true {
   color: blue;
   &::before{
     content: '\e863';
-    font-family: "fontawesomer";
-    font-style: normal;
-    font-weight: normal;
-    speak: none;
-    margin-right: 10px;
+    @include icon-set();
   }
 }
 .custom-false {
   color: green;
   &::before{
     content: '\e8c6';
-    font-family: "fontawesomer";
-    font-style: normal;
-    font-weight: normal;
-    speak: none;
-    margin-right: 10px;
+    @include icon-set();
   }
 }
