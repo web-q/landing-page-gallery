@@ -123,6 +123,12 @@ input {
   top: 0;
   left: 0;
 }
+.loading-text {
+  padding-top: 3px;
+  span {
+    text-transform: uppercase;
+  }
+}
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
