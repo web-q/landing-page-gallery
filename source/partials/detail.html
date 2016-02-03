@@ -21,8 +21,8 @@
         <h4 class="build-time">Build Time: {{detail.template.buildTime}}</h4>
         <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
         <div class="action-section">
-          <a class="btn btn-view" target="_blank" href="{{detail.campaign.url}}">View Live Campaign</a>
-          <a class="btn btn-select" target="_blank" href="#">Select This Template</a>
+          <a class="btn btn-view" target="_blank" href="{{detail.campaign.url}}"><span>View Live Campaign</span></a>
+          <a class="btn btn-select" target="_blank" href="#"><span>Select This Template</span></a>
         </div>
       </section>
       <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">

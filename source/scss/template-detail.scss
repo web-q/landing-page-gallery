@@ -245,13 +245,8 @@
         display: block;
         width: 100%;
         float: none;
-      }
-      .btn-select {
         left: 0;
-        position: static;
-      }
-      .btn-view {
-        display: none;
+        position: relative;
       }
     }
     #other-campaigns {
@@ -332,34 +327,71 @@
     @include icon-set();
   }
 }
-.btn, .btn:link, .btn:visited, .btn:active {
-  background-color: transparent;
-  color: $secondary-color;
-  padding: 6px 12px;
-  margin: 15px 2px 0 -2px;
-  font-size: 14px;
-  font-weight: 400;
+$btn-time: 0.4s;
+.btn {
+  margin: 13px 0 0 0;
+  font-size: 15px;
+  font-weight: light;
   text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  background-image: none;
-  border: 1px solid $secondary-color;
-  border-radius: 0;
-  box-shadow:4px 4px 0px 0px $secondary-color;
+	display: block;
+	background: none;
+	color: $secondary-color;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+  width: 100%;
+	overflow: hidden;
+	padding: 0;
+	transition: border-color $btn-time, background-color $btn-time;
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  border: 1px solid;
+  &:link, &:visited, &:active {
+    color: $secondary-color;
+  }
+  &:focus {
+    outline: none;
+  }
+  &::after {
+    content: '';
+    @include icon-set();
+    font-weight: light;
+  	position: absolute;
+    font-size: 18px;
+  	width: 100%;
+  	height: 100%;
+  	top: 0;
+  	left: 0;
+  	opacity: 0;
+  	color: #fff;
+  	transform: translate3d(0, 25%, 0);
+  }
+  &::after, > span {
+    padding: 6px 0;
+  	transition: transform $btn-time, opacity $btn-time;
+  	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  > span {
+    display: block;
+    vertical-align: middle;
+  }
   &:hover {
-    box-shadow:4px 4px 0px 0px $primary-color;
-    cursor: pointer;
-    color: #fff;
-    background-color: $secondary-color;
-    transition: all .3s ease-in-out;
+    border-color: $primary-color;
+    background-color: $primary-color;
+    &::after {
+      opacity: 1;
+    	transform: translate3d(0, 0, 0);
+    }
+    > span {
+      opacity: 0;
+      transform: translate3d(0, -25%, 0);
+    }
   }
 }
-.btn-select::before {
+.btn-select::after {
   content: '\e8e7';
-  @include icon-set();
 }
-.btn-view::before {
-    content: '\e905';
-    @include icon-set();
+.btn-view::after {
+  content: '\e905';
 }
