@@ -57,6 +57,12 @@
       text-align: center;
       width: 100%;
       position: relative;
+      padding-bottom: 20px;
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+      }
     }
     #campaign-listing {
       list-style: none;
