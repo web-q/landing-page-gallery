@@ -310,20 +310,20 @@
   }
 }
 .build-time::before {
-  content: '\e94f';
+  content: '\e902';
   @include icon-set();
 }
 .custom-true {
   color: blue;
   &::before{
-    content: '\e863';
+    content: '\e900';
     @include icon-set();
   }
 }
 .custom-false {
   color: green;
   &::before{
-    content: '\e8c6';
+    content: '\e904';
     @include icon-set();
   }
 }
