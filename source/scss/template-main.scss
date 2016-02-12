@@ -176,7 +176,8 @@
       clear: both;
       .campaign-thumbnail {
         width: 33.3333%;
-        float: left;
+        display: inline-block;
+        vertical-align: top;
       }
     }
   }
