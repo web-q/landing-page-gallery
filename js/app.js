@@ -91,6 +91,7 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
   var campaigns = appdata.campaigns;
   var topics = [];
   var types = [];
+  var templatesCurrent = [];
 
   // Loop through campaigns to add template title
   // from "templates" data (based on templateId)
@@ -101,13 +102,14 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
     campaigns[i].templateTitle = template.title;
     topics = topics.concat(campaigns[i].topic);
     types = types.concat(campaigns[i].type);
+    templatesCurrent = templatesCurrent.concat(template);
   }
 
   // Pass campaigns data to controllerAs for use on the front
   this.campaigns = campaigns;
   this.topics = topics;
   this.types = types;
-  this.templates = templates;
+  this.templates = templatesCurrent;
 
   // Filter campaigns array
   this.filterResults = function() {
