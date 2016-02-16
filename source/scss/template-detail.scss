@@ -130,9 +130,6 @@
           margin: 0 14px 0 0;
           border: 1px solid $mid-grey;
         }
-        span {
-          line-height: 40px;
-        }
       }
     }
   }
@@ -200,6 +197,7 @@
         li {
           display: inline-block;
           width: 33%;
+          vertical-align: top;
           a {
             padding: 20px 20px 0 20px;
             display: block;
