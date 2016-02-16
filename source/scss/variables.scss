@@ -23,11 +23,10 @@ $splash-aspect-h: 1.7;
   height: auto;
 }
 @mixin icon-set() {
-  font-family: "fontawesomer";
+  font-family: "LPGicons";
   font-style: normal;
   font-weight: normal;
   speak: none;
-  margin-right: 10px;
 }
 @mixin anim-grad-bg() {
   background: linear-gradient(135deg, $primary-color, $secondary-color);
