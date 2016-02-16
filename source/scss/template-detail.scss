@@ -40,18 +40,16 @@
       height: 100%;
       display: inline-block;
       &::before {
-        content: '\e963';
-        font-family: "fontawesomer";
-        font-style: normal;
-        font-size: 30px;
+        content: '\e909';
+        @include icon-set();
+        font-size: 40px;
         color: #FFF;
-        speak: none;
         display: inline;
         vertical-align: middle;
         padding: 0 2px 2px 5px;
         position: relative;
         float: left;
-        top: 30px;
+        top: 20px;
       }
     }
     img {
@@ -87,6 +85,11 @@
   }
   #template-detail {
     h4 {
+      &::before{
+        font-size: 25px;
+      }
+      display: flex;
+      align-items: center;
       font-size: 16px;
       color: $secondary-color;
     }
@@ -311,20 +314,21 @@
   }
 }
 .build-time::before {
-  content: '\e902';
+  margin: 0 10px 0 2px;
+  content: '\e903';
   @include icon-set();
 }
 .custom-true {
-  color: blue;
   &::before{
-    content: '\e900';
+    margin-right: 8px;
+    content: '\e905';
     @include icon-set();
   }
 }
 .custom-false {
-  color: green;
   &::before{
-    content: '\e904';
+    margin: 0 15px 0 5px;
+    content: '\e900';
     @include icon-set();
   }
 }

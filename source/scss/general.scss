@@ -48,16 +48,15 @@ input {
 .heart-icon {
   color: red;
   &::before {
-    content: "\e8d5";
-    font-family: "fontawesomer";
-    font-style: normal;
-    font-weight: normal;
+    content: "\e907";
+    @include icon-set();
+    font-size: 16px;
+    vertical-align: sub;
     display: inline-block;
     text-decoration: inherit;
     width: 1em;
     margin-right: 0.2em;
     text-align: center;
-    font-variant: normal;
     text-transform: none;
     line-height: 1em;
     margin-left: 0.2em;
@@ -193,11 +192,11 @@ $btn-time: 0.4s;
   }
 }
 .btn-select::after {
-  content: '\e901';
+  content: '\e902';
 }
 .btn-view::after {
-  content: '\e903';
+  content: '\e906';
 }
 .btn-clear::after {
-  content: '\e8eb';
+  content: '\e904';
 }
