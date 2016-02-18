@@ -46,3 +46,26 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
     cache: cache
   };
 });
+
+
+// Caching of search paramaters
+landingPageGallery.factory('searchCache', function($cacheFactory) {
+  return $cacheFactory('searchCache');
+});
+landingPageGallery.factory('searchParams', function(searchCache) {
+  return {
+      get: function(key) {
+          var params = searchCache.get(key);
+          if(params) {
+              return params;
+          }
+          return '';
+      },
+      set: function(key, value) {
+          searchCache.put(key, value);
+      },
+      clear: function(key) {
+          searchCache.put(key, '');
+      }
+  };
+});

@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync'),
     ghPages = require('gulp-gh-pages'),
-    pageres = require('pageres'),
+    phantom = require('phantom'),
+    async = require('async'),
     request = require('request'),
     imageResize = require('gulp-image-resize'),
     gutil = require('gulp-util'),
@@ -67,28 +68,122 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
+/* For printing time in messages */
+var now = function() {
+  var i = new Date().toLocaleTimeString('en-GB',{hour12:false});
+  return i;
+};
+
+/* WIP - Suppress stdout from phantomjs */
+function p_onConsoleMessage(msg, lineNum, sourceId) {
+//    log_event({e: "console", w: this.serial, u: this.url, d: msg});
+};
+function p_onError(msg, trace) {
+//    log_event({e: "jserror", w: this.serial, u: this.url, d: msg});
+};
+function p_onAlert(msg) {
+//    log_event({e: "alert",   w: this.serial, u: this.url, d: msg});
+};
+function p_onConfirm(msg) {
+//    log_event({e: "confirm", w: this.serial, u: this.url, d: msg});
+    return true;
+};
+function p_onPrompt(msg) {
+//    log_event({e: "prompt",  w: this.serial, u: this.url, d: msg});
+    return "derp";
+};
+
+/* Function that uses phantomjs to take a screenshot */
+var takeScreenshot = function(url,w,h,dest,filename,callback) {
+  phantom.create("--ignore-ssl-errors=yes", "--ssl-protocol=any", function (ph) {
+    ph.createPage(function (page) {
+      page.onAlert = p_onAlert.bind(page);
+      page.onConfirm = p_onConfirm.bind(page);
+      page.onPrompt = p_onPrompt.bind(page);
+      page.onConsoleMessage = p_onConsoleMessage.bind(page);
+      page.onError = p_onError.bind(page);
+      page.set('viewportSize', {width:w,height:h}, function(){
+        page.set('clipRect', {top:0,left:0,width:w,height:h}, function(){
+          page.open(url, function(status) {
+            setTimeout(function(){
+              page.render(dest+'/'+filename, function(finished){
+                console.log('[\x1b[30m\x1b[1m'+now()+'\x1b[0m] Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h+'\x1b[0m');
+                ph.exit();
+                callback();
+              });
+            }, 10000);
+          });
+        });
+      });
+    });
+  });
+};
+
 /*--- Take Screenshots ---*/
 gulp.task('screenshots-scrape', function(cb) {
-  process.stdout.write('\nCapturing screenshots... \n\n');
   var campaignURLs;
-  request(SRC.appdata, function (error, response, body) {
+  request(SRC.appdata, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       campaignURLs = JSON.parse(body).campaigns;
     }
-    var screenshot = new pageres({delay: 10}).dest(SRC.screenshots.raw);
-    campaignURLs.forEach(function(c){
-      var fnameLG = c.id + '-d',
-          fnameSM = c.id + '-m';
-      screenshot.src(c.url, ['1024x768'], {filename: fnameLG})
-                    .src(c.url, ['750x1334'], {filename: fnameSM});
+    async.mapSeries(campaignURLs, function(c, cback) {
+      var fnameLG = c.id + '-d.png',
+          fnameSM = c.id + '-m.png';
+      async.series([
+          function(callback) {
+            takeScreenshot(c.url, 1024, 1300, SRC.screenshots.raw, fnameLG, callback)
+          },
+          function(callback) {
+            takeScreenshot(c.url, 360, 900, SRC.screenshots.raw, fnameSM, callback)
+          }
+        ],
+        function(err, results) {
+          return cback();
+        }
+      );
+    }, function(err, results) {
+      return cb();
     });
-    screenshot.run()
-    .then(() => {return cb()});
   });
 });
 
 /*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
 gulp.task('screenshots-save',['screenshots-scrape'], function() {
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
+    .pipe(imageResize({
+      width:300,
+      height:300,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
+    .pipe(imageResize({
+      width:700,
+      height:800,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(rename({suffix:'-lg'}))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw +'/*-m.png')
+    .pipe(imageResize({
+      width:160,
+      height:230,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
+    ;
+});
+
+gulp.task('screenshots-resize-only', function() {
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:300,
