@@ -183,6 +183,41 @@ gulp.task('screenshots-save',['screenshots-scrape'], function() {
     ;
 });
 
+gulp.task('screenshots-resize-only', function() {
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
+    .pipe(imageResize({
+      width:300,
+      height:300,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw + '/*-d.png')
+    .pipe(imageResize({
+      width:700,
+      height:800,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(rename({suffix:'-lg'}))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    ;
+  gulp.src(SRC.screenshots.raw +'/*-m.png')
+    .pipe(imageResize({
+      width:160,
+      height:230,
+      crop:true,
+      gravity: 'North',
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(SRC.screenshots.pub))
+    .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
+    ;
+});
+
 /*--- Delete Screenshots Folder ---*/
 gulp.task('clear-screenshots', function() {
     return del([SRC.screenshots.root]);

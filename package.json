@@ -46,6 +46,7 @@
     "pregh-pages": "gulp clean",
     "gh-pages": "gulp gh-pages",
     "screenshots": "gulp screenshots-save",
+    "resize-screenshots": "gulp screenshots-resize-only",
     "clear-screenshots": "gulp clear-screenshots"
   }
 }
