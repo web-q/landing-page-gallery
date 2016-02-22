@@ -36,6 +36,9 @@
               <option ng-repeat="t in main.templates | unique:'id'" value="{{t.id}}">{{t.title}}</option>
             </select>
           </div>
+          <div class="clear-search">
+          <a class="btn btn-clear" ng-click="main.clearSearch()"><span>Clear</span></a>
+        </div>
         </div>
       </section>
     </div>
