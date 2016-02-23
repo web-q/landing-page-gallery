@@ -3,18 +3,18 @@
     <div id="topbar">
       <header>
         <div id="navbar-header">
-            <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
+          <img class="webq-logo" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
         </div>
         <div id="navbar-search">
           <div class="search-wrapper">
-            <input type="search" ng-model="main.quicksearch" ng-change="main.filterResults()" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
+            <input type="search" ng-model="main.filters.quicksearch" ng-change="main.filterResults()" placeholder="Quick Search" name="quick-search" id="quick-search" aria-label="Quick Search">
           </div>
         </div>
       </header>
       <section id="banner">
         <div>
           <img src="img/landing-page-gallery-banner.png" />
-      </div>
+        </div>
       </section>
       <section id="filters">
         <div>
@@ -36,6 +36,12 @@
               <option ng-repeat="t in main.templates | unique:'id'" value="{{t.id}}">{{t.title}}</option>
             </select>
           </div>
+          <div class="clear-search">
+            <a class="btn btn-clear" ng-click="main.clearSearch()"><span>Clear</span></a>
+          </div>
+        </div>
+        <div id="disclaimer">
+          <p><em>For best results, we reccommend exploring the gallery using one filter at time.</em></p>
         </div>
       </section>
     </div>

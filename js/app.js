@@ -88,7 +88,6 @@ landingPageGallery.run(function($rootScope, $timeout, $window) {
 
 landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', 'searchParams', function($routeParams, appdata, $filter, $scope, $rootScope, searchParams) {
   this.filters = searchParams.get('filters');
-  this.quicksearch = searchParams.get('quicksearch');
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -116,19 +115,19 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
 
   // Filter campaigns array
   this.filterResults = function() {
-    var temp =  $filter('filter')(campaigns, {$: this.quicksearch});
+    var temp =  $filter('filter')(campaigns, {$: this.filters.quicksearch});
     this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
     searchParams.set('filters', this.filters);
-    searchParams.set('quicksearch', this.quicksearch);
   };
   this.filterResults();
 
   this.clearSearch = function() {
     this.campaigns = campaigns;
-    this.filters.topic = '';
-    this.filters.type = '';
-    this.filters.templateId = '';
-    this.quicksearch = '';
+    var filters = this.filters;
+    Object.keys(filters).forEach(function(prop, i, arr) {
+      filters[prop] = '';
+    });
+    this.filters = filters;
   }
 
   // Config for sliding page left/right

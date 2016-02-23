@@ -346,6 +346,23 @@ input {
       margin-top: -6.5px;
       padding-left: 3px;
       display: inline-block; }
+  #main div.clear-search a.btn {
+    display: block;
+    margin: 3px auto;
+    width: 100%;
+    color: #666666; }
+  #main div.clear-search a.btn:hover {
+    border-color: #666666;
+    background-color: #666666; }
+
+div#disclaimer {
+  text-align: center;
+  margin-top: 10px;
+  color: #666;
+  font-size: .9em; }
+
+div#disclaimer p {
+  margin-bottom: 0; }
 
 @media (min-width: 768px) {
   #main header {
@@ -377,13 +394,17 @@ input {
     #main #filters .filter-dropdown {
       padding: 0 5px;
       float: left;
-      width: 33%; }
+      width: 29%; }
   #main #thumbnail-gallery {
     clear: both; }
     #main #thumbnail-gallery .campaign-thumbnail {
       width: 33.3333%;
       display: inline-block;
-      vertical-align: top; } }
+      vertical-align: top; }
+  #main div.clear-search a.btn {
+    width: 10%;
+    padding: 0 1px;
+    font-size: 14px; } }
 
 select::-ms-expand {
   /* for IE 11 */
