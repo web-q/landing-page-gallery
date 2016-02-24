@@ -14,10 +14,10 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
         function success(response) {
           $rootScope.dataFetched = true; console.log('Data Fetched');
           cache = response.data;
-          var c = cache.campaigns;
-          for (var i=0; i < c.length; i++) {
-            c[i].shortCode = MD5(c[i].id).substring(0, 6)
+          for (var i=0; i < cache.campaigns.length; i++) {
+            cache.campaigns[i].shortCode = MD5(cache.campaigns[i].id).substring(0, 6)
           }
+          cache.campaigns = shuffleArray(cache.campaigns);
           $rootScope.$watch('splashFinished', function(){
             if($rootScope.splashFinished){
               console.log('Animation Complete');

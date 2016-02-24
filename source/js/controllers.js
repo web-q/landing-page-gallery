@@ -19,8 +19,18 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
     templatesCurrent = templatesCurrent.concat(template);
   }
 
+  // Remove duplicates
+  topics = $filter('unique')(topics,'toString()');
+  types = $filter('unique')(types,'toString()');
+  templatesCurrent = $filter('unique')(templatesCurrent,'id');
+  // Sort by alpha ascending
+  topics = $filter('orderBy')(topics,'toString()');
+  types = $filter('orderBy')(types,'toString()');
+  templatesCurrent = $filter('orderBy')(templatesCurrent,'title');
+
   // Pass campaigns data to controllerAs for use on the front
   this.campaigns = campaigns;
+
   this.topics = topics;
   this.types = types;
   this.templates = templatesCurrent;
