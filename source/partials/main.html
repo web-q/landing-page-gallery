@@ -21,19 +21,19 @@
           <div class="filter-dropdown">
             <select ng-model="main.filters.topic" ng-change="main.filterResults()">
               <option value="">Topic</option>
-              <option ng-repeat="t in main.topics | unique track by $index" value="{{t}}">{{t}}</option>
+              <option ng-repeat="t in main.topics track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
             <select ng-model="main.filters.type" ng-change="main.filterResults()">
               <option value="">Type</option>
-              <option ng-repeat="t in main.types | unique track by $index" value="{{t}}">{{t}}</option>
+              <option ng-repeat="t in main.types track by $index" value="{{t}}">{{t}}</option>
             </select>
           </div>
           <div class="filter-dropdown">
             <select ng-model="main.filters.templateId" ng-change="main.filterResults()">
               <option value="">Template</option>
-              <option ng-repeat="t in main.templates | unique:'id'" value="{{t.id}}">{{t.title}}</option>
+              <option ng-repeat="t in main.templates" value="{{t.id}}">{{t.title}}</option>
             </select>
           </div>
           <div class="clear-search">
