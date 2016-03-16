@@ -24,6 +24,7 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
     "http-server": "^0.6.1",
+    "lodash": "^4.6.1",
     "phantom": "^0.9.0",
     "phantomjs": "^1.9.1",
     "request": "^2.67.0",

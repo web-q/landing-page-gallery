@@ -15,7 +15,8 @@ var gulp = require('gulp'),
     request = require('request'),
     imageResize = require('gulp-image-resize'),
     gutil = require('gulp-util'),
-    del = require('del')
+    del = require('del'),
+    fs = require('fs')
     ;
 
 /*--- Set Sources ---*/
@@ -72,6 +73,16 @@ var AUTOPREFIXER_BROWSERS = [
 var now = function() {
   var i = new Date().toLocaleTimeString('en-GB',{hour12:false});
   return i;
+};
+
+var arrayDiff = function(base, more) {
+  var b = {};
+  base.forEach(function(obj) {
+    b[obj.id] = obj;
+  });
+  return more.filter(function(obj) {
+    return !(obj.id in b);
+  });
 };
 
 /* WIP - Suppress stdout from phantomjs */
@@ -142,7 +153,11 @@ gulp.task('screenshots-scrape', function(cb) {
         }
       );
     }, function(err, results) {
-      return cb();
+      fs.writeFile('.campaigns.cache', JSON.stringify(campaignURLs), function(err) {
+        if (err) return console.log(err);
+        console.log('[\x1b[30m\x1b[1m'+now()+'\x1b[32m Campaign URLs Cached\x1b[0m');
+        return cb();
+      });
     });
   });
 });
