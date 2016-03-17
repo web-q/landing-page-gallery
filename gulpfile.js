@@ -15,7 +15,8 @@ var gulp = require('gulp'),
     request = require('request'),
     imageResize = require('gulp-image-resize'),
     gutil = require('gulp-util'),
-    del = require('del')
+    del = require('del'),
+    fs = require('fs')
     ;
 
 /*--- Set Sources ---*/
@@ -53,7 +54,8 @@ var SRC = {
     raw: '_screenshots/raw',
     pub: '_screenshots/pub'
   },
-  appdata: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
+  appdata: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json',
+  appcache: '.campaigns.cache'
 };
 
 var AUTOPREFIXER_BROWSERS = [
@@ -69,9 +71,20 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 /* For printing time in messages */
-var now = function() {
-  var i = new Date().toLocaleTimeString('en-GB',{hour12:false});
-  return i;
+var prettyLog = function(log) {
+  var t = new Date().toLocaleTimeString('en-GB',{hour12:false});
+  t = '\x1b[0m[\x1b[30m\x1b[1m'+t+'\x1b[0m] ';
+  console.log(t + log + '\x1b[0m');
+}
+
+var arrayDiff = function(base, more) {
+  var b = {};
+  base.forEach(function(obj) {
+    b[obj.id] = obj;
+  });
+  return more.filter(function(obj) {
+    return !(obj.id in b);
+  });
 };
 
 /* WIP - Suppress stdout from phantomjs */
@@ -107,7 +120,7 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
           page.open(url, function(status) {
             setTimeout(function(){
               page.render(dest+'/'+filename, function(finished){
-                console.log('[\x1b[30m\x1b[1m'+now()+'\x1b[0m] Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h+'\x1b[0m');
+                prettyLog('Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h);
                 ph.exit();
                 callback();
               });
@@ -121,34 +134,66 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
 
 /*--- Take Screenshots ---*/
 gulp.task('screenshots-scrape', function(cb) {
-  var campaignURLs;
+  var campaignURLs,fetchedURLs;
   request(SRC.appdata, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      campaignURLs = JSON.parse(body).campaigns;
-    }
-    async.mapSeries(campaignURLs, function(c, cback) {
-      var fnameLG = c.id + '-d.png',
-          fnameSM = c.id + '-m.png';
-      async.series([
-          function(callback) {
-            takeScreenshot(c.url, 1024, 1300, SRC.screenshots.raw, fnameLG, callback)
-          },
-          function(callback) {
-            takeScreenshot(c.url, 360, 900, SRC.screenshots.raw, fnameSM, callback)
-          }
-        ],
-        function(err, results) {
-          return cback();
+      fetchedURLs = JSON.parse(body).campaigns;
+      fs.readFile(SRC.appcache, function(err, data){
+        if(!err){
+          var cachedURLs = JSON.parse(data);
+          campaignURLs = arrayDiff(cachedURLs,fetchedURLs);
+        } else {
+          prettyLog('\x1b[33mWARNING:\x1b[0m CampaignURLs cache not found.');
+          campaignURLs = fetchedURLs;
         }
-      );
-    }, function(err, results) {
-      return cb();
-    });
+        if(campaignURLs.length > 0){
+          var remaining = campaignURLs.length;
+          prettyLog('Scraping \x1b[32m'+remaining+'\x1b[0m new campaign pages.');
+          async.mapSeries(campaignURLs, function(c, cback) {
+            var fnameLG = c.id + '-d.png',
+                fnameSM = c.id + '-m.png';
+            async.series([
+                function(callback) {
+                  takeScreenshot(c.url, 1024, 1300, SRC.screenshots.raw, fnameLG, callback)
+                },
+                function(callback) {
+                  takeScreenshot(c.url, 360, 900, SRC.screenshots.raw, fnameSM, callback)
+                },
+                function(callback) {
+                  remaining--;
+                  prettyLog('\x1b[32m'+remaining+'\x1b[0m pages remaining.');
+                  callback();
+                }
+              ],
+              function(err, results) {
+                return cback();
+              }
+            );
+          }, function(err, results) {
+            fs.writeFile(SRC.appcache, JSON.stringify(fetchedURLs), function(err) {
+              if (err) return console.log(err);
+              prettyLog('\x1b[32mCampaign URLs Cached');
+              return cb();
+            });
+          });
+        } else {
+          prettyLog('\x1b[33mThere are no new campaign pages at this time.');
+          var err = new Error('no new campaign pages');
+          throw err;
+        }
+      });
+    } else {
+      prettyLog('\x1b[31mUnable to fetch URLs');
+      prettyLog('\x1b[31m'+error);
+      var err = new Error('screenshots-scrape failed');
+      throw err;
+    }
   });
 });
 
 /*--- Resize Screenshots (!!! requires imagemagick !!!) ---*/
 gulp.task('screenshots-save',['screenshots-scrape'], function() {
+  return Promise.all([
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:300,
@@ -157,8 +202,7 @@ gulp.task('screenshots-save',['screenshots-scrape'], function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshots.pub))
-    ;
+    .pipe(gulp.dest(SRC.screenshots.pub)),
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:700,
@@ -168,8 +212,7 @@ gulp.task('screenshots-save',['screenshots-scrape'], function() {
       imageMagick: true
     }))
     .pipe(rename({suffix:'-lg'}))
-    .pipe(gulp.dest(SRC.screenshots.pub))
-    ;
+    .pipe(gulp.dest(SRC.screenshots.pub)),
   gulp.src(SRC.screenshots.raw +'/*-m.png')
     .pipe(imageResize({
       width:160,
@@ -180,10 +223,11 @@ gulp.task('screenshots-save',['screenshots-scrape'], function() {
     }))
     .pipe(gulp.dest(SRC.screenshots.pub))
     .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
-    ;
+  ]);
 });
 
 gulp.task('screenshots-resize-only', function() {
+  return Promise.all([
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:300,
@@ -192,8 +236,7 @@ gulp.task('screenshots-resize-only', function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshots.pub))
-    ;
+    .pipe(gulp.dest(SRC.screenshots.pub)),
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:700,
@@ -203,8 +246,7 @@ gulp.task('screenshots-resize-only', function() {
       imageMagick: true
     }))
     .pipe(rename({suffix:'-lg'}))
-    .pipe(gulp.dest(SRC.screenshots.pub))
-    ;
+    .pipe(gulp.dest(SRC.screenshots.pub)),
   gulp.src(SRC.screenshots.raw +'/*-m.png')
     .pipe(imageResize({
       width:160,
@@ -215,7 +257,7 @@ gulp.task('screenshots-resize-only', function() {
     }))
     .pipe(gulp.dest(SRC.screenshots.pub))
     .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
-    ;
+  ]);
 });
 
 /*--- Delete Screenshots Folder ---*/
