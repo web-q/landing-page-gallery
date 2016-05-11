@@ -95,70 +95,6 @@ input {
   clip: rect(0, 0, 0, 0);
   border: 0; }
 
-#pageLoad {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #013C80;
-  -webkit-animation: bganim 8s linear infinite;
-          animation: bganim 8s linear infinite;
-  transition: opacity 0.3s ease;
-  overflow: hidden; }
-  #pageLoad .loading-logo {
-    display: block;
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; }
-  #pageLoad #svg-splash {
-    display: block;
-    width: 95%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; }
-  #pageLoad span {
-    display: block;
-    margin: auto;
-    padding-top: 3px;
-    text-align: center;
-    color: #FFF;
-    font-size: 11px;
-    font-family: "Lato", sans-serif;
-    display: block;
-    width: 100%; }
-
-.load-wrap {
-  width: 100vw;
-  height: 170vw;
-  /* height:width ratio */
-  max-height: 100vh;
-  max-width: 58.82353vh;
-  /* height:width ratio */
-  margin: 0 auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  /* vertical center */
-  left: 0;
-  right: 0;
-  /* horizontal center */
-  overflow: hidden;
-  padding: 15px; }
-
-#skip-it {
-  background: none;
-  position: fixed;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0; }
-
-.loading-text {
-  padding-top: 3px; }
-  .loading-text span {
-    text-transform: uppercase; }
-
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
@@ -230,6 +166,127 @@ input {
 
 .btn-clear::after {
   content: '\e904'; }
+
+#app-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: -webkit-filter 0.5s ease;
+  transition: filter 0.5s ease;
+  transition: filter 0.5s ease, -webkit-filter 0.5s ease; }
+
+.full-blur {
+  -webkit-filter: blur(10px);
+          filter: blur(10px); }
+
+.no-blur {
+  -webkit-filter: blur(0);
+          filter: blur(0); }
+
+#pageLoad {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #013C80;
+  -webkit-animation: bganim 8s linear infinite;
+          animation: bganim 8s linear infinite;
+  transition: opacity 0.3s ease;
+  overflow: hidden; }
+  #pageLoad .loading-logo {
+    display: block;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  #pageLoad #svg-splash {
+    display: block;
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  #pageLoad span {
+    display: block;
+    margin: auto;
+    padding-top: 3px;
+    text-align: center;
+    color: #FFF;
+    font-size: 11px;
+    font-family: "Lato", sans-serif;
+    display: block;
+    width: 100%; }
+
+.load-wrap {
+  width: 100vw;
+  height: 170vw;
+  /* height:width ratio */
+  max-height: 100vh;
+  max-width: 58.82353vh;
+  /* height:width ratio */
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* vertical center */
+  left: 0;
+  right: 0;
+  /* horizontal center */
+  overflow: hidden;
+  padding: 15px; }
+
+#skip-it {
+  background: none;
+  position: fixed;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0; }
+
+.loading-text {
+  padding-top: 3px; }
+  .loading-text span {
+    text-transform: uppercase; }
+
+#divisionSelectModal {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(75, 75, 75, 0.5);
+  transition: opacity 0.5s ease;
+  opacity: 0; }
+  #divisionSelectModal a.btn-select {
+    color: #fff; }
+    #divisionSelectModal a.btn-select::after {
+      color: #666; }
+  #divisionSelectModal a.btn-select:hover {
+    border-color: #fff;
+    background-color: #fff; }
+  #divisionSelectModal h1 {
+    margin: 10px 0;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase; }
+
+.division-select-wrap {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #fff; }
 
 /*--------------------------------*/
 /*    MAIN PAGE
@@ -763,6 +820,13 @@ select {
     padding: 10px;
     width: 100%;
     border-radius: 5px; }
+  #tagtool .example-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
 
 /*--------------------------------*/
 /*    ANIMATIONS

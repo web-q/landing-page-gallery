@@ -22,7 +22,7 @@
         <h4 class="custom-{{detail.template.custom}}">{{detail.customFlag}}</h4>
         <div class="action-section">
           <a class="btn btn-view" target="_blank" href="{{detail.campaign.url}}"><span>View Live Campaign</span></a>
-          <a class="btn btn-select" target="_blank" href="https://webq.zendesk.com/hc/en-us/requests/new?form=/hut/campaign-landing-page&formparams={{detail.campaign.shortCode}}"><span>Select This Template</span></a>
+          <a class="btn btn-select" target="_blank" href="https://webq.zendesk.com/hc/en-us/requests/new?form=/campaign-landing-page/new&formparams={{detail.campaign.shortCode}}"><span>Select This Template</span></a>
         </div>
       </section>
       <section id="other-campaigns" ng-if="detail.otherCampaigns.length > 0">
