@@ -23,6 +23,7 @@ var shuffleArray = function(array) {
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
   'ngAnimate',
+  'LocalStorageModule',
   'angular.filter',
   'ngOnload'
 ]);
@@ -62,6 +63,10 @@ landingPageGallery.config(['$routeProvider', function($routeProvider) {
       }
     }).
   otherwise({redirectTo: '/'});
+}]);
+
+landingPageGallery.config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('webqLPG');
 }]);
 
 // Function for page loading spinner
