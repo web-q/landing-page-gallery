@@ -15,10 +15,12 @@
   <script src="js/modernizr.min.js"></script>
 </head>
 <body>
-  <div id="app-viewer" ng-view class="{{pageTransition}}" autoscroll="false"></div>
-  <!--[if lt IE 7]>
-          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-      <![endif]-->
+  <div id="app-wrapper">
+    <div id="app-viewer" ng-view class="{{pageTransition}}" autoscroll="false"></div>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+  </div>
 <div id="pageLoad" ng-if="loadingView">
   <div class="load-wrap">
     <img class="loading-logo" width="200" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
@@ -30,6 +32,23 @@
       <span ng-if="dataFetched && !splashFinished">Click anywhere to skip</span>
     </div>
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
+  </div>
+</div>
+<div id="divisionSelectModal" ng-if="!loadingView && $root.showDivisionSelect" ng-cloak>
+  <div class="division-select-wrap">
+    <h1>Please select your division:</h1>
+    <select id="division-select" ng-model="divSel">
+      <option value="">Select a division</option>
+      <option value="webq">Sector A</option>
+      <option value="webq">Sector B</option>
+      <option value="webq">Sector C</option>
+      <option value="webq">Sector D</option>
+      <option value="other">Sector E</option>
+      <option value="other">Sector E</option>
+      <option value="other">Sector E</option>
+      <option value="other">Sector E</option>
+    </select>
+    <a class="btn btn-select" ng-click="$root.setDivision(divSel);"><span>Select Division</span></a>
   </div>
 </div>
   <script src="js/lib.min.js"></script>

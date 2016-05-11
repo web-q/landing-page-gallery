@@ -1,5 +1,5 @@
-landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', 'searchParams', function($routeParams, appdata, $filter, $scope, $rootScope, searchParams) {
-  this.filters = searchParams.get('filters');
+landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', 'appCache', function($routeParams, appdata, $filter, $scope, $rootScope, appCache) {
+  this.filters = appCache.get('filters');
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -39,7 +39,7 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
   this.filterResults = function() {
     var temp =  $filter('filter')(campaigns, {$: this.filters.quicksearch});
     this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
-    searchParams.set('filters', this.filters);
+    appCache.set('filters', this.filters);
   };
   this.filterResults();
 

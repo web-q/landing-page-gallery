@@ -72,62 +72,6 @@ input {
     clip: rect(0,0,0,0);
     border: 0;
 }
-#pageLoad {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    @include anim-bg();
-    transition: opacity 0.3s ease;
-    overflow: hidden;
-    .loading-logo {
-      display: block;
-      width: 50%;
-      @include center-block();
-    }
-    #svg-splash {
-      display: block;
-      width: 95%;
-      @include center-block();
-    }
-  span {
-    display: block;
-    margin: auto;
-    padding-top: 3px;
-    text-align: center;
-    color: #FFF;
-    font-size: 11px;
-    font-family: $font-stack;
-    display: block;
-    width: 100%;
-  }
-}
-.load-wrap {
-  width: 100vw;
-  height: ($splash-aspect-h/$splash-aspect-w)*100vw; /* height:width ratio */
-  max-height: 100vh;
-  max-width: ($splash-aspect-w/$splash-aspect-h)*100vh; /* height:width ratio */
-  margin: 0 auto;
-  position: absolute;
-  top:0;bottom:0; /* vertical center */
-  left:0;right:0; /* horizontal center */
-  overflow: hidden;
-  padding: 15px;
-}
-#skip-it {
-  background: none;
-  position: fixed;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-.loading-text {
-  padding-top: 3px;
-  span {
-    text-transform: uppercase;
-  }
-}
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
@@ -199,4 +143,20 @@ $btn-time: 0.4s;
 }
 .btn-clear::after {
   content: '\e904';
+}
+#app-wrapper{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: filter 0.5s ease;
+}
+.full-blur {
+  filter: blur(10px);
+}
+.no-blur {
+  filter: blur(0);
 }
