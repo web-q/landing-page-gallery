@@ -34,7 +34,7 @@
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
   </div>
 </div>
-<div id="divisionSelectModal" ng-if="!loadingView && $root.showDivisionSelect" ng-cloak>
+<div class="if-fade" id="divisionSelectModal" ng-if="!loadingView && $root.showDivisionSelect" ng-cloak>
   <div class="division-select-wrap">
     <h1>Please select your division:</h1>
     <select id="division-select" ng-model="divSel">

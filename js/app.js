@@ -84,6 +84,9 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
   $rootScope.setDivision = function(d) {
     $rootScope.division = d;
     localStorageService.set('division', $rootScope.division);
+    if(d){
+      $rootScope.hideDivSel();
+    }
   };
 
   $rootScope.$on('$routeChangeSuccess', function() {
@@ -97,27 +100,13 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
         $rootScope.loadingView = false;
       }, 300);
     }
-
-    $rootScope.$watch('division', function(){
-      // If division is set. Transition to normal.
-      if($rootScope.division){
-        appWrapper.removeClass('full-blur').addClass('no-blur');
-        var divisionSelectModal = document.getElementById('divisionSelectModal');
-        divisionSelectModal.style.opacity = '0';
-        $timeout(function () {
-          $rootScope.showDivisionSelect = false;
-        }, 500);
-      // If division isn't set, show modal,
-      // and blur the main view.
-      } else {
-        $rootScope.showDivisionSelect = true;
-        $timeout(function () {
-          var divisionSelectModal = document.getElementById('divisionSelectModal');
-          divisionSelectModal.style.opacity = '1';
-        }, 500);
-        appWrapper.removeClass('no-blur').addClass('full-blur');
+    
+    $timeout(function () {
+      if(!$rootScope.division){
+        $rootScope.showDivSel();
       }
-    });
+    }, 1500);
+
 
     // Scroll to top when going to different page
     $timeout(function () {
@@ -125,6 +114,14 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
+  $rootScope.hideDivSel = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.showDivisionSelect = false;
+  }
+  $rootScope.showDivSel = function(t){
+    $rootScope.showDivisionSelect = true;
+    appWrapper.removeClass('no-blur').addClass('full-blur');
+  }
   // Set App Name
   $rootScope.appName = 'Landing Page Gallery'
 });
