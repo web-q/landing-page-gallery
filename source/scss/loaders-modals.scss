@@ -63,8 +63,6 @@
   width: 100%;
   height: 100%;
   background-color: rgba(75, 75, 75, 0.5);
-  transition: opacity 0.5s ease;
-  opacity: 0;
   a.btn-select {
     color: #fff;
     &::after {
@@ -81,6 +79,9 @@
     text-align: center;
     font-size: 18px;
     text-transform: uppercase;
+  }
+  select {
+    background-color: #fff;
   }
 }
 .division-select-wrap {
