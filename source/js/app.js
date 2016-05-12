@@ -82,9 +82,9 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
 
   // Set and store the division
   $rootScope.setDivision = function(d) {
-    $rootScope.division = d;
-    localStorageService.set('division', $rootScope.division);
     if(d){
+      $rootScope.division = d;
+      localStorageService.set('division', $rootScope.division);
       $rootScope.hideDivSel();
     }
   };
