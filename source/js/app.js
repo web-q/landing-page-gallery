@@ -23,6 +23,7 @@ var shuffleArray = function(array) {
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
   'ngAnimate',
+  'LocalStorageModule',
   'angular.filter',
   'ngOnload'
 ]);
@@ -64,24 +65,63 @@ landingPageGallery.config(['$routeProvider', function($routeProvider) {
   otherwise({redirectTo: '/'});
 }]);
 
-// Function for page loading spinner
-landingPageGallery.run(function($rootScope, $timeout, $window) {
-  $rootScope.$on('$routeChangeSuccess', function() {
+landingPageGallery.config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('webqLPG');
+}]);
 
+// Function for page loading spinner
+landingPageGallery.run(function($rootScope, $timeout, $window, localStorageService) {
+  // Select app wrapper for making blurred glass effect
+  var appWrapper = angular.element(document.getElementById('app-wrapper'));
+
+  // Fetch division from local storage
+  $rootScope.division = localStorageService.get('division');
+
+  // Hide division modal on open
+  $rootScope.showDivisionSelect = false;
+
+  // Set and store the division
+  $rootScope.setDivision = function(d) {
+    $rootScope.division = d;
+    localStorageService.set('division', $rootScope.division);
+    if(d){
+      $rootScope.hideDivSel();
+    }
+  };
+
+  $rootScope.$on('$routeChangeSuccess', function() {
     // If showing loading screen, close it
+    // (showing the view is handled as part of the JSON service)
     if ($rootScope.loadingView === true){
       var pageLoad = document.getElementById('pageLoad');
       pageLoad.style.opacity = '0';
       $timeout(function () {
         pageLoad.style.display = 'none';
+        $rootScope.loadingView = false;
       }, 300);
     }
-    $rootScope.loadingView = false;
+    
+    $timeout(function () {
+      if(!$rootScope.division){
+        $rootScope.showDivSel();
+      }
+    }, 1500);
+
 
     // Scroll to top when going to different page
     $timeout(function () {
       $window.scrollTo(0,0);
     }, 400);
   });
+
+  $rootScope.hideDivSel = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.showDivisionSelect = false;
+  }
+  $rootScope.showDivSel = function(t){
+    $rootScope.showDivisionSelect = true;
+    appWrapper.removeClass('no-blur').addClass('full-blur');
+  }
+  // Set App Name
   $rootScope.appName = 'Landing Page Gallery'
 });

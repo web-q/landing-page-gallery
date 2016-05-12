@@ -13,6 +13,7 @@
     "html5-boilerplate": "~5.2.0",
     "ng-onload": "~0.2.1",
     "angulargrid": "s-yadav/angulargrid#~0.4.0",
-    "gsap": "~1.18.2"
+    "gsap": "~1.18.2",
+    "angular-local-storage": "~0.2.7"
   }
 }

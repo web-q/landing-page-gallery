@@ -146,6 +146,14 @@
     border-color: #666666;
     background-color: #666666;
   }
+  .switch-division {
+    float: right;
+    cursor: pointer;
+    padding: 5px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 div#disclaimer {
     text-align: center;

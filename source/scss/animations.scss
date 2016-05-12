@@ -21,7 +21,7 @@
     height: 100%;
 }
 .slidepage-l.ng-enter, .slidepage-r.ng-enter {
-    transition: all .4s ease 450ms;
+  transition: all .4s ease 450ms;
 }
 .slidepage-l.ng-leave, .slidepage-r.ng-leave {
   transition: all .4s ease;
@@ -29,6 +29,22 @@
 .fadepage.ng-enter, .fadepage.ng-leave {
   transition: all 1.3s ease;
 }
+
+.if-fade.ng-enter {
+  transition:0.5s ease all;
+  opacity:0;
+}
+.if-fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+.if-fade.ng-leave {
+  transition:0.5s ease all;
+  opacity:1;
+}
+.if-fade.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
 /* Fade Page */
 .fadepage.ng-enter, .fadepage.ng-leave-active { opacity: 0; }
 .fadepage.ng-enter-active, .fadepage.ng-leave { opacity: 1; }
