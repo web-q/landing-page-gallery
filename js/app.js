@@ -100,12 +100,12 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
         $rootScope.loadingView = false;
       }, 300);
     }
-    
+
     $timeout(function () {
       if(!$rootScope.division){
         $rootScope.showDivSel();
       }
-    }, 1500);
+    }, 3500);
 
 
     // Scroll to top when going to different page
