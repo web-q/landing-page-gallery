@@ -141,12 +141,13 @@
     margin: 3px auto;
     width:100%;
     color: #666666;
-  }
-  div.clear-search a.btn:hover {
-    border-color: #666666;
-    background-color: #666666;
+    .no-touch &:hover {
+      border-color: #666666;
+      background-color: #666666;
+    }
   }
   .switch-division {
+    color: $dark-grey;
     float: right;
     cursor: pointer;
     padding: 5px;
@@ -161,7 +162,6 @@ div#disclaimer {
     color: #666;
     font-size: .9em;
 }
-
 div#disclaimer p {
     margin-bottom: 0;
 }
