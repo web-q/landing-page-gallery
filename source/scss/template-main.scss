@@ -146,13 +146,32 @@
       background-color: #666666;
     }
   }
-  .switch-division {
-    color: $dark-grey;
-    float: right;
+  #user-welcome {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    color: $white;
+    text-align: center;
+  }
+  .welcome-message {
+    display: block;
+    font-size: 16px;
+  }
+  .user-notice {
+    font-style: italic;
+    display: block;
+    font-size: 12px;
+  }
+  .switch-user {
+    margin-left: 5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px solid $white;
+    padding: 1px 3px;
+    color: $white;
     cursor: pointer;
-    padding: 5px;
     &:hover {
-      text-decoration: underline;
+      color: $secondary-color;
+      background-color: $white;
     }
   }
 }
@@ -172,7 +191,8 @@ div#disclaimer p {
         float: left;
         width: 50%;
         .webq-logo {
-          margin: 4px 0px 3px 10px;
+          max-width: 230px;
+          margin: 8px 0px 3px 10px;
           display: inline-block;
         }
       }
@@ -180,7 +200,7 @@ div#disclaimer p {
         float: right;
         width: 30%;
         .search-wrapper {
-          padding: 16px 35px 0 0;
+          padding: 10px 35px 5px 0;
         }
       }
       float: left;
@@ -218,6 +238,13 @@ div#disclaimer p {
       width: 10%;
       padding: 0 1px;
       font-size: 14px;
+    }
+    #user-welcome {
+      float: right;
+      width: 30%;
+      margin: 0;
+      text-align: right;
+      padding-right: 12px;
     }
   }
 }

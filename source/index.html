@@ -34,15 +34,24 @@
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
   </div>
 </div>
-<div class="if-fade" id="divisionSelectModal" ng-if="!loadingView && $root.showDivisionSelect" ng-cloak>
-  <div class="division-select-wrap">
+<div class="if-fade" id="userSelectModal" ng-if="!loadingView && $root.userModal" ng-cloak>
+  <div class="user-select-wrap">
     <h1>For the best experience, please tell us who you are.</h1>
-    <label for="lpg-user-first" class="control-label">First Name</label>
-    <input ng-model="tempUser.firstName" class="form-control" id="lpg-user-first" type="text" />
-    <label for="lpg-user-last" class="control-label">Last Name</label>
-    <input ng-model="tempUser.lastName" class="form-control" id="lpg-user-last" type="text" />
-    <label for="lpg-user-email" class="control-label">Email Address</label>
-    <input ng-model="tempUser.email" class="form-control" id="lpg-user-email" type="email" />
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.firstName" id="lpg-user-first" class="material-textbox" name="First Name" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-first" class="material-textbox-label">First Name</label>
+    </div>
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.lastName" id="lpg-user-last" class="material-textbox" name="Last Name" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-last" class="material-textbox-label">Last Name</label>
+    </div>
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.email" id="lpg-user-email" class="material-textbox" name="Email" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-email" class="material-textbox-label">Email Address</label>
+    </div>
     <select id="division-select" ng-model="tempUser.division">
       <option value="">Select a division</option>
       <option value="Capital">Capital</option>
@@ -60,7 +69,7 @@
       <option value="Tristar">Tristar</option>
       <option value="West Florida">West Florida</option>
     </select>
-    <a class="btn btn-select" ng-click="$root.setDivision(tempUser);"><span>Select Division</span></a>
+    <a class="btn btn-select" ng-click="$root.setUser(tempUser);"><span>Continue</span></a>
   </div>
 </div>
   <script src="js/lib.min.js"></script>

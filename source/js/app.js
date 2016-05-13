@@ -19,6 +19,20 @@ var shuffleArray = function(array) {
   return array;
 }
 
+// Email validate
+var validateEmail = function(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
+
+var webqSupportedDivisions = [
+  'East Florida',
+  'West Florida',
+  'South Atlantic',
+  'North Florida',
+  'Mountain'
+];
+
 // Declare app level module which depends on views, and components
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
@@ -74,18 +88,20 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
   // Select app wrapper for making blurred glass effect
   var appWrapper = angular.element(document.getElementById('app-wrapper'));
 
-  // Fetch division from local storage
-  $rootScope.division = localStorageService.get('division');
+  // Fetch user from local storage
+  $rootScope.lpgUser = localStorageService.get('user');
 
-  // Hide division modal on open
-  $rootScope.showDivisionSelect = false;
+  // Hide user modal on open
+  $rootScope.userModal = false;
 
-  // Set and store the division
-  $rootScope.setDivision = function(d) {
-    if(d){
-      $rootScope.division = d;
-      localStorageService.set('division', $rootScope.division);
-      $rootScope.hideDivSel();
+  // Set and store the user
+  $rootScope.setUser = function(u) {
+    if(u.firstName && u.lastName && validateEmail(u.email) && u.division){
+      $rootScope.lpgUser = u;
+      localStorageService.set('user', $rootScope.lpgUser);
+      $rootScope.hideUserModal();
+    } else {
+
     }
   };
 
@@ -102,8 +118,8 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }
 
     $timeout(function () {
-      if(!$rootScope.division){
-        $rootScope.showDivSel();
+      if(!$rootScope.lpgUser){
+        $rootScope.showUserModal();
       }
     }, 3500);
 
@@ -114,12 +130,12 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
-  $rootScope.hideDivSel = function(){
+  $rootScope.hideUserModal = function(){
     appWrapper.removeClass('full-blur').addClass('no-blur');
-    $rootScope.showDivisionSelect = false;
+    $rootScope.userModal = false;
   }
-  $rootScope.showDivSel = function(t){
-    $rootScope.showDivisionSelect = true;
+  $rootScope.showUserModal = function(){
+    $rootScope.userModal = true;
     appWrapper.removeClass('no-blur').addClass('full-blur');
   }
   // Set App Name

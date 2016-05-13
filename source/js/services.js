@@ -47,6 +47,25 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
   };
 });
 
+landingPageGallery.factory('emailService', function($http, $rootScope) {
+  function send(sendData){
+    $http({
+      method: 'POST',
+      url: '/dotCMS/sendEmail',
+      data: sendData,
+      responseType:'json'
+    }).then(
+      function success(response) {
+        console.log(response);
+      },
+      function failure(reason) {
+        console.log(reason);
+      });
+  }
+  return {
+    send: send
+  };
+});
 
 // Caching of search paramaters
 landingPageGallery.factory('cacher', function($cacheFactory) {

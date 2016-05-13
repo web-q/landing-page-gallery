@@ -1,5 +1,6 @@
 landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', 'appCache', function($routeParams, appdata, $filter, $scope, $rootScope, appCache) {
-  this.filters = appCache.get('filters');
+  var ctrl = this;
+  ctrl.filters = appCache.get('filters');
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -29,38 +30,45 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
   templatesCurrent = $filter('orderBy')(templatesCurrent,'title');
 
   // Pass campaigns data to controllerAs for use on the front
-  this.campaigns = campaigns;
+  ctrl.campaigns = campaigns;
 
-  this.topics = topics;
-  this.types = types;
-  this.templates = templatesCurrent;
+  ctrl.topics = topics;
+  ctrl.types = types;
+  ctrl.templates = templatesCurrent;
 
   // Filter campaigns array
-  this.filterResults = function() {
-    var temp =  $filter('filter')(campaigns, {$: this.filters.quicksearch});
-    this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
-    appCache.set('filters', this.filters);
+  ctrl.filterResults = function() {
+    var temp =  $filter('filter')(campaigns, {$: ctrl.filters.quicksearch});
+    ctrl.campaigns =  $filter('filter')(temp, {topic: ctrl.filters.topic || undefined, type: ctrl.filters.type || undefined, templateId: ctrl.filters.templateId || undefined}, true);
+    appCache.set('filters', ctrl.filters);
   };
-  this.filterResults();
+  ctrl.filterResults();
 
-  this.clearSearch = function() {
-    this.campaigns = campaigns;
-    var filters = this.filters;
+  ctrl.clearSearch = function() {
+    ctrl.campaigns = campaigns;
+    var filters = ctrl.filters;
     Object.keys(filters).forEach(function(prop, i, arr) {
       filters[prop] = '';
     });
-    this.filters = filters;
+    ctrl.filters = filters;
   }
 
   // Config for sliding page left/right
-  this.slide = function(transition) {
+  ctrl.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
 }]); //---------END MAINCTRL---------//
 
-landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', '$location', 'emailService', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope, $location, emailService) {
+  var ctrl = this;
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
+
+  if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+    ctrl.webqSupported = true;
+  } else {
+    ctrl.webqSupported = false;
+  }
 
   // Collect url paramters into variables
   var cid = $routeParams.shortCode;
@@ -80,21 +88,45 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
   otherCampaigns = shuffleArray(otherCampaigns);
 
   // Pass variables needed on the front to controllerAs
-  this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
-  this.template = template;
-  this.campaign = campaign;
-  this.otherCampaigns = otherCampaigns;
+  ctrl.iframeURL = $sce.trustAsResourceUrl(campaign.url);
+  ctrl.template = template;
+  ctrl.campaign = campaign;
+  ctrl.otherCampaigns = otherCampaigns;
 
-  this.renderHTML = function(html) {
+  ctrl.renderHTML = function(html) {
     var decoded = angular.element('<textarea />').html(html).text();
     return $sce.trustAsHtml(decoded);
   };
 
+  ctrl.sendEmail = function(){
+    var base = $location.protocol() + '://' + $location.host() + '/lpg/',
+    errorURL = base + 'process-form.dot',
+    returnURL = errorURL + '?submitted=true',
+    landingPageURL = base + '#/' + ctrl.campaign.shortCode,
+    fromAddress = 'no-reply@' + $location.host();
+    var formData = {
+      'from': fromAddress,
+      'to': 'cody.merrill@hcahealthcare.com',
+      'subject': 'Landing Page Gallery - Request',
+      'returnUrl': returnURL,
+      'errorURL': errorURL,
+      'formType': 'Landing Page Gallery - Request a new landing page',
+      'url': base,
+      'First Name': $rootScope.lpgUser.firstName,
+      'Last Name': $rootScope.lpgUser.lastName,
+      'Division': $rootScope.lpgUser.division,
+      'Email': $rootScope.lpgUser.email,
+      'Landing Page': landingPageURL,
+      'order': 'subject,First Name,Last Name,Division,Email,Landing Page,url'
+    };
+    emailService.send(formData);
+  }
+
   // Functionality for "Custom" style classes
   if(template.custom) {
-    this.customFlag = "Custom";
+    ctrl.customFlag = "Custom";
   } else {
-    this.customFlag = "Standard";
+    ctrl.customFlag = "Standard";
   }
 
   // Detect window width for displaying the iframe preview
@@ -107,24 +139,24 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
   });
 
   // Config for sliding page left/right
-  this.slide = function(transition) {
+  ctrl.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
 
   // Show loading spinner until iframe is fully loaded
-  this.frameLoaded = function(){
+  ctrl.frameLoaded = function(){
     document.getElementById('campaign-frame').style.display = 'block';
     document.getElementById('iframe-loader').style.display = 'none';
   };
 }]); //---------END DETAILCTRL---------//
 
 landingPageGallery.controller('debugCtrl', ['appdata', function(appdata) {
-  this.templates = appdata.templates;
-  this.campaigns = appdata.campaigns;
-  this.printdata = appdata;
+  ctrl.templates = appdata.templates;
+  ctrl.campaigns = appdata.campaigns;
+  ctrl.printdata = appdata;
 }]); //---------END DEBUGCTRL---------//
 
 landingPageGallery.controller('tagtoolCtrl', ['appdata', function(appdata) {
-  this.templates = appdata.templates;
-  this.campaigns = appdata.campaigns;
+  ctrl.templates = appdata.templates;
+  ctrl.campaigns = appdata.campaigns;
 }]); //---------END TAGTOOLCTRL---------//
