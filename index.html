@@ -34,21 +34,42 @@
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
   </div>
 </div>
-<div class="if-fade" id="divisionSelectModal" ng-if="!loadingView && $root.showDivisionSelect" ng-cloak>
-  <div class="division-select-wrap">
-    <h1>Please select your division:</h1>
-    <select id="division-select" ng-model="divSel">
+<div class="if-fade" id="userSelectModal" ng-if="!loadingView && $root.userModal" ng-cloak>
+  <div class="user-select-wrap">
+    <h1>For the best experience, please tell us who you are.</h1>
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.firstName" id="lpg-user-first" class="material-textbox" name="First Name" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-first" class="material-textbox-label">First Name</label>
+    </div>
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.lastName" id="lpg-user-last" class="material-textbox" name="Last Name" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-last" class="material-textbox-label">Last Name</label>
+    </div>
+    <div class="material-textbox-group">
+      <input ng-model="tempUser.email" id="lpg-user-email" class="material-textbox" name="Email" required="true" type="text">
+      <span class="material-textbox-bar"></span>
+      <label for="lpg-user-email" class="material-textbox-label">Email Address</label>
+    </div>
+    <select id="division-select" ng-model="tempUser.division">
       <option value="">Select a division</option>
-      <option value="webq">Sector A</option>
-      <option value="webq">Sector B</option>
-      <option value="webq">Sector C</option>
-      <option value="webq">Sector D</option>
-      <option value="other">Sector E</option>
-      <option value="other">Sector E</option>
-      <option value="other">Sector E</option>
-      <option value="other">Sector E</option>
+      <option value="Capital">Capital</option>
+      <option value="Central and West Texas">Central and West Texas</option>
+      <option value="Continental">Continental</option>
+      <option value="East Florida">East Florida</option>
+      <option value="Far West">Far West</option>
+      <option value="Gulf Coast">Gulf Coast</option>
+      <option value="Mid-America">Mid-America</option>
+      <option value="Mountain">Mountain</option>
+      <option value="North Florida">North Florida</option>
+      <option value="North Texas">North Texas</option>
+      <option value="San Antonio">San Antonio</option>
+      <option value="South Atlantic">South Atlantic</option>
+      <option value="Tristar">Tristar</option>
+      <option value="West Florida">West Florida</option>
     </select>
-    <a class="btn btn-select" ng-click="$root.setDivision(divSel);"><span>Select Division</span></a>
+    <a class="btn btn-select" ng-click="$root.setUser(tempUser);"><span>Continue</span></a>
   </div>
 </div>
   <script src="js/lib.min.js"></script>

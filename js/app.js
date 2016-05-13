@@ -19,6 +19,20 @@ var shuffleArray = function(array) {
   return array;
 }
 
+// Email validate
+var validateEmail = function(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
+
+var webqSupportedDivisions = [
+  'East Florida',
+  'West Florida',
+  'South Atlantic',
+  'North Florida',
+  'Mountain'
+];
+
 // Declare app level module which depends on views, and components
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
@@ -74,18 +88,20 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
   // Select app wrapper for making blurred glass effect
   var appWrapper = angular.element(document.getElementById('app-wrapper'));
 
-  // Fetch division from local storage
-  $rootScope.division = localStorageService.get('division');
+  // Fetch user from local storage
+  $rootScope.lpgUser = localStorageService.get('user');
 
-  // Hide division modal on open
-  $rootScope.showDivisionSelect = false;
+  // Hide user modal on open
+  $rootScope.userModal = false;
 
-  // Set and store the division
-  $rootScope.setDivision = function(d) {
-    $rootScope.division = d;
-    localStorageService.set('division', $rootScope.division);
-    if(d){
-      $rootScope.hideDivSel();
+  // Set and store the user
+  $rootScope.setUser = function(u) {
+    if(u.firstName && u.lastName && validateEmail(u.email) && u.division){
+      $rootScope.lpgUser = u;
+      localStorageService.set('user', $rootScope.lpgUser);
+      $rootScope.hideUserModal();
+    } else {
+
     }
   };
 
@@ -102,8 +118,8 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }
 
     $timeout(function () {
-      if(!$rootScope.division){
-        $rootScope.showDivSel();
+      if(!$rootScope.lpgUser){
+        $rootScope.showUserModal();
       }
     }, 3500);
 
@@ -114,12 +130,12 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
-  $rootScope.hideDivSel = function(){
+  $rootScope.hideUserModal = function(){
     appWrapper.removeClass('full-blur').addClass('no-blur');
-    $rootScope.showDivisionSelect = false;
+    $rootScope.userModal = false;
   }
-  $rootScope.showDivSel = function(t){
-    $rootScope.showDivisionSelect = true;
+  $rootScope.showUserModal = function(){
+    $rootScope.userModal = true;
     appWrapper.removeClass('no-blur').addClass('full-blur');
   }
   // Set App Name
@@ -127,7 +143,8 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
 });
 
 landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter', '$scope', '$rootScope', 'appCache', function($routeParams, appdata, $filter, $scope, $rootScope, appCache) {
-  this.filters = appCache.get('filters');
+  var ctrl = this;
+  ctrl.filters = appCache.get('filters');
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
   var topics = [];
@@ -157,38 +174,45 @@ landingPageGallery.controller('mainCtrl', ['$routeParams', 'appdata', '$filter',
   templatesCurrent = $filter('orderBy')(templatesCurrent,'title');
 
   // Pass campaigns data to controllerAs for use on the front
-  this.campaigns = campaigns;
+  ctrl.campaigns = campaigns;
 
-  this.topics = topics;
-  this.types = types;
-  this.templates = templatesCurrent;
+  ctrl.topics = topics;
+  ctrl.types = types;
+  ctrl.templates = templatesCurrent;
 
   // Filter campaigns array
-  this.filterResults = function() {
-    var temp =  $filter('filter')(campaigns, {$: this.filters.quicksearch});
-    this.campaigns =  $filter('filter')(temp, {topic: this.filters.topic || undefined, type: this.filters.type || undefined, templateId: this.filters.templateId || undefined}, true);
-    appCache.set('filters', this.filters);
+  ctrl.filterResults = function() {
+    var temp =  $filter('filter')(campaigns, {$: ctrl.filters.quicksearch});
+    ctrl.campaigns =  $filter('filter')(temp, {topic: ctrl.filters.topic || undefined, type: ctrl.filters.type || undefined, templateId: ctrl.filters.templateId || undefined}, true);
+    appCache.set('filters', ctrl.filters);
   };
-  this.filterResults();
+  ctrl.filterResults();
 
-  this.clearSearch = function() {
-    this.campaigns = campaigns;
-    var filters = this.filters;
+  ctrl.clearSearch = function() {
+    ctrl.campaigns = campaigns;
+    var filters = ctrl.filters;
     Object.keys(filters).forEach(function(prop, i, arr) {
       filters[prop] = '';
     });
-    this.filters = filters;
+    ctrl.filters = filters;
   }
 
   // Config for sliding page left/right
-  this.slide = function(transition) {
+  ctrl.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
 }]); //---------END MAINCTRL---------//
 
-landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope) {
+landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 'appdata', '$filter', '$scope', '$rootScope', '$location', 'emailService', function($window, $sce, $routeParams, appdata, $filter, $scope, $rootScope, $location, emailService) {
+  var ctrl = this;
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
+
+  if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+    ctrl.webqSupported = true;
+  } else {
+    ctrl.webqSupported = false;
+  }
 
   // Collect url paramters into variables
   var cid = $routeParams.shortCode;
@@ -208,21 +232,45 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
   otherCampaigns = shuffleArray(otherCampaigns);
 
   // Pass variables needed on the front to controllerAs
-  this.iframeURL = $sce.trustAsResourceUrl(campaign.url);
-  this.template = template;
-  this.campaign = campaign;
-  this.otherCampaigns = otherCampaigns;
+  ctrl.iframeURL = $sce.trustAsResourceUrl(campaign.url);
+  ctrl.template = template;
+  ctrl.campaign = campaign;
+  ctrl.otherCampaigns = otherCampaigns;
 
-  this.renderHTML = function(html) {
+  ctrl.renderHTML = function(html) {
     var decoded = angular.element('<textarea />').html(html).text();
     return $sce.trustAsHtml(decoded);
   };
 
+  ctrl.sendEmail = function(){
+    var base = $location.protocol() + '://' + $location.host() + '/lpg/',
+    errorURL = base + 'process-form.dot',
+    returnURL = errorURL + '?submitted=true',
+    landingPageURL = base + '#/' + ctrl.campaign.shortCode,
+    fromAddress = 'no-reply@' + $location.host();
+    var formData = {
+      'from': fromAddress,
+      'to': 'cody.merrill@hcahealthcare.com',
+      'subject': 'Landing Page Gallery - Request',
+      'returnUrl': returnURL,
+      'errorURL': errorURL,
+      'formType': 'Landing Page Gallery - Request a new landing page',
+      'url': base,
+      'First Name': $rootScope.lpgUser.firstName,
+      'Last Name': $rootScope.lpgUser.lastName,
+      'Division': $rootScope.lpgUser.division,
+      'Email': $rootScope.lpgUser.email,
+      'Landing Page': landingPageURL,
+      'order': 'subject,First Name,Last Name,Division,Email,Landing Page,url'
+    };
+    emailService.send(formData);
+  }
+
   // Functionality for "Custom" style classes
   if(template.custom) {
-    this.customFlag = "Custom";
+    ctrl.customFlag = "Custom";
   } else {
-    this.customFlag = "Standard";
+    ctrl.customFlag = "Standard";
   }
 
   // Detect window width for displaying the iframe preview
@@ -235,26 +283,26 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
   });
 
   // Config for sliding page left/right
-  this.slide = function(transition) {
+  ctrl.slide = function(transition) {
     $rootScope.pageTransition = transition;
   };
 
   // Show loading spinner until iframe is fully loaded
-  this.frameLoaded = function(){
+  ctrl.frameLoaded = function(){
     document.getElementById('campaign-frame').style.display = 'block';
     document.getElementById('iframe-loader').style.display = 'none';
   };
 }]); //---------END DETAILCTRL---------//
 
 landingPageGallery.controller('debugCtrl', ['appdata', function(appdata) {
-  this.templates = appdata.templates;
-  this.campaigns = appdata.campaigns;
-  this.printdata = appdata;
+  ctrl.templates = appdata.templates;
+  ctrl.campaigns = appdata.campaigns;
+  ctrl.printdata = appdata;
 }]); //---------END DEBUGCTRL---------//
 
 landingPageGallery.controller('tagtoolCtrl', ['appdata', function(appdata) {
-  this.templates = appdata.templates;
-  this.campaigns = appdata.campaigns;
+  ctrl.templates = appdata.templates;
+  ctrl.campaigns = appdata.campaigns;
 }]); //---------END TAGTOOLCTRL---------//
 
 landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
@@ -306,6 +354,25 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
   };
 });
 
+landingPageGallery.factory('emailService', function($http, $rootScope) {
+  function send(sendData){
+    $http({
+      method: 'POST',
+      url: '/dotCMS/sendEmail',
+      data: sendData,
+      responseType:'json'
+    }).then(
+      function success(response) {
+        console.log(response);
+      },
+      function failure(reason) {
+        console.log(reason);
+      });
+  }
+  return {
+    send: send
+  };
+});
 
 // Caching of search paramaters
 landingPageGallery.factory('cacher', function($cacheFactory) {

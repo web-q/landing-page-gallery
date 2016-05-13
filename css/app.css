@@ -65,6 +65,8 @@ a {
 
 input {
   outline: none; }
+  input:invalid {
+    box-shadow: none; }
 
 .heart-icon {
   color: red; }
@@ -99,6 +101,7 @@ input {
   display: none !important; }
 
 .btn {
+  cursor: pointer;
   margin: 13px 0 0 0;
   font-size: 15px;
   font-weight: light;
@@ -251,7 +254,7 @@ input {
   .loading-text span {
     text-transform: uppercase; }
 
-#divisionSelectModal {
+#userSelectModal {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -266,27 +269,87 @@ input {
   width: 100%;
   height: 100%;
   background-color: rgba(75, 75, 75, 0.5); }
-  #divisionSelectModal a.btn {
+  #userSelectModal a.btn {
     color: #fff; }
-    #divisionSelectModal a.btn::after {
+    #userSelectModal a.btn::after {
       color: #444; }
-    .no-touch #divisionSelectModal a.btn:hover {
+    .no-touch #userSelectModal a.btn:hover {
       border-color: #fff;
       background-color: #fff; }
-  #divisionSelectModal h1 {
+  #userSelectModal h1 {
     margin: 10px 0;
     color: #fff;
     text-align: center;
     font-size: 18px;
     text-transform: uppercase; }
-  #divisionSelectModal select {
+  #userSelectModal select {
     background-color: #fff; }
 
-.division-select-wrap {
+.user-select-wrap {
   width: 100%;
   max-width: 600px;
   padding: 20px;
   border: 1px solid #fff; }
+
+/* MATERIAL DESIGN STYLE INPUTS */
+/* GROUP ********************/
+.material-textbox-group {
+  position: relative;
+  margin: 30px 0;
+  width: 100%; }
+
+/* INPUT ********************/
+.material-textbox {
+  color: #fff;
+  font-weight: normal;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent; }
+  .material-textbox:focus {
+    outline: none; }
+
+/* LABEL ********************/
+.material-textbox-label {
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all; }
+
+/* active state */
+.material-textbox:focus ~ .material-textbox-label, .material-textbox:valid ~ .material-textbox-label {
+  top: -20px;
+  font-size: 14px;
+  color: #fff; }
+
+/* BAR ********************/
+.material-textbox-bar {
+  position: relative;
+  display: block;
+  width: 100%; }
+  .material-textbox-bar:before, .material-textbox-bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #fff;
+    transition: 0.2s ease all; }
+  .material-textbox-bar:before {
+    left: 50%; }
+  .material-textbox-bar:after {
+    right: 50%; }
+
+/* active state */
+.material-textbox:focus ~ .material-textbox-bar:before, .material-textbox:focus ~ .material-textbox-bar:after {
+  width: 50%; }
 
 /*--------------------------------*/
 /*    MAIN PAGE
@@ -411,13 +474,29 @@ input {
     .no-touch #main div.clear-search a.btn:hover {
       border-color: #666666;
       background-color: #666666; }
-  #main .switch-division {
-    color: #333;
-    float: right;
-    cursor: pointer;
-    padding: 5px; }
-    #main .switch-division:hover {
-      text-decoration: underline; }
+  #main #user-welcome {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center; }
+  #main .welcome-message {
+    display: block;
+    font-size: 16px; }
+  #main .user-notice {
+    font-style: italic;
+    display: block;
+    font-size: 12px; }
+  #main .switch-user {
+    margin-left: 5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    padding: 1px 3px;
+    color: #fff;
+    cursor: pointer; }
+    #main .switch-user:hover {
+      color: #009edb;
+      background-color: #fff; }
 
 div#disclaimer {
   text-align: center;
@@ -436,13 +515,14 @@ div#disclaimer p {
       float: left;
       width: 50%; }
       #main header #navbar-header .webq-logo {
-        margin: 4px 0px 3px 10px;
+        max-width: 230px;
+        margin: 8px 0px 3px 10px;
         display: inline-block; }
     #main header #navbar-search {
       float: right;
       width: 30%; }
       #main header #navbar-search .search-wrapper {
-        padding: 16px 35px 0 0; }
+        padding: 10px 35px 5px 0; }
     #main header .webq-logo {
       max-width: 200px;
       margin-top: -7px;
@@ -468,7 +548,13 @@ div#disclaimer p {
   #main div.clear-search a.btn {
     width: 10%;
     padding: 0 1px;
-    font-size: 14px; } }
+    font-size: 14px; }
+  #main #user-welcome {
+    float: right;
+    width: 30%;
+    margin: 0;
+    text-align: right;
+    padding-right: 12px; } }
 
 select::-ms-expand {
   /* for IE 11 */
