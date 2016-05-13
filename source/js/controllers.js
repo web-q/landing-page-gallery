@@ -64,12 +64,6 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
   var templates = appdata.templates;
   var campaigns = appdata.campaigns;
 
-  if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
-    ctrl.webqSupported = true;
-  } else {
-    ctrl.webqSupported = false;
-  }
-
   // Collect url paramters into variables
   var cid = $routeParams.shortCode;
 

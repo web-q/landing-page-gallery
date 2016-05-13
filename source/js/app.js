@@ -99,6 +99,11 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     if(u.firstName && u.lastName && validateEmail(u.email) && u.division){
       $rootScope.lpgUser = u;
       localStorageService.set('user', $rootScope.lpgUser);
+      if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+        $rootScope.webqSupported = true;
+      } else {
+        $rootScope.webqSupported = false;
+      }
       $rootScope.hideUserModal();
     } else {
 
@@ -117,12 +122,17 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
       }, 300);
     }
 
-    $timeout(function () {
-      if(!$rootScope.lpgUser){
+    if (!$rootScope.lpgUser) {
+      $timeout(function() {
         $rootScope.showUserModal();
+      }, 3500);
+    } else {
+      if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+        $rootScope.webqSupported = true;
+      } else {
+        $rootScope.webqSupported = false;
       }
-    }, 3500);
-
+    }
 
     // Scroll to top when going to different page
     $timeout(function () {
