@@ -43,7 +43,10 @@ a {
   }
 }
 input {
- outline:none;
+  outline: none;
+  &:invalid {
+    box-shadow: none;
+  }
 }
 .heart-icon {
   color: red;
@@ -77,6 +80,7 @@ input {
 }
 $btn-time: 0.4s;
 .btn {
+  cursor: pointer;
   margin: 13px 0 0 0;
   font-size: 15px;
   font-weight: light;

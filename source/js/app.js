@@ -19,6 +19,23 @@ var shuffleArray = function(array) {
   return array;
 }
 
+// Email validate
+var validateEmail = function(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
+
+var webqSupportedDivisions = [
+  'East Florida',
+  'West Florida',
+  'South Atlantic',
+  'North Florida',
+  'Mountain'
+];
+
+// Select app wrapper for making blurred glass effect
+var appWrapper = angular.element(document.getElementById('app-wrapper'));
+
 // Declare app level module which depends on views, and components
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
@@ -71,21 +88,25 @@ landingPageGallery.config(['localStorageServiceProvider', function(localStorageS
 
 // Function for page loading spinner
 landingPageGallery.run(function($rootScope, $timeout, $window, localStorageService) {
-  // Select app wrapper for making blurred glass effect
-  var appWrapper = angular.element(document.getElementById('app-wrapper'));
+  // Fetch user from local storage
+  $rootScope.lpgUser = localStorageService.get('user');
 
-  // Fetch division from local storage
-  $rootScope.division = localStorageService.get('division');
+  // Hide user modal on open
+  $rootScope.userModal = false;
 
-  // Hide division modal on open
-  $rootScope.showDivisionSelect = false;
+  // Set and store the user
+  $rootScope.setUser = function(u) {
+    if(u.firstName && u.lastName && validateEmail(u.email) && u.division){
+      $rootScope.lpgUser = u;
+      localStorageService.set('user', $rootScope.lpgUser);
+      if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+        $rootScope.webqSupported = true;
+      } else {
+        $rootScope.webqSupported = false;
+      }
+      $rootScope.hideUserModal();
+    } else {
 
-  // Set and store the division
-  $rootScope.setDivision = function(d) {
-    $rootScope.division = d;
-    localStorageService.set('division', $rootScope.division);
-    if(d){
-      $rootScope.hideDivSel();
     }
   };
 
@@ -100,13 +121,18 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
         $rootScope.loadingView = false;
       }, 300);
     }
-    
-    $timeout(function () {
-      if(!$rootScope.division){
-        $rootScope.showDivSel();
-      }
-    }, 1500);
 
+    if (!$rootScope.lpgUser) {
+      $timeout(function() {
+        $rootScope.showUserModal();
+      }, 3500);
+    } else {
+      if(webqSupportedDivisions.indexOf($rootScope.lpgUser.division) !== -1){
+        $rootScope.webqSupported = true;
+      } else {
+        $rootScope.webqSupported = false;
+      }
+    }
 
     // Scroll to top when going to different page
     $timeout(function () {
@@ -114,13 +140,21 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
-  $rootScope.hideDivSel = function(){
-    appWrapper.removeClass('full-blur').addClass('no-blur');
-    $rootScope.showDivisionSelect = false;
-  }
-  $rootScope.showDivSel = function(t){
-    $rootScope.showDivisionSelect = true;
+  $rootScope.showEmailModal = function(text){
     appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.emailResponse = text;
+  }
+  $rootScope.hideEmailModal = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.emailResponse = false;
+  }
+  $rootScope.hideUserModal = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.userModal = false;
+  }
+  $rootScope.showUserModal = function(){
+    appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.userModal = true;
   }
   // Set App Name
   $rootScope.appName = 'Landing Page Gallery'
