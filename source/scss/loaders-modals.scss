@@ -54,7 +54,7 @@
     text-transform: uppercase;
   }
 }
-#userSelectModal {
+.lpg-modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,7 @@
     background-color: #fff;
   }
 }
-.user-select-wrap {
+.lpg-modal-wrap {
   width: 100%;
   max-width: 600px;
   padding: 20px;

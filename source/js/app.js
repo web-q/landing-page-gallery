@@ -33,6 +33,9 @@ var webqSupportedDivisions = [
   'Mountain'
 ];
 
+// Select app wrapper for making blurred glass effect
+var appWrapper = angular.element(document.getElementById('app-wrapper'));
+
 // Declare app level module which depends on views, and components
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
@@ -85,9 +88,6 @@ landingPageGallery.config(['localStorageServiceProvider', function(localStorageS
 
 // Function for page loading spinner
 landingPageGallery.run(function($rootScope, $timeout, $window, localStorageService) {
-  // Select app wrapper for making blurred glass effect
-  var appWrapper = angular.element(document.getElementById('app-wrapper'));
-
   // Fetch user from local storage
   $rootScope.lpgUser = localStorageService.get('user');
 
@@ -140,13 +140,21 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
+  $rootScope.showEmailModal = function(text){
+    appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.emailResponse = text;
+  }
+  $rootScope.hideEmailModal = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.emailResponse = false;
+  }
   $rootScope.hideUserModal = function(){
     appWrapper.removeClass('full-blur').addClass('no-blur');
     $rootScope.userModal = false;
   }
   $rootScope.showUserModal = function(){
-    $rootScope.userModal = true;
     appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.userModal = true;
   }
   // Set App Name
   $rootScope.appName = 'Landing Page Gallery'

@@ -100,7 +100,7 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
     fromAddress = 'no-reply@' + $location.host();
     var formData = {
       'from': fromAddress,
-      'to': 'cody.merrill@hcahealthcare.com',
+      'to': 'corp.digitalmarketing@hcahealthcare.com',
       'subject': 'Landing Page Gallery - Request',
       'returnUrl': returnURL,
       'errorURL': errorURL,
@@ -110,8 +110,12 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
       'Last Name': $rootScope.lpgUser.lastName,
       'Division': $rootScope.lpgUser.division,
       'Email': $rootScope.lpgUser.email,
-      'Landing Page': landingPageURL,
-      'order': 'subject,First Name,Last Name,Division,Email,Landing Page,url'
+      'Campaign Example': ctrl.campaign.title,
+      'Campaign Ex URL': ctrl.campaign.url,
+      'Template Name': ctrl.template.title,
+      'Build Time': ctrl.template.buildTime,
+      'Gallery URL': landingPageURL,
+      'order': 'subject,First Name,Last Name,Email,Division,Template Name,Build Time,Gallery URL,Campaign Example,Campaign Ex URL,url'
     };
     emailService.send(formData);
   }

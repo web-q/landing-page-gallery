@@ -47,16 +47,24 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
   };
 });
 
-landingPageGallery.factory('emailService', function($http, $rootScope) {
+landingPageGallery.factory('emailService', function($http, $rootScope, $httpParamSerializer) {
   function send(sendData){
     $http({
       method: 'POST',
       url: '/dotCMS/sendEmail',
-      data: sendData,
-      responseType:'json'
+      data: $httpParamSerializer(sendData),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
     }).then(
       function success(response) {
-        console.log(response);
+        console.log(response.data)
+        switch (response.data.StatusCode) {
+          case "success":
+            $rootScope.showEmailModal('Your request has been submitted. We will contact you shortly to further discuss the details of your landing page.');
+            break;
+          case "error":
+            $rootScope.showEmailModal('Unable to submit request, please contact HCA Web-Q.');
+            break;
+        }
       },
       function failure(reason) {
         console.log(reason);

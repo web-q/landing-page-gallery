@@ -34,8 +34,8 @@
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
   </div>
 </div>
-<div class="if-fade" id="userSelectModal" ng-if="!loadingView && $root.userModal" ng-cloak>
-  <div class="user-select-wrap">
+<div class="if-fade lpg-modal" id="userSelectModal" ng-if="!loadingView && $root.userModal" ng-cloak>
+  <div class="lpg-modal-wrap">
     <h1>For the best experience, please tell us who you are.</h1>
     <div class="material-textbox-group">
       <input ng-model="tempUser.firstName" id="lpg-user-first" class="material-textbox" name="First Name" required="true" type="text">
@@ -70,6 +70,12 @@
       <option value="West Florida">West Florida</option>
     </select>
     <a class="btn btn-select" ng-click="$root.setUser(tempUser);"><span>Continue</span></a>
+  </div>
+</div>
+<div class="if-fade lpg-modal" id="emailResponse" ng-if="emailResponse" ng-cloak>
+  <div class="lpg-modal-wrap">
+    <h1>{{emailResponse}}</h1>
+    <a class="btn btn-clear" ng-click="$root.hideEmailModal()"><span>Close</span></a>
   </div>
 </div>
   <script src="js/lib.min.js"></script>
