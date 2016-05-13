@@ -254,7 +254,7 @@ input {
   .loading-text span {
     text-transform: uppercase; }
 
-#userSelectModal {
+.lpg-modal {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -269,23 +269,23 @@ input {
   width: 100%;
   height: 100%;
   background-color: rgba(75, 75, 75, 0.5); }
-  #userSelectModal a.btn {
+  .lpg-modal a.btn {
     color: #fff; }
-    #userSelectModal a.btn::after {
+    .lpg-modal a.btn::after {
       color: #444; }
-    .no-touch #userSelectModal a.btn:hover {
+    .no-touch .lpg-modal a.btn:hover {
       border-color: #fff;
       background-color: #fff; }
-  #userSelectModal h1 {
+  .lpg-modal h1 {
     margin: 10px 0;
     color: #fff;
     text-align: center;
     font-size: 18px;
     text-transform: uppercase; }
-  #userSelectModal select {
+  .lpg-modal select {
     background-color: #fff; }
 
-.user-select-wrap {
+.lpg-modal-wrap {
   width: 100%;
   max-width: 600px;
   padding: 20px;

@@ -33,6 +33,9 @@ var webqSupportedDivisions = [
   'Mountain'
 ];
 
+// Select app wrapper for making blurred glass effect
+var appWrapper = angular.element(document.getElementById('app-wrapper'));
+
 // Declare app level module which depends on views, and components
 var landingPageGallery = angular.module('landingPageGallery', [
   'ngRoute',
@@ -85,9 +88,6 @@ landingPageGallery.config(['localStorageServiceProvider', function(localStorageS
 
 // Function for page loading spinner
 landingPageGallery.run(function($rootScope, $timeout, $window, localStorageService) {
-  // Select app wrapper for making blurred glass effect
-  var appWrapper = angular.element(document.getElementById('app-wrapper'));
-
   // Fetch user from local storage
   $rootScope.lpgUser = localStorageService.get('user');
 
@@ -140,13 +140,21 @@ landingPageGallery.run(function($rootScope, $timeout, $window, localStorageServi
     }, 400);
   });
 
+  $rootScope.showEmailModal = function(text){
+    appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.emailResponse = text;
+  }
+  $rootScope.hideEmailModal = function(){
+    appWrapper.removeClass('full-blur').addClass('no-blur');
+    $rootScope.emailResponse = false;
+  }
   $rootScope.hideUserModal = function(){
     appWrapper.removeClass('full-blur').addClass('no-blur');
     $rootScope.userModal = false;
   }
   $rootScope.showUserModal = function(){
-    $rootScope.userModal = true;
     appWrapper.removeClass('no-blur').addClass('full-blur');
+    $rootScope.userModal = true;
   }
   // Set App Name
   $rootScope.appName = 'Landing Page Gallery'
@@ -264,8 +272,12 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
       'Last Name': $rootScope.lpgUser.lastName,
       'Division': $rootScope.lpgUser.division,
       'Email': $rootScope.lpgUser.email,
-      'Landing Page': landingPageURL,
-      'order': 'subject,First Name,Last Name,Division,Email,Landing Page,url'
+      'Campaign Example': ctrl.campaign.title,
+      'Campaign Ex URL': ctrl.campaign.url,
+      'Template Name': ctrl.template.title,
+      'Build Time': ctrl.template.buildTime,
+      'Gallery URL': landingPageURL,
+      'order': 'subject,First Name,Last Name,Email,Division,Template Name,Build Time,Gallery URL,Campaign Example,Campaign Ex URL,url'
     };
     emailService.send(formData);
   }
@@ -358,16 +370,24 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
   };
 });
 
-landingPageGallery.factory('emailService', function($http, $rootScope) {
+landingPageGallery.factory('emailService', function($http, $rootScope, $httpParamSerializer) {
   function send(sendData){
     $http({
       method: 'POST',
       url: '/dotCMS/sendEmail',
-      data: sendData,
-      responseType:'json'
+      data: $httpParamSerializer(sendData),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
     }).then(
       function success(response) {
-        console.log(response);
+        console.log(response.data)
+        switch (response.data.StatusCode) {
+          case "success":
+            $rootScope.showEmailModal('Your request has been submitted. We will contact you shortly to further discuss the details of your landing page.');
+            break;
+          case "error":
+            $rootScope.showEmailModal('Unable to submit request, please contact HCA Web-Q.');
+            break;
+        }
       },
       function failure(reason) {
         console.log(reason);
