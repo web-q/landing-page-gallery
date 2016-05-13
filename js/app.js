@@ -262,7 +262,7 @@ landingPageGallery.controller('detailCtrl', ['$window', '$sce', '$routeParams', 
     fromAddress = 'no-reply@' + $location.host();
     var formData = {
       'from': fromAddress,
-      'to': 'cody.merrill@hcahealthcare.com',
+      'to': 'corp.digitalmarketing@hcahealthcare.com',
       'subject': 'Landing Page Gallery - Request',
       'returnUrl': returnURL,
       'errorURL': errorURL,
