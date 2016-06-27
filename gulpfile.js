@@ -130,6 +130,8 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
         });
       });
     });
+  }, {
+  dnodeOpts: {weak: false}
   });
 };
 
