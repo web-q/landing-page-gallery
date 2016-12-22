@@ -285,7 +285,7 @@ gulp.task('scripts', function () {
   .pipe(concat('app.js'))
   .pipe(gulp.dest(SRC.pub.scripts))
   .pipe(ngAnnotate())
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(rename({suffix:'.min'}))
   .pipe(gulp.dest(SRC.pub.scripts))
   .pipe(gutil.env.type !== 'ci' ? notify("JS Compiled and Minified") : gutil.noop())

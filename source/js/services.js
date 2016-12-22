@@ -9,7 +9,7 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
       $rootScope.pageTransition = 'fadepage';
       $http({
         method: 'GET',
-        url: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
+        url: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.dot'
       }).then(
         function success(response) {
           $rootScope.dataFetched = true; console.log('Data Fetched');
@@ -18,6 +18,7 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
             cache.campaigns[i].shortCode = MD5(cache.campaigns[i].id).substring(0, 6)
           }
           cache.campaigns = shuffleArray(cache.campaigns);
+
           $rootScope.$watch('splashFinished', function(){
             if($rootScope.splashFinished){
               console.log('Animation Complete');
@@ -30,6 +31,7 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
               return d.resolve(cache);
             }
           });
+
         },
         function failure(reason) {
           d.reject(reason);

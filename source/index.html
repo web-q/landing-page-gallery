@@ -24,6 +24,7 @@
 <div id="pageLoad" ng-if="loadingView">
   <div class="load-wrap">
     <img class="loading-logo" width="200" src="http://web-q-hospital.prod.ehc.com/global/webq/img/HCAwebQ-logo-knockout-400x120.png" alt="HCA Web-Q" />
+
     <object splash-animate id="svg-splash" data="img/splash.svg" type="image/svg+xml">
       Your browser doesn&rsquo;t support SVG
     </object>
@@ -32,6 +33,7 @@
       <span ng-if="dataFetched && !splashFinished">Click anywhere to skip</span>
     </div>
     <div id="skip-it" ng-if="dataFetched" ng-click="$root.skipIntro=true;"></div>
+
   </div>
 </div>
 <div class="if-fade lpg-modal" id="userSelectModal" ng-if="!loadingView && $root.userModal" ng-cloak>
