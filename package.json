@@ -36,8 +36,8 @@
     "gulp-watch": "^4.3.5",
     "http-server": "^0.6.1",
     "lodash": "^4.6.1",
-    "phantom": "^0.9.0",
-    "phantomjs": "^1.9.1",
+    "phantom": "^4.0.0",
+    "phantomjs-prebuilt": "^2.1.14",
     "request": "^2.67.0",
     "shelljs": "^0.2.6"
   },

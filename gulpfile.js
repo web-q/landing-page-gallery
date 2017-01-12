@@ -109,29 +109,35 @@ function p_onPrompt(msg) {
 
 /* Function that uses phantomjs to take a screenshot */
 var takeScreenshot = function(url,w,h,dest,filename,callback) {
-  phantom.create("--ignore-ssl-errors=yes", "--ssl-protocol=any", function (ph) {
-    ph.createPage(function (page) {
-      page.onAlert = p_onAlert.bind(page);
-      page.onConfirm = p_onConfirm.bind(page);
-      page.onPrompt = p_onPrompt.bind(page);
-      page.onConsoleMessage = p_onConsoleMessage.bind(page);
-      page.onError = p_onError.bind(page);
-      page.set('viewportSize', {width:w,height:h}, function(){
-        page.set('clipRect', {top:0,left:0,width:w,height:h}, function(){
-          page.open(url, function(status) {
-            setTimeout(function(){
-              page.render(dest+'/'+filename, function(finished){
-                prettyLog('Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h);
-                ph.exit();
-                callback();
-              });
-            }, 10000);
-          });
-        });
-      });
-    });
-  }, {
-  dnodeOpts: {weak: false}
+  var _ph, _page, _outObj;
+  phantom.create(["--ignore-ssl-errors=yes", "--ssl-protocol=any"])
+  .then( ph => {
+    _ph = ph;
+    return _ph.createPage();
+    })
+  .then( page => {
+      _page = page;
+      _page.property('viewportSize', {width: w, height: h});
+      _page.property('clipRect', {top:0,left:0,width:w,height:h});
+      return _page.open(url);
+    })
+  .then(status => {
+    console.log(status);
+    return _page.property('content')
+  })
+  .then(content => {
+    //console.log(content);
+    //setTimeout(function(){
+      _page.render(dest+'/'+filename);
+      prettyLog('Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h);
+      _ph.exit();
+      callback();
+    //}, 3000);
+
+  })
+  .catch(error => {
+      prettyLog(error)
+      _ph.exit();
   });
 };
 
