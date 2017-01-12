@@ -231,12 +231,12 @@ gulp.task('screenshots-save',['screenshots-scrape'], function() {
       imageMagick: true
     }))
     .pipe(gulp.dest(SRC.screenshots.pub))
-    .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
   ]);
 });
 
 gulp.task('screenshots-resize-only', function() {
-  return Promise.all([
+  //return Promise.all([
+  prettyLog('start resize');
   gulp.src(SRC.screenshots.raw + '/*-d.png')
     .pipe(imageResize({
       width:300,
@@ -264,9 +264,8 @@ gulp.task('screenshots-resize-only', function() {
       gravity: 'North',
       imageMagick: true
     }))
-    .pipe(gulp.dest(SRC.screenshots.pub))
-    .pipe(notify({ message: "Screenshots Ready!", onLast: true }))
-  ]);
+    .pipe(gulp.dest(SRC.screenshots.pub));
+  //]);
 });
 
 /*--- Delete Screenshots Folder ---*/
