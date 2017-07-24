@@ -13,3 +13,4 @@ npm-debug.log
 tmux*.log
 _screenshots
 app
+.campaigns.cache
