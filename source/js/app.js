@@ -27,10 +27,12 @@ var validateEmail = function(email) {
 
 var webqSupportedDivisions = [
   'East Florida',
-  'West Florida',
-  'South Atlantic',
+  'Far West',
+  'Mountain',
   'North Florida',
-  'Mountain'
+  'South Atlantic',
+  'TriStar',
+  'West Florida'    
 ];
 
 // Select app wrapper for making blurred glass effect
