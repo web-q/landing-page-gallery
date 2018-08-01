@@ -10,11 +10,13 @@
     "email": "hi@halvves.com",
     "url": "http://halvves.com/"
   },
-  "contributors": [{
-    "name": "praige"
-  }, {
-    "name": "albertkoncz"
-  }
+  "contributors": [
+    {
+      "name": "praige"
+    },
+    {
+      "name": "albertkoncz"
+    }
   ],
   "devDependencies": {
     "async": "^1.5.2",

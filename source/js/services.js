@@ -9,7 +9,7 @@ landingPageGallery.factory('fetchData', function($q, $http, $rootScope) {
       $rootScope.pageTransition = 'fadepage';
       $http({
         method: 'GET',
-        url: 'http://web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
+        url: '//web-q-hospital.prod.ehc.com/global/webq/report/campaign-pages/campaign-pages.json'
       }).then(
         function success(response) {
           $rootScope.dataFetched = true; console.log('Data Fetched');
