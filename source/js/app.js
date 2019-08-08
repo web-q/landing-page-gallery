@@ -26,10 +26,17 @@ var validateEmail = function(email) {
 };
 
 var webqSupportedDivisions = [
+  'Capital',
+  'Central and West Texas',
+  'Continental',
   'East Florida',
   'Far West',
+  'Gulf Coast',
+  'Mid-America',
   'Mountain',
   'North Florida',
+  'North Texas',
+  'San Antonio',
   'South Atlantic',
   'TriStar',
   'West Florida'    

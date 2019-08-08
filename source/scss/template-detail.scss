@@ -8,6 +8,11 @@
     width: 100%;
     margin: 0 auto -40px;
     padding-bottom: 40px;
+    .container{
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
   }
   ul {
     padding: 0 0 0 35px;
@@ -222,9 +227,11 @@
     }
   }
 }
+/*
 @media (min-width: 1068px) {
   #detail {
     height: 100%;
+    
     .sidebar {
       width: 300px;
       box-shadow: 0px 0px 20px black;
@@ -311,8 +318,10 @@
         }
       }
     }
+   
   }
 }
+*/
 .build-time::before {
   margin: 0 10px 0 2px;
   content: '\e903';

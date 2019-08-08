@@ -1,12 +1,13 @@
 <div id="detail">
     <div class="sidebar">
-      <div class="wrapme">
+      <div class="wrapme">      
       <header>
         <a ng-click="detail.slide('slidepage-r');" href="#/">
           <img class="webq-logo" src="/contentAsset/raw-data/4de1c507-0449-4102-8aca-57a220d7c5f9/knockOutLogo" alt="HCA Web Services" />
           <h1>{{appName}}</h1>
         </a>
       </header>
+      <div class="container clearfix">
       <section id="template-head" ng-cloak>
         <h2>{{detail.template.title}}</h2>
         <h3>{{detail.campaign.title}}</h3>
@@ -40,6 +41,7 @@
         </ul>
       </section>
       </div>
+      </div>
       <footer>
         <div>made with <span class="heart-icon" aria-hidden="true"></span>
           <span class="sr-only">love</span> by
@@ -50,6 +52,7 @@
         </div>
       </footer>
     </div>
+    <!--
     <div id="campaign-viewer" ng-if="windowWidth > 1068">
       <div id="iframe-loader">
         <object id="iframe-svg-loader" data="img/iframe-loader.svg" type="image/svg+xml">
@@ -58,4 +61,5 @@
       </div>
       <iframe id="campaign-frame" class="fade-onload" ng-onload="detail.frameLoaded();" ng-src="{{detail.iframeURL}}"></iframe>
     </div>
+    -->
 </div>
