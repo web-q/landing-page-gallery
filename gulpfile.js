@@ -143,8 +143,13 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
 };
 */
 
-var takeScreenshot = function(url,w,h,dest,filename,callback) {
-  var _ph, _page, _outObj;
+var takeScreenshot = function(url,w,h,dest,filename,callback) {  
+  
+  httpsurl = "https:" + url;
+  //httpsurl = url;
+  prettyLog("Scraping "+ httpsurl);
+
+  var _ph, _page, _outObj;  
   phantom.create(["--ignore-ssl-errors=yes", "--ssl-protocol=any"])
   .then( ph => {
     _ph = ph;
@@ -154,7 +159,7 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
       _page = page;
       _page.property('viewportSize', {width: w, height: h});
       _page.property('clipRect', {top:0,left:0,width:w,height:h});
-      var status = _page.open(url);
+      var status = _page.open(httpsurl);
       return status;
     })  
   .then(status => new Promise(resolve => setTimeout(() => resolve(status), 5000)))
@@ -163,7 +168,7 @@ var takeScreenshot = function(url,w,h,dest,filename,callback) {
     return _page.render(dest+'/'+filename);         
   })
   .then(() => {
-     prettyLog('Captured \'\x1b[32m'+url+'\x1b[0m\' at \x1b[34m'+w+'x'+h);                    
+     prettyLog('Captured \'\x1b[32m'+httpsurl+'\x1b[0m\' at \x1b[34m'+w+'x'+h);                    
     _ph.exit();
     callback();    
   })
